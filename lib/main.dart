@@ -53,11 +53,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-// <<<<<<< hive
-//         //"/": (context) => OrganizerHomePage(),
-// =======
-//         // "/": (context) => EditEvents(),
-// >>>>>>> main
         Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
