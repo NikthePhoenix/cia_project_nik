@@ -78,7 +78,7 @@ class MyCardList extends StatelessWidget {
               title: 'Edit Event',
               icon: Icons.edit_square,
               onTap: () {
-                Navigator.pushNamed(context, Routes.updatedEvents);
+                Navigator.pushNamed(context, Routes.editEvents);
               },
             ),
             SizedBox(height: 20.0),
