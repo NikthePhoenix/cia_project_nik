@@ -10,7 +10,8 @@ import 'package:seproject/events/events.dart';
 import 'package:seproject/events/event_description.dart';
 import 'package:seproject/authentication/reset_password.dart';
 import 'package:seproject/organizers/og_home.dart';
-import 'package:seproject/organizers/update_event.dart';
+import 'package:seproject/organizers/edit_events.dart';
+import 'package:seproject/organizers/update_events.dart';
 import 'package:seproject/search.dart';
 import 'package:seproject/settings/about_us.dart';
 import 'package:seproject/settings/help_center.dart';
@@ -44,8 +45,8 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        "/": (context) => OrganizerHomePage(),
-        // Routes.splashScreen: (context) => SplashScreen(),
+        // "/": (context) => EditEvents(),
+        Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
         Routes.agreement: (context) => UserAgreementPage(),
@@ -67,7 +68,8 @@ class MyApp extends StatelessWidget {
         Routes.organizerHome: (context) => OrganizerHomePage(),
         Routes.createEvent: (context) => Create_event(),
         Routes.bookedEvents: (context) => BookedEvents(),
-        Routes.updatedEvents: (context) => UpdateEvent(),
+        Routes.editEvents: (context) => EditEvents(),
+        Routes.updateEvents: (context) => UpdateEvents(),
       },
       debugShowCheckedModeBanner: false,
     );
