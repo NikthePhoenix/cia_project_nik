@@ -3,7 +3,10 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:seproject/authentication/email_verification.dart';
+import 'package:seproject/hive/hive.dart';
 import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/events/events.dart';
@@ -28,8 +31,13 @@ import 'home/home_page.dart';
 import 'authentication/signup.dart';
 import 'other/routes.dart';
 import 'other/screen_navigator.dart';
+import 'package:hive/hive.dart';
 
-void main() {
+void main() async {
+//initialize hive
+  await HiveManager.init();
+
+
   runApp(const MyApp());
 }
 
@@ -45,7 +53,6 @@ class MyApp extends StatelessWidget {
         useMaterial3: true,
       ),
       routes: {
-        // "/": (context) => EditEvents(),
         Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),

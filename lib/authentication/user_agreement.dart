@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:seproject/hive/hive.dart';
 import '../other/routes.dart';
+import 'package:hive/hive.dart';
 
 class UserAgreementPage extends StatefulWidget {
   const UserAgreementPage({Key? key}) : super(key: key);
@@ -11,6 +13,18 @@ class UserAgreementPage extends StatefulWidget {
 class _UserAgreementPageState extends State<UserAgreementPage> {
   bool terms_conditions = false;
   bool privacy_policy = false;
+
+  final myBox = HiveManager.myBox;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    var data = myBox.get('agreement');
+    if (data == null) {
+      myBox.put('agreement', true);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Material(
