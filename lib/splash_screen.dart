@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:seproject/hive/hive.dart';
 import 'other/routes.dart';
+import 'package:hive/hive.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -9,10 +11,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  final myBox = HiveManager.myBox;
+  @override
   void initState() {
     super.initState();
     Future.delayed(Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, Routes.agreement);
+      if (myBox.get('agreement') == null) {
+        Navigator.pushReplacementNamed(context, Routes.agreement);
+      } else {
+        Navigator.pushReplacementNamed(context, Routes.signUp);
+      }
     });
   }
 

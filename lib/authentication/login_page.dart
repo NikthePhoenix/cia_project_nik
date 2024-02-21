@@ -3,8 +3,12 @@
 // import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:seproject/hive/hive.dart';
+import 'signup.dart';
 import 'package:http/http.dart';
 import '../other/routes.dart';
+import 'package:hive/hive.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -37,6 +41,22 @@ class LoginPageState extends State<LoginPage> {
       print("Incorrect Password");
     } else {
       print("Empty Password");
+    }
+  }
+
+  final myBox = HiveManager.myBox;
+
+  @override
+  void initState() {
+    super.initState();
+    autoFill();
+  }
+
+  autoFill() {
+    final data = myBox.get('User');
+    if (data != null) {
+      uidcontroller.text = data[1];
+      passwordController.text = data[4];
     }
   }
 
@@ -89,28 +109,6 @@ class LoginPageState extends State<LoginPage> {
                         border: OutlineInputBorder(),
                         labelText: "Enter UID",
                         prefixIcon: Icon(Icons.perm_identity_outlined)),
-                  ),
-                  SizedBox(height: 20.0),
-                  // email id
-                  TextFormField(
-                    controller: emailController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Email field can't be empty";
-                      }
-                      bool isEmailValid = RegExp(
-                        r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$',
-                      ).hasMatch(value);
-
-                      if (!isEmailValid) {
-                        return "Please enter valid email";
-                      }
-                    },
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Enter Email",
-                      prefixIcon: Icon(Icons.email_outlined),
-                    ),
                   ),
                   SizedBox(height: 20.0),
                   // password
@@ -201,7 +199,7 @@ class LoginPageState extends State<LoginPage> {
                         height: 50.0,
                         width: valid ? 50.0 : 100.0,
                         alignment: Alignment.center,
-                        child:  valid
+                        child: valid
                             ? Icon(
                                 Icons.done,
                                 color: Colors.white,

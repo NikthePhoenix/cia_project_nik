@@ -7,16 +7,23 @@
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:seproject/hive/hive.dart';
 import '../other/routes.dart';
+import 'package:hive/hive.dart';
 import 'dart:convert';
 import 'package:http/http.dart';
 
 class SignUpPage extends StatefulWidget {
+  /*var myBox = Hive.box('myBox');
+  SignUpPage({required this.myBox});*/
+
   @override
   State<SignUpPage> createState() => SignUpPageState();
 }
 
 class SignUpPageState extends State<SignUpPage> {
+  final myBox = HiveManager.myBox;
   TextEditingController nameController = TextEditingController();
   TextEditingController uidController = TextEditingController();
   TextEditingController emailController = TextEditingController();
@@ -29,6 +36,16 @@ class SignUpPageState extends State<SignUpPage> {
   bool isConfirmPwdVisible = false;
 
   final _formKey = GlobalKey<FormState>();
+
+  saveUserDataLocally() {
+    myBox.put('User', [
+      nameController.text,
+      uidController.text,
+      emailController.text,
+      phoneController.text,
+      passwordController.text
+    ]);
+  }
 
   // void validateData(String name, String email, String password, String uid,
   //     String otp) async {
@@ -228,6 +245,7 @@ class SignUpPageState extends State<SignUpPage> {
                     color: Colors.black87,
                     child: InkWell(
                       onTap: () async {
+                        saveUserDataLocally();
                         setState(() {
                           isButtonClicked = true;
                         });
@@ -244,9 +262,10 @@ class SignUpPageState extends State<SignUpPage> {
                         }
                         // await Future.delayed(Duration(seconds: 2));
                         if (valid) {
-                          Navigator.pushNamed(context, Routes.verifyEmail, arguments: {
-                            'uid': uidController.text,
-                          });
+                          Navigator.pushNamed(context, Routes.verifyEmail,
+                              arguments: {
+                                'uid': uidController.text,
+                              });
                         }
                         setState(() {
                           isButtonClicked = false;
