@@ -319,7 +319,7 @@ class SignUpPageState extends State<SignUpPage> {
                     ],
                   ),
                   Visibility(
-                    visible: isButtonClicked,
+                    visible: valid,
                     child: Text(
                       valid
                           ? "Account created successfully "
