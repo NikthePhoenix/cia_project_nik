@@ -37,15 +37,15 @@ class SignUpPageState extends State<SignUpPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  saveUserDataLocally() {
-    myBox.put('User', [
-      nameController.text,
-      uidController.text,
-      emailController.text,
-      phoneController.text,
-      passwordController.text
-    ]);
-  }
+  // saveUserDataLocally() {
+  //   myBox.put('User', [
+  //     nameController.text,
+  //     uidController.text,
+  //     emailController.text,
+  //     phoneController.text,
+  //     passwordController.text
+  //   ]);
+  // }
 
   // void validateData(String name, String email, String password, String uid,
   //     String otp) async {
@@ -245,7 +245,7 @@ class SignUpPageState extends State<SignUpPage> {
                     color: Colors.black87,
                     child: InkWell(
                       onTap: () async {
-                        saveUserDataLocally();
+                        // saveUserDataLocally();
                         setState(() {
                           isButtonClicked = true;
                         });
