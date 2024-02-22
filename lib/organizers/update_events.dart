@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seproject/events/event_description.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/other/date_pick.dart';
@@ -6,19 +7,24 @@ import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/time_pick.dart';
 
 class UpdateEvents extends StatefulWidget {
-  const UpdateEvents({Key? key}) : super(key: key);
+  final eventName;
+  static Map<String, dynamic> updated_events =
+      _UpdateEventsState.updated_events;
+  const UpdateEvents({Key? key, this.eventName}) : super(key: key);
 
   @override
   State<UpdateEvents> createState() => _UpdateEventsState();
 }
 
 class _UpdateEventsState extends State<UpdateEvents> {
-  TextEditingController eventName = TextEditingController();
-  TextEditingController eventVenue = TextEditingController();
-  TextEditingController eventDesc = TextEditingController();
-  // TextEditingController eventTime = TextEditingController();
+  TextEditingController updatedEventName = TextEditingController();
+  TextEditingController updatedEventVenue = TextEditingController();
+  TextEditingController updatedEventDesc = TextEditingController();
+  TextEditingController updatedEventTime = TextEditingController();
   String eventDate = DateSelectionScreen.eventDate;
-  static Map<String, dynamic> created_events = {};
+  static Map<String, dynamic> created_events = Create_event.created_events;
+
+  static Map<String, dynamic> updated_events = {};
 
   String collaborator = "";
 
@@ -33,6 +39,9 @@ class _UpdateEventsState extends State<UpdateEvents> {
 
   @override
   Widget build(BuildContext context) {
+    final Map<String, dynamic>? eventDetails =
+        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final eventName = eventDetails?['eventName'] ?? "";
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -44,7 +53,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Create Event",
+                "Update Event",
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
               ),
               SizedBox(
@@ -62,16 +71,17 @@ class _UpdateEventsState extends State<UpdateEvents> {
                 height: 40,
               ),
               Text(
-                " Enter Event Name :",
+                " Update Event Name :",
                 style: TextStyle(fontSize: 18),
               ),
               InputField(
-                hintText: 'Enter Event Name',
-                controller: eventName,
+                hintText: 'Update Event Name',
+                controller: updatedEventName,
+                // defaultValue: created_events['eventName'] ?? "",
               ),
               SizedBox(height: 30.0),
               Text(
-                " Enter Event Date :",
+                " Update Event Date :",
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(
@@ -80,7 +90,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
               DateSelectionScreen(),
               SizedBox(height: 30.0),
               Text(
-                " Enter Event Time :",
+                " Update Event Time :",
                 style: TextStyle(fontSize: 18),
               ),
               SizedBox(
@@ -89,12 +99,13 @@ class _UpdateEventsState extends State<UpdateEvents> {
               TimeSelectionScreen(),
               SizedBox(height: 30.0),
               Text(
-                " Enter Event Venue :",
+                " Update Event Venue :",
                 style: TextStyle(fontSize: 18),
               ),
               InputField(
-                hintText: 'Enter Event Venue',
-                controller: eventVenue,
+                hintText: 'Update Event Venue',
+                controller: updatedEventVenue,
+                // defaultValue: created_events['eventVenue'] ?? "",
               ),
               SizedBox(
                 height: 20,
@@ -110,13 +121,13 @@ class _UpdateEventsState extends State<UpdateEvents> {
                 height: 20,
               ),
               Text(
-                " Enter Event ECC Points : ",
+                " Update Event ECC Points : ",
                 style: TextStyle(fontSize: 18),
               ),
               TextField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: "Enter Event ECC Points ",
+                    hintText: "Update Event ECC Points ",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     filled: true,
@@ -124,13 +135,13 @@ class _UpdateEventsState extends State<UpdateEvents> {
                   )),
               SizedBox(height: 30.0),
               Text(
-                " Enter Event Max Capacity :",
+                " Update Event Max Capacity :",
                 style: TextStyle(fontSize: 16),
               ),
               TextField(
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: "Enter Event Max Capacity ",
+                    hintText: "Update Event Max Capacity ",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     filled: true,
@@ -140,14 +151,15 @@ class _UpdateEventsState extends State<UpdateEvents> {
                 height: 30,
               ),
               Text(
-                " Enter Event Description :",
+                " Update Event Description :",
                 style: TextStyle(fontSize: 18),
               ),
-              TextField(
+              TextFormField(
                   maxLines: 8,
-                  controller: eventDesc,
+                  controller: updatedEventDesc,
+                  // initialValue: created_events['eventDesc'] ?? "",
                   decoration: InputDecoration(
-                    hintText: "Enter Event Description ",
+                    hintText: "Update Event Description ",
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     filled: true,
@@ -303,26 +315,12 @@ class _UpdateEventsState extends State<UpdateEvents> {
                 child: ListTile(
                   title: Center(
                     child: Text(
-                      "Create Event ",
+                      "Update Event ",
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  onTap: () {
-                    print(eventName.text);
-                    created_events['eventName'] = eventName.text;
-                    created_events['organizer'] = collaborator;
-                    created_events['eventVenue'] = eventVenue.text;
-                    created_events['eventDate'] = eventDate;
-                    created_events['eventDesc'] = eventDesc.text;
-                    Navigator.pushNamed(context, Routes.events, arguments: {
-                      'eventName': eventName.text,
-                      'organizer': collaborator,
-                      'eventVenue': eventVenue.text,
-                      'eventDate': eventDate,
-                      'eventDesc': eventDesc.text
-                    });
-                  },
+                  onTap: () {},
                 ),
               ),
             ],
@@ -335,15 +333,16 @@ class _UpdateEventsState extends State<UpdateEvents> {
 
 class InputField extends StatelessWidget {
   final String hintText;
-  final TextEditingController controller;
+  final controller;
 
-  const InputField({Key? key, required this.hintText, required this.controller,})
+  const InputField({Key? key, required this.hintText, this.controller})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       controller: controller,
+      // initialValue: defaultValue,
       decoration: InputDecoration(
         hintText: hintText,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
