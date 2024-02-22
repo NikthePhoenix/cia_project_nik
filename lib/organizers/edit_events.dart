@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/routes.dart';
 
-class UpdateEvent extends StatefulWidget {
-  const UpdateEvent({Key? key}) : super(key: key);
+class EditEvents extends StatefulWidget {
+  const EditEvents({Key? key}) : super(key: key);
 
   @override
-  State<UpdateEvent> createState() => _UpdateEventState();
+  State<EditEvents> createState() => _EditEventstate();
 }
 
-class _UpdateEventState extends State<UpdateEvent> {
+class _EditEventstate extends State<EditEvents> {
   static Map<String, dynamic> created_events = Create_event.created_events;
   @override
   Widget build(BuildContext context) {
@@ -111,11 +111,11 @@ class _UpdateEventState extends State<UpdateEvent> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.green,
+                        color: Colors.grey,
                         borderRadius: BorderRadius.circular(12.0)),
                     child: Row(
                       children: [
-                        Text("  Booked  ",
+                        Text("  Created  ",
                             style: TextStyle(
                               fontSize: 15,
                             )),
@@ -123,6 +123,26 @@ class _UpdateEventState extends State<UpdateEvent> {
                       ],
                     ),
                   ),
+                  InkWell(
+                    child: TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, Routes.updateEvents, arguments: {
+                          'eventName': eventName,
+                                          // 'organizer': organizer,
+                                          // 'eventDate': eventDate,
+                                          // 'eventTime': eventTime,
+                                          // 'eventVenue': eventVenue
+                        });
+                      },
+                      child: Text("Edit Event"),
+                    ),
+                  ),
+                  InkWell(
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text("Delete Event"),
+                    ),
+                  )
                 ],
               ),
               SizedBox(
