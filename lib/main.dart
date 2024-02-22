@@ -51,8 +51,10 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
         useMaterial3: true,
       ),
+      // initialRoute: Routes.createEvent,
       routes: {
-        Routes.splashScreen: (context) => SplashScreen(),
+        "/": (context) => OrganizerHomePage(),
+        // Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
         Routes.agreement: (context) => UserAgreementPage(),
