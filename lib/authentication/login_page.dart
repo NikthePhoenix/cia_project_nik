@@ -55,9 +55,11 @@ class LoginPageState extends State<LoginPage> {
 
   autoFill() {
     final data = myBox.get('User');
-    if (data != null) {
-      uidcontroller.text = data[1];
-      passwordController.text = data[4];
+    if (data == null) {
+       myBox.put('User', [
+      uidcontroller.text,
+      passwordController.text
+    ]);
     }
   }
 

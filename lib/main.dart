@@ -37,7 +37,6 @@ void main() async {
 //initialize hive
   await HiveManager.init();
 
-
   runApp(const MyApp());
 }
 

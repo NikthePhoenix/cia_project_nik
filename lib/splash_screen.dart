@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
       if (myBox.get('agreement') == null) {
         Navigator.pushReplacementNamed(context, Routes.agreement);
       } else {
-        Navigator.pushReplacementNamed(context, Routes.signUp);
+        Navigator.pushReplacementNamed(context, Routes.navigator);
       }
     });
   }

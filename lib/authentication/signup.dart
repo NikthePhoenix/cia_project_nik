@@ -35,15 +35,28 @@ class SignUpPageState extends State<SignUpPage> {
   bool isConfirmPwdVisible = false;
 
   final _formKey = GlobalKey<FormState>();
-  saveUserDataLocally() {
-    myBox.put('User', [
-      nameController.text,
-      uidController.text,
-      emailController.text,
-      phoneController.text,
-      passwordController.text
-    ]);
-  }
+// <<<<<<< hive
+
+//   // saveUserDataLocally() {
+//   //   myBox.put('User', [
+//   //     nameController.text,
+//   //     uidController.text,
+//   //     emailController.text,
+//   //     phoneController.text,
+//   //     passwordController.text
+//   //   ]);
+//   // }
+// =======
+//   saveUserDataLocally() {
+//     myBox.put('User', [
+//       nameController.text,
+//       uidController.text,
+//       emailController.text,
+//       phoneController.text,
+//       passwordController.text
+//     ]);
+//   }
+// >>>>>>> main
 
   Future<bool> validateData(String name, String email, String password,
       String uid, String phone) async {
@@ -227,7 +240,7 @@ class SignUpPageState extends State<SignUpPage> {
                     color: Colors.black87,
                     child: InkWell(
                       onTap: () async {
-                        saveUserDataLocally();
+                        // saveUserDataLocally();
                         setState(() {
                           isButtonClicked = true;
                         });
