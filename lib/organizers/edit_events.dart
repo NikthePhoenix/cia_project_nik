@@ -126,13 +126,15 @@ class _EditEventstate extends State<EditEvents> {
                   InkWell(
                     child: TextButton(
                       onPressed: () {
-                        Navigator.pushNamed(context, Routes.updateEvents, arguments: {
-                          'eventName': eventName,
-                                          // 'organizer': organizer,
-                                          // 'eventDate': eventDate,
-                                          // 'eventTime': eventTime,
-                                          // 'eventVenue': eventVenue
-                        });
+                        print(created_events);
+                        Navigator.pushNamed(context, Routes.updateEvents,
+                            arguments: {
+                              'eventName': eventName,
+                              // 'organizer': organizer,
+                              // 'eventDate': eventDate,
+                              // 'eventTime': eventTime,
+                              // 'eventVenue': eventVenue
+                            });
                       },
                       child: Text("Edit Event"),
                     ),
