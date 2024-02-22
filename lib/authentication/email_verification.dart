@@ -64,22 +64,18 @@ class _EmailVerificationState extends State<EmailVerification> {
                         fieldOuterPadding:
                             EdgeInsets.symmetric(horizontal: 7.0)),
                     onCompleted: (pin) async {
-                      // when the complete otp is entered
-                      print("Entered OTP: $pin");
-                      print(uid);
-                      Navigator.pushNamed(context, Routes.loginPage);
                       Map<String, dynamic> map = {'uid': uid, 'otp': pin};
                       Response response = await post(
-                          Uri.http("localhost:3000", "user/otpcheck"),
+                          Uri.http("localhost:3000", "users/otpcheck"),
                           body: map);
 
                       if (response.statusCode == 200) {
-                        print("yayyyyyyyyyyy");
+                        print("OTP valid");
                         Navigator.pushNamed(context, Routes.loginPage);
                       } else if (response.statusCode == 401) {
-                        print("incorrect bruh");
+                        print("OTP Incorrect");
                       } else {
-                        print("expired bruh!");
+                        print("OTP Expired!");
                       }
                     },
                     onChanged: (value) {

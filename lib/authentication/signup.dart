@@ -5,7 +5,6 @@
 // 2. The app crashes when clicking on the 'Create' Button without displaying text in Visibility Class
 // PLS NOTE; DO NOT DELETE THE AWAIT FUTURE DELAYED FUNCTION AS IT IS AN VITAL PART OF THIS CODE
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seproject/hive/hive.dart';
@@ -36,7 +35,6 @@ class SignUpPageState extends State<SignUpPage> {
   bool isConfirmPwdVisible = false;
 
   final _formKey = GlobalKey<FormState>();
-
   saveUserDataLocally() {
     myBox.put('User', [
       nameController.text,
@@ -47,48 +45,27 @@ class SignUpPageState extends State<SignUpPage> {
     ]);
   }
 
-  // void validateData(String name, String email, String password, String uid,
-  //     String otp) async {
-  //   try {
-  //     Response response = await post(
-  //         Uri.parse("localhost:3000","user"),
-  //         body: {
-  //           "name": name,
-  //           "Email": email,
-  //           "Pass": password,
-  //           "UID": uid,
-  //           "OTP": otp,
-  //         });
-  //     print(response.statusCode);
-  //     if (response.statusCode == 201) {
-  //       print("User signed up successfully!");
-  //     } else {
-  //       print("failure");
-  //     }
-  //   } catch (e) {
-  //     print(e.toString);
-  //   }
-  // }
-
-  void validateData(String name, String email, String password, String uid,
-      String phone) async {
+  Future<bool> validateData(String name, String email, String password,
+      String uid, String phone) async {
     try {
       Response response =
-          await post(Uri.http("localhost:3000", "user/signup"), body: {
+          await post(Uri.http("localhost:3000", "users/signup"), body: {
         "name": name,
         "email": email,
         "password": password,
         "uid": uid,
         "phone": phone,
       });
-      print(response.statusCode);
       if (response.statusCode == 201) {
         print("User signed up successfully!");
+        return true;
       } else {
         print("failure");
+        return false;
       }
     } catch (e) {
       print(e.toString());
+      return false;
     }
   }
 
@@ -129,6 +106,7 @@ class SignUpPageState extends State<SignUpPage> {
                       if (value!.isEmpty) {
                         return "Please enter name";
                       }
+                      return null;
                     },
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -150,6 +128,7 @@ class SignUpPageState extends State<SignUpPage> {
                       if (!isEmailValid) {
                         return "Please enter valid email";
                       }
+                      return null;
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -169,6 +148,7 @@ class SignUpPageState extends State<SignUpPage> {
                         if (value.length > 7) {
                           return "Please enter valid UID";
                         }
+                        return null;
                       },
                       decoration: InputDecoration(
                           border: OutlineInputBorder(),
@@ -193,6 +173,7 @@ class SignUpPageState extends State<SignUpPage> {
                       if (value.length < 4) {
                         return "Password should have minimum 4 characters";
                       }
+                      return null;
                     },
                     obscureText: isPwdVisible ? false : true,
                     decoration: InputDecoration(
@@ -221,6 +202,7 @@ class SignUpPageState extends State<SignUpPage> {
                       } else if (passwordController.text != value) {
                         return "Password is not matching";
                       }
+                      return null;
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
@@ -251,16 +233,13 @@ class SignUpPageState extends State<SignUpPage> {
                         });
 
                         if (_formKey.currentState!.validate()) {
-                          valid = true;
-                          print("name: ${nameController.text}");
-                          validateData(
+                          valid = await validateData(
                               nameController.text,
                               emailController.text,
                               passwordController.text,
                               uidController.text,
                               phoneController.text);
                         }
-                        // await Future.delayed(Duration(seconds: 2));
                         if (valid) {
                           Navigator.pushNamed(context, Routes.verifyEmail,
                               arguments: {

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:seproject/other/routes.dart';
 
 class ResetPasswordPage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    dynamic arguments = ModalRoute.of(context)?.settings?.arguments;
     return Material(
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0),
@@ -65,6 +67,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     // confirm password
                     TextFormField(
                       obscureText: isConfirmPwdVisible ? false : true,
+                      controller: confirmedController,
                       validator: (value) {
                         if (value!.isEmpty) {
                           return "Kindly confirm password";
@@ -104,13 +107,25 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                             isButtonClicked = true;
                           });
 
-                          await Future.delayed(Duration(seconds: 5));
+                          await Future.delayed(Duration(seconds: 2));
                           if (_formKey.currentState!.validate()) {
-                            await Navigator.pushNamed(
-                                context, Routes.loginPage);
                             if (passwordController.text ==
-                                confirmedController) {
-                              // to move to login page only if passwords in both fields matches
+                                confirmedController.text) {
+                              print("sent");
+                              Response resp = await put(
+                                  Uri.http("localhost:3000", "users/"),
+                                  body: {
+                                    "uid": arguments?["uid"],
+                                    "password": passwordController.text
+                                  });
+                              if (resp.statusCode == 201) {
+                                print("User updated");
+                                await Navigator.pushNamed(
+                                    context, Routes.loginPage);
+                              } else {
+                                print("UHoh");
+                                //Show error, refresh page.
+                              }
                             }
                           }
 

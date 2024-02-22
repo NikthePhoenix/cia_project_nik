@@ -11,6 +11,8 @@ import '../other/routes.dart';
 import 'package:hive/hive.dart';
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   State<LoginPage> createState() => LoginPageState();
 }
@@ -29,19 +31,18 @@ class LoginPageState extends State<LoginPage> {
 
   final _formKey = GlobalKey<FormState>();
 
-  Future<void> checkData(String uid, String password) async {
-    print("UID is " + uid.toString());
-    Response response = await post(Uri.http("localhost:3000", "user/login/"),
-        headers: {"Content-Type": "application/json"},
+  Future<bool> checkData(String uid, String password) async {
+    Response response = await post(Uri.http("localhost:3000", "users/login/"),
         body: {"uid": uid, "password": password});
 
     if (response.statusCode == 200) {
-      Navigator.pushNamed(context, Routes.homePage);
-    } else if (response.statusCode == 201) {
+      return true;
+    } else if (response.statusCode == 401) {
       print("Incorrect Password");
     } else {
       print("Empty Password");
     }
+    return false;
   }
 
   final myBox = HiveManager.myBox;
@@ -104,6 +105,7 @@ class LoginPageState extends State<LoginPage> {
                       if (value.length > 7) {
                         return "Please enter valid UID";
                       }
+                      return null;
                     },
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
@@ -111,7 +113,6 @@ class LoginPageState extends State<LoginPage> {
                         prefixIcon: Icon(Icons.perm_identity_outlined)),
                   ),
                   SizedBox(height: 20.0),
-                  // password
                   TextFormField(
                     controller: passwordController,
                     validator: (value) {
@@ -121,6 +122,7 @@ class LoginPageState extends State<LoginPage> {
                       if (value.length <= 4) {
                         return "Password should have minimum 4 characters";
                       }
+                      return null;
                     },
                     obscureText: isPwdVisible ? false : true,
                     decoration: InputDecoration(
@@ -164,18 +166,18 @@ class LoginPageState extends State<LoginPage> {
                           isButtonClicked = true;
                         });
 
-                        await Future.delayed(Duration(seconds: 2));
+                        // await Future.delayed(Duration(seconds: 2));
                         if (_formKey.currentState!.validate()) {
-                          valid = true;
-                          // print("Successs");
-                          print("email: ${emailController.text}");
-                          print("Password: ${passwordController.text}");
-                          // await checkData(
-                          //     uidcontroller.text, passwordController.text);
-                          Navigator.pushReplacementNamed(
-                            context,
-                            Routes.navigator,
-                          );
+                          // print("email: ${emailController.text}");
+                          // print("Password: ${passwordController.text}");
+                          valid = await checkData(
+                              uidcontroller.text, passwordController.text);
+                          if (valid) {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              Routes.navigator,
+                            );
+                          }
                           uidcontroller.clear();
                           passwordController.clear();
                           // await Navigator.pushNamed(
