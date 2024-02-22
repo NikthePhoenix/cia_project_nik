@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
+// ignore: use_build_context_synchronously
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:seproject/other/routes.dart';
 
@@ -14,7 +16,7 @@ class VerificationPage extends StatefulWidget {
 class _VerificationPageState extends State<VerificationPage> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
+    TextEditingController uidController = TextEditingController();
     TextEditingController otpController = TextEditingController();
     bool isEmailSent = false;
     final _formKey = GlobalKey<FormState>();
@@ -22,7 +24,6 @@ class _VerificationPageState extends State<VerificationPage> {
         GlobalKey<FormFieldState<String>>();
 
     return Material(
-        
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
           child: Form(
@@ -36,26 +37,14 @@ class _VerificationPageState extends State<VerificationPage> {
                   ),
                   SizedBox(height: 15.0),
                   TextFormField(
-                    controller: emailController,
-                    validator: (value) {
-                      if (value!.isEmpty) {
-                        return "Email field can't be empty";
-                      }
-                      bool isEmailValid = RegExp(
-                        r'^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$',
-                      ).hasMatch(value);
-
-                      if (!isEmailValid) {
-                        return "Please enter valid email";
-                      }
-                    },
+                    controller: uidController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(30.0)),
                       ),
-                      labelText: "Enter Email",
-                      hintText: "Enter the registered email id",
-                      prefixIcon: Icon(Icons.email_outlined),
+                      labelText: "Enter UID",
+                      hintText: "Enter your UID:",
+                      prefixIcon: Icon(Icons.perm_identity),
                     ),
                   ),
                   SizedBox(
@@ -65,9 +54,15 @@ class _VerificationPageState extends State<VerificationPage> {
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.black,
                           foregroundColor: Colors.white),
-                      onPressed: () {
+                      onPressed: () async {
                         print("request for otp...");
-                        // code to send otp through email
+                        Response resp = await get(Uri.http("localhost:3000",
+                            "users/newotp/${int.parse(uidController.text)}"));
+                        if (resp.statusCode == 200) {
+                          print("OTP sent");
+                        } else {
+                          print("uhoh");
+                        }
                       },
                       child: Text(
                         "Send OTP",
@@ -85,7 +80,7 @@ class _VerificationPageState extends State<VerificationPage> {
                   PinCodeTextField(
                     appContext: context,
                     controller: otpController,
-                    length: 4,
+                    length: 6,
                     keyboardType: TextInputType.number,
                     obscureText: false,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -98,11 +93,22 @@ class _VerificationPageState extends State<VerificationPage> {
                         activeFillColor: Colors.red,
                         fieldOuterPadding:
                             EdgeInsets.symmetric(horizontal: 7.0)),
-                    onCompleted: (pin) {
-                      // when the complete otp is entered
-                      print("Entered OTP: $pin");
-                      Navigator.pushNamed(
-                          context, Routes.resetPassword);
+                    onCompleted: (pin) async {
+                      Response response = await post(
+                          Uri.http("localhost:3000", "users/otpcheck"),
+                          body: {
+                            "uid": uidController.text,
+                            "otp": pin.toString()
+                          });
+                      if (response.statusCode == 200) {
+                        print("OTP Validated");
+                        Navigator.pushNamed(context, Routes.resetPassword,
+                            arguments: {"uid": uidController.text});
+                      } else if (response.statusCode == 401) {
+                        print("Incorrect OTP");
+                      } else {
+                        print("OTP expired!");
+                      }
                     },
                     onChanged: (value) {
                       // every time the value changes
