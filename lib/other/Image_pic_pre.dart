@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:seproject/other/api_calls.dart';
 
 class Image_pic_pre extends StatefulWidget {
   static File? _imageFile;
@@ -14,6 +15,11 @@ class Image_pic_pre extends StatefulWidget {
 
   static String? getImageFileName() {
     return fileName;
+  }
+
+  static Future<String?> upload() async {
+    final resp = await ApiRequester.uploadImage(_imageFile!.path);
+    return resp;
   }
 
   @override

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/organizers/collaborators.dart';
+import 'package:seproject/other/api_calls.dart';
 
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
@@ -20,7 +21,9 @@ class _Create_eventState extends State<Create_event> {
   TextEditingController eventName = TextEditingController();
   TextEditingController eventVenue = TextEditingController();
   TextEditingController eventDesc = TextEditingController();
-  // TextEditingController eventTime = TextEditingController();
+  TextEditingController points = TextEditingController();
+  TextEditingController captroller = TextEditingController();
+
   String eventDate = DateSelectionScreen.eventDate;
   static Map<String, dynamic> created_events = {};
 
@@ -118,6 +121,7 @@ class _Create_eventState extends State<Create_event> {
                 style: TextStyle(fontSize: 18),
               ),
               TextField(
+                  controller: points,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: "Enter Event ECC Points ",
@@ -132,6 +136,7 @@ class _Create_eventState extends State<Create_event> {
                 style: TextStyle(fontSize: 16),
               ),
               TextField(
+                  controller: captroller,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
                     hintText: "Enter Event Max Capacity ",
@@ -312,14 +317,36 @@ class _Create_eventState extends State<Create_event> {
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  onTap: () {
+                  onTap: () async {
                     print(eventName.text);
                     created_events['eventName'] = eventName.text;
                     created_events['organizer'] = collaborator;
                     created_events['eventVenue'] = eventVenue.text;
                     created_events['eventDate'] = eventDate;
                     created_events['eventDesc'] = eventDesc.text;
-                    print(created_events);
+
+                    DateTime date = DateSelectionScreen.dateObj;
+                    TimeOfDay time = TimeSelectionScreen.timeObj;
+
+                    DateTime eventDateTime = DateTime(date.year, date.month,
+                        date.day, time.hour, time.minute);
+                    String url = "";
+                    String? upStatus = await Image_pic_pre.upload();
+                    url = upStatus ?? "";
+                    bool status = await ApiRequester.addEvent({
+                      "orgId": 1.toString(),
+                      "tagId": 5.toString(), //deprecated perchance
+                      "eventName": eventName.text,
+                      "eventDateTime": eventDateTime.toIso8601String(),
+                      "eventVenue": eventVenue.text,
+                      "maxCapacity": captroller.text,
+                      "eccPoints": points.text,
+                      "description": eventDesc.text,
+                      //colaborator1: after collaborators get integrated
+                      "url": url,
+                    });
+                    print("Addition succeded: ${status.toString()}");
+
                     Navigator.pushNamed(context, Routes.events, arguments: {
                       'eventName': eventName.text,
                       'organizer': collaborator,

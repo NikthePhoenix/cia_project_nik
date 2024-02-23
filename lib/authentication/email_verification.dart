@@ -16,7 +16,6 @@ class EmailVerification extends StatefulWidget {
 class _EmailVerificationState extends State<EmailVerification> {
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
     TextEditingController otpController = TextEditingController();
     bool isEmailSent = false;
     final _formKey = GlobalKey<FormState>();
