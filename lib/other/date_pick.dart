@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 
 class DateSelectionScreen extends StatefulWidget {
   static String eventDate = "";
+  static late DateTime dateObj;
   @override
   _DateSelectionScreenState createState() => _DateSelectionScreenState();
 }
@@ -23,6 +24,7 @@ class _DateSelectionScreenState extends State<DateSelectionScreen> {
         selectedDate = picked;
         date = DateFormat('MMMM dd, yyyy').format(selectedDate);
         DateSelectionScreen.eventDate = date;
+        DateSelectionScreen.dateObj = selectedDate;
       });
     }
   }

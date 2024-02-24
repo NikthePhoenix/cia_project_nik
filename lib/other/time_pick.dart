@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class TimeSelectionScreen extends StatefulWidget {
   static String eventTime = _TimeSelectionScreenState.time;
+  static late TimeOfDay timeObj;
   @override
   _TimeSelectionScreenState createState() => _TimeSelectionScreenState();
 }
@@ -20,7 +21,7 @@ class _TimeSelectionScreenState extends State<TimeSelectionScreen> {
         selectedTime = picked;
         // time = picked.toString().substring(10, 25);
         time = selectedTime.toString().substring(10, 15);
-
+        TimeSelectionScreen.timeObj = selectedTime;
       });
     }
   }

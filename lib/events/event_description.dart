@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_file.dart';
+import 'package:intl/intl.dart';
 import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/events/events.dart';
 import 'package:seproject/other/date_pick.dart';
@@ -25,7 +27,6 @@ class _EventDescriptionState extends State<EventDescription> {
   static Map<String, dynamic> tickets = {};
 
   static bool isEventBooked = false;
-
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic>? args =
@@ -34,11 +35,14 @@ class _EventDescriptionState extends State<EventDescription> {
     final organizer = args?['organizer'] ?? "";
     final eventVenue = args?['eventVenue'] ?? "";
     final image = args?['image'] ?? "";
+    final url = args?['url'];
     final eventDesc = args?['eventDesc'] ?? "";
+    final eventDateTime = args?['eventDateTime'];
     var isEventBooked = args?['isEventBooked'] ?? '';
 
-    final String eventDate = DateSelectionScreen.eventDate;
-    final String eventTime = TimeSelectionScreen.eventTime;
+    final DateTime localTime = DateTime.parse(eventDateTime);
+    final String eventDate = DateFormat.yMd().format(localTime);
+    final String eventTime = DateFormat.jm().format(localTime);
 
     return Scaffold(
         appBar: AppBar(),
@@ -53,8 +57,11 @@ class _EventDescriptionState extends State<EventDescription> {
                 Container(
                     width: double.infinity,
                     color: Colors.red,
-                    child: Image.asset(
-                      "assets/images/" + image,
+                    child:
+                        // Image.asset(
+                        // "assets/images/" + image,
+                        Image.network(
+                      url,
                       height: MediaQuery.of(context).size.height * 0.5,
                       fit: BoxFit.cover,
                     )),
