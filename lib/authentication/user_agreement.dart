@@ -28,6 +28,7 @@ class _UserAgreementPageState extends State<UserAgreementPage> {
   @override
   Widget build(BuildContext context) {
     return Material(
+      color: Color(0xff181816),
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50),
@@ -36,23 +37,29 @@ class _UserAgreementPageState extends State<UserAgreementPage> {
               children: [
                 Text(
                   "Terms and Conditions",
-                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffECFFD1)),
                 ),
                 Text(
                   "By accessing and using our services, you agree to abide by these terms and conditions. Users are responsible for the confidentiality of their account information and are prohibited from engaging in any unlawful activities on our platform. We reserve the right to modify or terminate services at our discretion, and users are encouraged to review these terms regularly for updates.",
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: 16, color: Color(0xffECFFD1)),
+                  textAlign: TextAlign.justify,
                 ),
                 SizedBox(
                   height: 10.0,
                 ),
                 Text("Privacy Policy",
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
-                Text(
-                    "We prioritize the privacy of our users and assure the confidentiality of personal information collected on our platform. The data we gather is used solely for the purpose of improving our services and enhancing user experience. We do not share, sell, or disclose any user information to third parties without explicit consent.",
                     style: TextStyle(
-                      fontSize: 16,
-                    )),
+                        fontSize: 25,
+                        color: Color(0xffECFFD1),
+                        fontWeight: FontWeight.bold)),
+                Text(
+                  "We prioritize the privacy of our users and assure the confidentiality of personal information collected on our platform. The data we gather is used solely for the purpose of improving our services and enhancing user experience. We do not share, sell, or disclose any user information to third parties without explicit consent.",
+                  style: TextStyle(fontSize: 16, color: Color(0xffECFFD1)),
+                  textAlign: TextAlign.justify,
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -65,7 +72,10 @@ class _UserAgreementPageState extends State<UserAgreementPage> {
                             terms_conditions = value!;
                           });
                         }),
-                    Text("I agree to the Terms and Condition"),
+                    Text(
+                      "I agree to the Terms and Condition",
+                      style: TextStyle(color: Color(0xffECFFD1)),
+                    ),
                   ],
                 ),
                 Row(
@@ -77,7 +87,8 @@ class _UserAgreementPageState extends State<UserAgreementPage> {
                             privacy_policy = value!;
                           });
                         }),
-                    Text("I agree to the Privacy Policy"),
+                    Text("I agree to the Privacy Policy",
+                        style: TextStyle(color: Color(0xffECFFD1))),
                   ],
                 ),
                 SizedBox(
@@ -92,7 +103,7 @@ class _UserAgreementPageState extends State<UserAgreementPage> {
                     child: Text(
                       "Continue",
                       style: terms_conditions && privacy_policy
-                          ? TextStyle(color: Colors.black)
+                          ? TextStyle(color: Color(0xffE1A730),)
                           : TextStyle(color: Colors.grey),
                     ))
               ]),

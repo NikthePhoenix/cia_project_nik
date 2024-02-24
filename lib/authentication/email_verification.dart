@@ -23,8 +23,10 @@ class _EmailVerificationState extends State<EmailVerification> {
         GlobalKey<FormFieldState<String>>();
     final Map user = ModalRoute.of(context)!.settings.arguments as Map;
     final uid = user['uid'];
+    // final uid = "67";
 
     return Material(
+      color: Color(0xff181816),
       child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 20.0),
           child: Form(
@@ -34,15 +36,18 @@ class _EmailVerificationState extends State<EmailVerification> {
                 children: [
                   Text(
                     "Email Verfication",
-                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffECFFD1)),
                   ),
                   SizedBox(
                     height: 25.0,
                   ),
                   Text("An OTP has been sent to your email",
-                      style: TextStyle(fontSize: 18)),
+                      style: TextStyle(fontSize: 18, color: Color(0xffECFFD1))),
                   Text("Enter the given OTP below",
-                      style: TextStyle(fontSize: 18)),
+                      style: TextStyle(fontSize: 18, color: Color(0xffECFFD1))),
                   SizedBox(
                     height: 20.0,
                   ),
@@ -53,11 +58,12 @@ class _EmailVerificationState extends State<EmailVerification> {
                     keyboardType: TextInputType.number,
                     obscureText: false,
                     mainAxisAlignment: MainAxisAlignment.center,
+                    textStyle: TextStyle(color: Colors.white),
                     pinTheme: PinTheme(
                         shape: PinCodeFieldShape.box,
                         borderRadius: BorderRadius.circular(5),
-                        fieldHeight: 50.0,
-                        fieldWidth: 50.0,
+                        fieldHeight: 40.0,
+                        fieldWidth: 40.0,
                         activeColor: Colors.green,
                         activeFillColor: Colors.red,
                         fieldOuterPadding:
@@ -84,6 +90,32 @@ class _EmailVerificationState extends State<EmailVerification> {
                     key: _pincodekey,
                   ),
                   SizedBox(height: 20.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("Didn't recieve OTP?",
+                          style:
+                              TextStyle(fontSize: 16, color: Colors.amber[50])),
+                      TextButton(
+                        onPressed: () {
+                          setState(() {
+                            Navigator.pushReplacementNamed(
+                              context,
+                              Routes.signUp,
+                            );
+                          });
+                        },
+                        child: InkWell(
+                          onTap: () {},
+                          child: Text("Resend OTP",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.amber[100],
+                                  fontWeight: FontWeight.bold)),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ))),
     );

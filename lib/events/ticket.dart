@@ -26,7 +26,7 @@ class _BookedTicketState extends State<BookedTicket> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     return Scaffold(
-      backgroundColor: Colors.grey,
+      backgroundColor: Colors.amber[200],
 
       // appBar: AppBar(
       //   backgroundColor: Colors.black26,
@@ -47,6 +47,9 @@ class _BookedTicketState extends State<BookedTicket> {
       //           )),
       //     )),
       // ),
+      appBar: AppBar(
+        backgroundColor: Colors.amber[200],
+      ),
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -89,26 +92,26 @@ class TicketData extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: TextButton(
-                      onPressed: () {
-                        // Navigator.pushNamed(context, Routes.bookedEvents);
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => BookedEvents(),
-                            ));
-                      },
-                      child: Icon(
-                        Icons.arrow_back,
-                        color: Colors.black,
-                      )),
-                )),
+            // Align(
+            //     alignment: Alignment.topLeft,
+            //     child: Container(
+            //       decoration: BoxDecoration(
+            //           color: Colors.grey[300],
+            //           borderRadius: BorderRadius.circular(20.0)),
+            //       child: TextButton(
+            //           onPressed: () {
+            //             // Navigator.pushNamed(context, Routes.bookedEvents);
+            //             Navigator.push(
+            //                 context,
+            //                 MaterialPageRoute(
+            //                   builder: (context) => BookedEvents(),
+            //                 ));
+            //           },
+            //           child: Icon(
+            //             Icons.arrow_back,
+            //             color: Colors.black,
+            //           )),
+            //     )),
             SizedBox(
               height: 15,
             ),
@@ -213,7 +216,7 @@ class TicketData extends StatelessWidget {
                   child: Text(
                     'Confirmed',
                     style: TextStyle(
-                        color: Colors.red,
+                        color: Colors.green,
                         fontSize: (30.0),
                         fontWeight: FontWeight.bold),
                   ),

@@ -45,43 +45,61 @@ class _EventDescriptionState extends State<EventDescription> {
     final String eventTime = DateFormat.jm().format(localTime);
 
     return Scaffold(
-        appBar: AppBar(),
+        backgroundColor: Color(0xff181816),
+        // appBar: AppBar(
+        //   foregroundColor: Color(0xffE1A730)
+        // ),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(16),
             child: SingleChildScrollView(
               child: Column(children: [
+                Align(
+                    alignment: Alignment.topLeft,
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(0xffE1A730),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: TextButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            // Navigator.push
+                          },
+                          child: Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                          )),
+                    )),
                 SizedBox(
                   height: 15,
                 ),
                 Container(
-                    width: double.infinity,
-                    color: Colors.red,
-                    child:
-                        // Image.asset(
-                        // "assets/images/" + image,
-                        Image.network(
+                    width: MediaQuery.of(context).size.width * 0.75,
+                    child: Image.network(
                       url,
                       height: MediaQuery.of(context).size.height * 0.5,
-                      fit: BoxFit.cover,
+                      fit: BoxFit.fitWidth,
                     )),
                 Text(
                   eventName,
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xffECFFD1)),
                 ),
                 Text(
                   organizer,
-                  style: TextStyle(fontSize: 17),
+                  style: TextStyle(fontSize: 17, color: Color(0xffECFFD1)),
                 ),
                 Row(
                   children: [
-                    Icon(Icons.date_range),
+                    Icon(Icons.date_range, color: Color(0xffECFFD1)),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
                       "Date: $eventDate",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Color(0xffECFFD1)),
                     ),
                   ],
                 ),
@@ -90,13 +108,13 @@ class _EventDescriptionState extends State<EventDescription> {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.timer_rounded),
+                    Icon(Icons.timer_rounded, color: Color(0xffECFFD1)),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
                       "Time: $eventTime",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Color(0xffECFFD1)),
                     ),
                   ],
                 ),
@@ -105,13 +123,13 @@ class _EventDescriptionState extends State<EventDescription> {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.location_pin),
+                    Icon(Icons.location_pin, color: Color(0xffECFFD1)),
                     SizedBox(
                       width: 10,
                     ),
                     Text(
                       "Venue: $eventVenue",
-                      style: TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: 16, color: Color(0xffECFFD1)),
                     ),
                   ],
                 ),
@@ -178,7 +196,7 @@ class _EventDescriptionState extends State<EventDescription> {
                     decoration: BoxDecoration(
                         color: bookedEvents.contains(eventName)
                             ? Colors.grey
-                            : Colors.white,
+                            : Color(0xffE1A730),
                         border: Border.all(
                           width: 2,
                           color: Colors.black,

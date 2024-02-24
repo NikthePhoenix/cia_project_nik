@@ -39,6 +39,8 @@ class _EventsState extends State<Events> {
         });
       },
       child: Container(
+          height: 150,
+          width: 150,
           decoration: BoxDecoration(
             border: Border.all(color: Colors.black),
           ),
@@ -49,20 +51,25 @@ class _EventsState extends State<Events> {
               //       height: 100, width: 100, fit: BoxFit.cover),
               // ),
               Container(
-                child:
-                    // Image.asset("assets/images/" + image,
-                    Image.network(image,
-                        height: 100, width: 100, fit: BoxFit.cover),
+                height: 100,
+                child: Image.network(image,
+                    // height: 100,
+                    width: 150,
+                    fit: BoxFit.cover),
               ),
               Text(
                 eventName,
                 style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xffECFFD1)),
+                // textAlign: TextAlign.left,
               ),
               Text(organizer,
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w300))
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w300,
+                      color: Color(0xffECFFD1)))
             ],
           )),
     );
@@ -108,6 +115,7 @@ class _EventsState extends State<Events> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff181816),
       body: SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(16),
@@ -120,7 +128,7 @@ class _EventsState extends State<Events> {
                           alignment: Alignment.topLeft,
                           child: Container(
                             decoration: BoxDecoration(
-                                color: Colors.grey[300],
+                                color: Color(0xffE1A730),
                                 borderRadius: BorderRadius.circular(20.0)),
                             child: TextButton(
                                 onPressed: () {
@@ -140,12 +148,13 @@ class _EventsState extends State<Events> {
                   Container(
                     height: 40,
                     decoration: BoxDecoration(
-                        color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(20.0)),
                     child: Center(
                       child: Text("EVENTS",
                           style: TextStyle(
-                              fontSize: 22, fontWeight: FontWeight.bold)),
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                              color: Color(0xffECFFD1))),
                     ),
                   ),
                   SizedBox(height: 20),

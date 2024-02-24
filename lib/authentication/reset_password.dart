@@ -23,6 +23,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
   Widget build(BuildContext context) {
     dynamic arguments = ModalRoute.of(context)?.settings?.arguments;
     return Material(
+        color: Color(0xff181816),
         child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 30.0),
             child: Form(
@@ -32,8 +33,10 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                   children: [
                     Text(
                       "Set New Password",
-                      style:
-                          TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xffECFFD1)),
                     ),
                     SizedBox(height: 30),
                     TextFormField(
@@ -48,7 +51,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                       },
                       obscureText: isPwdVisible ? false : true,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        filled: true,
+                        fillColor: Color(0xffECFFD1),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(17),
+                        ),
                         labelText: "Enter Password",
                         prefixIcon: Icon(Icons.password),
                         suffixIcon: GestureDetector(
@@ -76,7 +83,11 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         }
                       },
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        filled: true,
+                        fillColor: Color(0xffECFFD1),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(17),
+                        ),
                         labelText: "Confirm Password",
                         prefixIcon: Icon(Icons.lock),
                         suffixIcon: Column(
@@ -100,7 +111,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                     Material(
                       borderRadius: BorderRadius.circular(35),
                       // color: Colors.deepPurple[700],
-                      color: Colors.black87,
+                      color: Color(0xffE1A730),
                       child: InkWell(
                         onTap: () async {
                           setState(() {
@@ -136,16 +147,16 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                         child: AnimatedContainer(
                           duration: Duration(seconds: 1),
                           height: 50.0,
-                          width: isButtonClicked ? 50.0 : 100.0,
+                          width: isButtonClicked ? 50.0 : 200.0,
                           alignment: Alignment.center,
                           child: isButtonClicked //&& valid
                               ? Icon(
                                   Icons.done,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 )
-                              : Text("Login",
+                              : Text("CONFIRM",
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20,
                                   )),
