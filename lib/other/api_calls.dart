@@ -6,6 +6,10 @@ import 'package:http/http.dart';
 const baseUrl = "localhost:3000";
 
 class ApiRequester {
+  static String buildUrl(String filename) {
+    return "http://${baseUrl}/uploads/$filename";
+  }
+
   /*
   List of organizers with keys
   {orgId, orgName, orgDept, orgEmail}

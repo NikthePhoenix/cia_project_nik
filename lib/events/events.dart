@@ -1,8 +1,8 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:seproject/events/event_description.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
+import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 
 class Events extends StatefulWidget {
@@ -23,23 +23,8 @@ class Events extends StatefulWidget {
 }
 
 class _EventsState extends State<Events> {
-  // Widget departmentsList() {
-  //   // use ListView.buildera() instead of row
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //     children: [
-  //       SizedBox(height: 10),
-  //       addDepartmentTiles("ECC"),
-  //       SizedBox(width: 15),
-  //       addDepartmentTiles("MVM"),
-  //       SizedBox(width: 15),
-  //       addDepartmentTiles("IMG"),
-  //       SizedBox(width: 15),
-  //       addDepartmentTiles("SSL"),
-  //     ],R
-  //   );
-  // }
-  Widget addEvents(eventName, organizer, eventVenue, eventDesc,  image,) {
+  Widget addEvents(eventName, organizer, eventVenue, eventDesc, image,
+      eventDateTime, eccPoints) {
     return InkWell(
       onTap: () {
         print(eventVenue);
@@ -48,8 +33,9 @@ class _EventsState extends State<Events> {
           'organizer': organizer,
           'eventVenue': eventVenue,
           'eventDesc': eventDesc,
-          'image': image,
-          'isEventBooked': false
+          'url': image,
+          'isEventBooked': false,
+          'eventDateTime': eventDateTime
         });
       },
       child: Container(
@@ -63,8 +49,10 @@ class _EventsState extends State<Events> {
               //       height: 100, width: 100, fit: BoxFit.cover),
               // ),
               Container(
-                child: Image.asset("assets/images/" + image,
-                    height: 100, width: 100, fit: BoxFit.cover),
+                child:
+                    // Image.asset("assets/images/" + image,
+                    Image.network(image,
+                        height: 100, width: 100, fit: BoxFit.cover),
               ),
               Text(
                 eventName,
@@ -81,51 +69,38 @@ class _EventsState extends State<Events> {
   }
 
   Widget eventsList(BuildContext context) {
-    Map<String, dynamic>? eventDetails =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
-
-    final eventName = eventDetails?['eventName'] ?? "";
-    final organizer = eventDetails?['organizer'] ?? "";
-    final eventVenue = eventDetails?['eventVenue'] ?? "";
-    final eventDesc = eventDetails?['eventDesc'] ?? "";
-    File? imageFile = Image_pic_pre.getImageFile();
-    // final imageName = Image_pic_pre.getImageFileName() ?? "";
-    final imageName = "main.jpeg";
+    final Future<dynamic> events = ApiRequester.getAllEvents();
 
     return SizedBox(
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Wrap(
-          direction: Axis.horizontal,
-          alignment: WrapAlignment.center,
-          spacing: 10.0,
-          runSpacing: 15.0,
-          children: [
-            addEvents(eventName, "ecc& wpa", eventVenue, eventDesc,  imageName, ),
-            addEvents("Dancer", "WPA", "", "", "demo_event.jpg"),
-            addEvents("Hip Hop", "ECC & WPA",  "", "", "open_mic.jpg" ),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-            addEvents("Hip Hop", "ECC & WPA", "", "", "open_mic.jpg"),
-          ],
-        ),
+        child: FutureBuilder(
+            future: events,
+            builder: (context, snapshot) {
+              List<Widget> children = [];
+              if (snapshot.hasData) {
+                var eventsData = snapshot.data as List<dynamic>;
+                for (var event in eventsData) {
+                  Widget builtEvent = addEvents(
+                      event['eventName'],
+                      event['orgId'].toString(),
+                      event['eventVenue'],
+                      event['eventDesc'],
+                      event['url'],
+                      /* change this to event['url'] */
+                      event['eventDateTime'],
+                      event['eccPoints']);
+                  children.add(builtEvent);
+                }
+              }
+              return Wrap(
+                direction: Axis.horizontal,
+                alignment: WrapAlignment.center,
+                spacing: 10.0,
+                runSpacing: 15.0,
+                children: children,
+              );
+            }),
       ),
     );
   }
@@ -173,10 +148,6 @@ class _EventsState extends State<Events> {
                               fontSize: 22, fontWeight: FontWeight.bold)),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  // SingleChildScrollView(
-                  //     scrollDirection: Axis.horizontal,
-                  //     child: departmentsList()),
                   SizedBox(height: 20),
                   Expanded(
                     child: eventsList(context),

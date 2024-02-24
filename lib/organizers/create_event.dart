@@ -28,15 +28,19 @@ class _Create_eventState extends State<Create_event> {
   static Map<String, dynamic> created_events = {};
 
   String collaborator = "";
+  int collaboratorId = 0;
 
-  final List<String> collaborators = [
-    "ECC",
-    "Fitoor",
-    "Ithaka",
-    "LFL",
-    "MVM",
-    "Wpa Dance"
-  ];
+  // final List<String> collaborators = [
+  //   "ECC",
+  //   "Fitoor",
+  //   "Ithaka",
+  //   "LFL",
+  //   "MVM",
+  //   "Wpa Dance"
+  // ];
+
+  final Future<dynamic> collabData = ApiRequester.getAllOrganizers();
+  List<dynamic> organizerData = [];
 
   @override
   Widget build(BuildContext context) {
@@ -182,124 +186,32 @@ class _Create_eventState extends State<Create_event> {
               SizedBox(
                 height: 20,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[0],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[0], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[1],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[1], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[2],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[2], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[3],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[3], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[4],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[4], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[5],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[5], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
+              // ignore: prefer_const_constructors
+              // Column(
+              //   crossAxisAlignment: CrossAxisAlignment.start,
+              // children: [
+              FutureBuilder(
+                future: collabData,
+                builder: ((context, snapshot) {
+                  List<Widget> children;
+                  children = [];
+                  if (snapshot.hasData) {
+                    var organizerData = snapshot.data as List<dynamic>;
+                    for (var elem in organizerData) {
+                      children.add(RadioOpt(elem));
+                      children.add(
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      );
+                    }
+                  }
+                  // children.removeLast();
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: children,
+                  );
+                }),
               ),
               SizedBox(
                 height: 100,
@@ -330,9 +242,10 @@ class _Create_eventState extends State<Create_event> {
 
                     DateTime eventDateTime = DateTime(date.year, date.month,
                         date.day, time.hour, time.minute);
-                    String url = "";
+                    String fname = "";
                     String? upStatus = await Image_pic_pre.upload();
-                    url = upStatus ?? "";
+                    fname = upStatus ?? "";
+
                     bool status = await ApiRequester.addEvent({
                       "orgId": 1.toString(),
                       "tagId": 5.toString(), //deprecated perchance
@@ -342,10 +255,10 @@ class _Create_eventState extends State<Create_event> {
                       "maxCapacity": captroller.text,
                       "eccPoints": points.text,
                       "description": eventDesc.text,
-                      //colaborator1: after collaborators get integrated
-                      "url": url,
+                      "colaborator1": collaboratorId.toString(),
+                      "url": ApiRequester.buildUrl(fname),
                     });
-                    print("Addition succeded: ${status.toString()}");
+                    print("Addition succeeded: ${status.toString()}");
 
                     Navigator.pushNamed(context, Routes.events, arguments: {
                       'eventName': eventName.text,
@@ -361,6 +274,25 @@ class _Create_eventState extends State<Create_event> {
           ),
         ),
       ),
+    );
+  }
+
+  Row RadioOpt(elem) {
+    return Row(
+      children: [
+        Radio(
+            value: elem['orgDept'] as String,
+            groupValue: collaborator,
+            onChanged: (String? value) {
+              setState(() {
+                collaborator = elem['orgDept'].toString();
+                collaboratorId = elem['orgId'];
+                print(collaborator);
+              });
+            }),
+        SizedBox(width: 8),
+        Text(elem['orgDept'] as String, style: TextStyle(fontSize: 16)),
+      ],
     );
   }
 
