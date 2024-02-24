@@ -18,6 +18,7 @@ class Routes {
   static String termsConditons = "/terms_conditions";
   static String helpCenter = "/help_center";
   static String search = "/search";
+  static String organizerLogin = "/og_login";
   static String organizerHome = "/og_home";
   static String createEvent = "/create_event";
   static String bookedEvents = "/booked_events";

@@ -14,6 +14,7 @@ import 'package:seproject/events/event_description.dart';
 import 'package:seproject/authentication/reset_password.dart';
 import 'package:seproject/organizers/og_home.dart';
 import 'package:seproject/organizers/edit_events.dart';
+import 'package:seproject/organizers/og_login.dart';
 import 'package:seproject/organizers/update_events.dart';
 import 'package:seproject/search.dart';
 import 'package:seproject/settings/about_us.dart';
@@ -48,13 +49,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.amber),
         useMaterial3: true,
       ),
       // initialRoute: Routes.createEvent,
       routes: {
-        "/": (context) => OrganizerHomePage(),
-        // Routes.splashScreen: (context) => SplashScreen(),
+        // "/": (context) => OrganizerLogin(),
+        Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
         Routes.agreement: (context) => UserAgreementPage(),
@@ -73,6 +74,7 @@ class MyApp extends StatelessWidget {
         Routes.privacy: (context) => Privacy(),
         Routes.termsConditons: (context) => TermsCondtion(),
         Routes.helpCenter: (context) => HelpCenter(),
+        Routes.organizerLogin: (context) => OrganizerLogin(),
         Routes.organizerHome: (context) => OrganizerHomePage(),
         Routes.createEvent: (context) => Create_event(),
         Routes.bookedEvents: (context) => BookedEvents(),
