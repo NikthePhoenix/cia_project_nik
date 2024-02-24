@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
-import 'package:seproject/organizers/collaborators.dart';
 import 'package:seproject/other/api_calls.dart';
 
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
-import 'collaborators.dart';
 
 class Create_event extends StatefulWidget {
   const Create_event({Key? key}) : super(key: key);
