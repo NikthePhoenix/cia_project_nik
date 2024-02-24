@@ -15,11 +15,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(seconds: 5), () {
+    Future.delayed(Duration(seconds: 3), () {
       if (myBox.get('agreement') == null) {
         Navigator.pushReplacementNamed(context, Routes.agreement);
       } else {
-        Navigator.pushReplacementNamed(context, Routes.navigator);
+        Navigator.pushReplacementNamed(context, Routes.signUp);
       }
     });
   }
@@ -27,10 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.grey[300],
+        backgroundColor: Color(0xffACDCFF),
         body: Center(
             child: Image.asset(
-          "assets/images/splash_screen_img.png",
+          "assets/images/bookmyevent.jpeg",
+          
           height: MediaQuery.of(context).size.height * .4,
         )));
   }
