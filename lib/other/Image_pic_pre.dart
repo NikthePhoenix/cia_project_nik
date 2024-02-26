@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:seproject/other/api_calls.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class Image_pic_pre extends StatefulWidget {
   static File? _imageFile;
@@ -120,6 +121,7 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                   _pickImage(ImageSource.gallery);
                 },
                 child: Card(
+                    color: Color(golden_yellow),
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(8), // Set border radius
@@ -129,7 +131,7 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                       child: Text(
                         "Upload",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff181816)),
                       ),
                     )),
               )),
@@ -139,6 +141,7 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                   _previewImage();
                 },
                 child: Card(
+                  color: Color(golden_yellow),
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(8), // Set border radius
@@ -148,7 +151,7 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                       child: Text(
                         "Preview",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold),
+                            fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff181816)),
                       ),
                     )),
               ))

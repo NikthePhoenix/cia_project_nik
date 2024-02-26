@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class DateSelectionScreen extends StatefulWidget {
   static String eventDate = "";
@@ -44,12 +45,12 @@ class _DateSelectionScreenState extends State<DateSelectionScreen> {
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
                 filled: true,
-                fillColor: Color.fromARGB(255, 232, 231, 233),
+                fillColor: Color(text_dm_offwhite),
                 suffixIcon: Icon(Icons.calendar_today),
               ),
               child: Text(
                 "${selectedDate.toLocal()}".split(' ')[0],
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, color: Color(background_darkgrey)),
               ),
             ),
           ),
