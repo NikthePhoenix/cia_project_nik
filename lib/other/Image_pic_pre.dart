@@ -108,7 +108,10 @@ class _Image_pic_preState extends State<Image_pic_pre> {
           Image_pic_pre._imageFile == null
               ? Text('No image selected.')
               : Wrap(
-                  children: [Text('Chosen Image : $fileName')],
+                  children: [
+                    Text('Chosen Image : $fileName',
+                        style: TextStyle(color: Colors.amber[50]))
+                  ],
                 ),
           SizedBox(
             height: 10,
@@ -131,7 +134,9 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                       child: Text(
                         "Upload",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff181816)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff181816)),
                       ),
                     )),
               )),
@@ -141,7 +146,7 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                   _previewImage();
                 },
                 child: Card(
-                  color: Color(golden_yellow),
+                    color: Color(golden_yellow),
                     shape: RoundedRectangleBorder(
                       borderRadius:
                           BorderRadius.circular(8), // Set border radius
@@ -151,7 +156,9 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                       child: Text(
                         "Preview",
                         style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.bold, color: Color(0xff181816)),
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Color(0xff181816)),
                       ),
                     )),
               ))
