@@ -6,6 +6,8 @@ import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
 
+import 'package:seproject/other/color_palette.dart';
+
 class Create_event extends StatefulWidget {
   const Create_event({Key? key}) : super(key: key);
   static Map<String, dynamic> created_events =
@@ -43,7 +45,8 @@ class _Create_eventState extends State<Create_event> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      backgroundColor: Color(background_darkgrey),
+      //appBar: AppBar(),
       body: SingleChildScrollView(
         child: Container(
           // Set grey background color
@@ -54,14 +57,15 @@ class _Create_eventState extends State<Create_event> {
             children: [
               Text(
                 "Create Event",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color: Color(text_dm_offwhite)),
+                
               ),
               SizedBox(
                 height: 40,
               ),
               Text(
                 "Upload Event Image :",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 20,
@@ -72,7 +76,7 @@ class _Create_eventState extends State<Create_event> {
               ),
               Text(
                 " Enter Event Name :",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
               InputField(
                 hintText: 'Enter Event Name',
@@ -81,7 +85,7 @@ class _Create_eventState extends State<Create_event> {
               SizedBox(height: 30.0),
               Text(
                 " Enter Event Date :",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 8,
@@ -90,7 +94,7 @@ class _Create_eventState extends State<Create_event> {
               SizedBox(height: 30.0),
               Text(
                 " Enter Event Time :",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 8,
@@ -99,7 +103,7 @@ class _Create_eventState extends State<Create_event> {
               SizedBox(height: 30.0),
               Text(
                 " Enter Event Venue :",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
               InputField(
                 hintText: 'Enter Event Venue',
@@ -113,14 +117,14 @@ class _Create_eventState extends State<Create_event> {
                 thickness: 2,
                 indent: 0,
                 endIndent: 0,
-                color: Colors.grey,
+                color: Color(golden_yellow),
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
                 " Enter Event ECC Points : ",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
               TextField(
                   controller: points,
@@ -130,12 +134,13 @@ class _Create_eventState extends State<Create_event> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     filled: true,
-                    fillColor: Color.fromARGB(255, 236, 234, 237),
+                    fillColor: Color(text_dm_offwhite),
+                    hintStyle: TextStyle(color: Color(background_darkgrey))
                   )),
               SizedBox(height: 30.0),
               Text(
                 " Enter Event Max Capacity :",
-                style: TextStyle(fontSize: 16),
+                style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)),
               ),
               TextField(
                   controller: captroller,
@@ -145,14 +150,15 @@ class _Create_eventState extends State<Create_event> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     filled: true,
-                    fillColor: Color.fromARGB(255, 236, 234, 237),
+                    fillColor: Color(text_dm_offwhite),
+                    hintStyle: TextStyle(color: Color(background_darkgrey))
                   )),
               SizedBox(
                 height: 30,
               ),
               Text(
                 " Enter Event Description :",
-                style: TextStyle(fontSize: 18),
+                style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
               TextField(
                   maxLines: 8,
@@ -162,7 +168,8 @@ class _Create_eventState extends State<Create_event> {
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(15)),
                     filled: true,
-                    fillColor: Color.fromARGB(255, 236, 234, 237),
+                    fillColor: Color(text_dm_offwhite),
+                    hintStyle: TextStyle(color: Color(background_darkgrey))
                   )),
               SizedBox(
                 height: 30,
@@ -172,14 +179,14 @@ class _Create_eventState extends State<Create_event> {
                 thickness: 2,
                 indent: 0,
                 endIndent: 0,
-                color: Colors.grey,
+                color: Color(golden_yellow),
               ),
               SizedBox(
                 height: 20,
               ),
               Text(
-                "Chose the organizer department",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                "Chose the collaborator (if any)",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 20,
@@ -215,6 +222,7 @@ class _Create_eventState extends State<Create_event> {
                 height: 100,
               ),
               Card(
+                color: Color(golden_yellow),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                   side: BorderSide(color: Colors.black, width: 1.0),
@@ -224,7 +232,7 @@ class _Create_eventState extends State<Create_event> {
                     child: Text(
                       "Create Event ",
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                          fontSize: 20.0, fontWeight: FontWeight.bold, color: Color(0xff181816)),
                     ),
                   ),
                   onTap: () async {
@@ -279,8 +287,11 @@ class _Create_eventState extends State<Create_event> {
     return Row(
       children: [
         Radio(
+            toggleable: true,
             value: elem['orgDept'] as String,
             groupValue: collaborator,
+            activeColor: Color(golden_yellow),
+            
             onChanged: (String? value) {
               setState(() {
                 collaborator = elem['orgDept'].toString();
@@ -289,7 +300,7 @@ class _Create_eventState extends State<Create_event> {
               });
             }),
         SizedBox(width: 8),
-        Text(elem['orgDept'] as String, style: TextStyle(fontSize: 16)),
+        Text(elem['orgDept'] as String, style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite))),
       ],
     );
   }
@@ -322,10 +333,12 @@ class InputField extends StatelessWidget {
       controller: controller,
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: TextStyle(color: Color(background_darkgrey)),
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
         filled: true,
-        fillColor: Color.fromARGB(255, 236, 234, 237),
+        fillColor: Color(text_dm_offwhite),
       ),
+      style: TextStyle(color: Color(background_darkgrey)),
     );
   }
 }

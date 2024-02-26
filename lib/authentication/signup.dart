@@ -259,7 +259,7 @@ class SignUpPageState extends State<SignUpPage> {
                       SizedBox(height: 30.0),
                       Material(
                         borderRadius: BorderRadius.circular(35),
-                        color: Colors.amber,
+                        color: Color(0xFFFFC107),
                         child: InkWell(
                           onTap: () async {
                             // saveUserDataLocally();

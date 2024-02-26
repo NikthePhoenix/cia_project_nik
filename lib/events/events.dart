@@ -90,7 +90,7 @@ class _EventsState extends State<Events> {
                 for (var event in eventsData) {
                   Widget builtEvent = addEvents(
                       event['eventName'],
-                      event['orgId'].toString(),
+                      event['orgName'].toString(),
                       event['eventVenue'],
                       event['eventDesc'],
                       event['url'],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class TimeSelectionScreen extends StatefulWidget {
   static String eventTime = _TimeSelectionScreenState.time;
@@ -41,12 +42,12 @@ class _TimeSelectionScreenState extends State<TimeSelectionScreen> {
                 border:
                     OutlineInputBorder(borderRadius: BorderRadius.circular(15)),
                 filled: true,
-                fillColor: Color.fromARGB(255, 232, 231, 233),
+                fillColor: Color(text_dm_offwhite),
                 suffixIcon: Icon(Icons.access_time),
               ),
               child: Text(
                 '${selectedTime.hour}:${selectedTime.minute.toString().padLeft(2, '0')}',
-                style: TextStyle(fontSize: 16.0),
+                style: TextStyle(fontSize: 16.0, color: Color(background_darkgrey)),
               ),
             ),
           ),
