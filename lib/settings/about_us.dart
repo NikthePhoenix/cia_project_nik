@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class AboutUsPage extends StatelessWidget {
   const AboutUsPage({super.key});
@@ -8,20 +9,27 @@ class AboutUsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Color(background_darkgrey),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: <Widget>[
                 Align(
-                  alignment: Alignment.topLeft,
-                  child: ElevatedButton(
-                    child: const Icon(Icons.arrow_back),
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(golden_yellow),
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.events);
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Color(background_darkgrey),
+                            )),
+                      )),
                 Align(
                   alignment: Alignment.topLeft,
                   child: Padding(
@@ -30,7 +38,7 @@ class AboutUsPage extends StatelessWidget {
                       textAlign: TextAlign.left,
                       "About Us",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Color(text_dm_offwhite),
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
                       ),
@@ -44,7 +52,7 @@ class AboutUsPage extends StatelessWidget {
                     child: Text(
                       "Welcome to BookMyEvents",
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Color(text_dm_offwhite),
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
                       ),
@@ -63,7 +71,7 @@ class AboutUsPage extends StatelessWidget {
                     "understanding. With a user-centric design, intuitive interface, and robust features,Book My Event is crafted "
                     "to enhance your event booking experience.",
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Color(text_dm_offwhite),
                       fontSize: 16,
                     ),
                   ),
