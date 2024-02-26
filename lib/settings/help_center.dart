@@ -31,7 +31,7 @@ class HelpCenter extends StatelessWidget {
                             borderRadius: BorderRadius.circular(20.0)),
                         child: TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, Routes.events);
+                              Navigator.pushNamed(context, Routes.settings);
                             },
                             child: Icon(
                               Icons.arrow_back,
