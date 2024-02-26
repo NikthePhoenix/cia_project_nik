@@ -1,4 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 
 class Profile extends StatefulWidget {
@@ -29,15 +33,29 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Color(background_darkgrey),
         appBar: AppBar(
-          // title: Text("AboutUs Bar"),
-          title: ElevatedButton(
-            child: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            },
-          ),
-        ),
+            backgroundColor: Color(background_darkgrey),
+            // title: Text("AboutUs Bar"),
+            // title: ElevatedButton(
+            //   child: const Icon(Icons.arrow_back, color: Color(background_darkgrey),),
+            //   onPressed: () {
+            //     Navigator.pop(context);
+            //   },
+            // ),
+            title: Container(
+              decoration: BoxDecoration(
+                  color: Color(golden_yellow),
+                  borderRadius: BorderRadius.circular(20.0)),
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, Routes.events);
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Color(background_darkgrey),
+                  )),
+            )),
         body: SingleChildScrollView(
           child: Form(
             autovalidateMode: AutovalidateMode.always,
@@ -56,7 +74,7 @@ class _ProfileState extends State<Profile> {
                       textAlign: TextAlign.justify,
                       "Edit Profile",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Color(text_dm_offwhite),
                         fontSize: 20,
                         fontWeight: FontWeight.w800,
                       ),
@@ -66,11 +84,11 @@ class _ProfileState extends State<Profile> {
                 const Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   child: CircleAvatar(
-                    backgroundColor: Color(0xffE6E6E6),
+                    backgroundColor: Color(golden_yellow),
                     radius: 30,
                     child: Icon(
                       Icons.person_rounded,
-                      color: Color(0xffCCCCCC),
+                      color: Color(background_darkgrey),
                     ),
                   ),
                 ),
@@ -81,9 +99,13 @@ class _ProfileState extends State<Profile> {
                     controller: uname,
                     readOnly: isReadOnly,
                     decoration: const InputDecoration(
-                      labelText: 'Name',
-                      border: UnderlineInputBorder(),
-                    ),
+                        labelText: 'Name',
+                        labelStyle:
+                            TextStyle(color: Color(background_darkgrey)),
+                        fillColor: Color(text_dm_offwhite),
+                        filled: true),
+                    cursorColor: Color(background_darkgrey),
+                    style: TextStyle(color: Color(background_darkgrey)),
                     onChanged: (str) => {
                       print("onChanged: " + str + " controller: " + uname.text)
                     },
@@ -101,9 +123,13 @@ class _ProfileState extends State<Profile> {
                   child: TextFormField(
                     controller: email,
                     decoration: const InputDecoration(
-                      labelText: 'Email ID',
-                      border: UnderlineInputBorder(),
-                    ),
+                        labelText: 'Email ID',
+                        labelStyle:
+                            TextStyle(color: Color(background_darkgrey)),
+                        fillColor: Color(text_dm_offwhite),
+                        filled: true),
+                    cursorColor: Color(background_darkgrey),
+                    style: TextStyle(color: Color(background_darkgrey)),
                     onChanged: (str) => {
                       print("onChanged: " + str + " controller: " + email.text)
                     },
@@ -120,9 +146,13 @@ class _ProfileState extends State<Profile> {
                   child: TextField(
                     readOnly: true,
                     decoration: InputDecoration(
-                      labelText: 'UID',
-                      border: UnderlineInputBorder(),
-                    ),
+                        labelText: 'UID',
+                        labelStyle:
+                            TextStyle(color: Color(background_darkgrey)),
+                        fillColor: Color(text_dm_offwhite),
+                        filled: true),
+                    cursorColor: Color(background_darkgrey),
+                    style: TextStyle(color: Color(background_darkgrey)),
                   ),
                 ),
                 Padding(
@@ -130,9 +160,13 @@ class _ProfileState extends State<Profile> {
                   child: TextFormField(
                     controller: pass,
                     decoration: const InputDecoration(
-                      labelText: 'Password',
-                      border: UnderlineInputBorder(),
-                    ),
+                        labelText: 'Password',
+                        labelStyle:
+                            TextStyle(color: Color(background_darkgrey)),
+                        fillColor: Color(text_dm_offwhite),
+                        filled: true),
+                    cursorColor: Color(background_darkgrey),
+                    style: TextStyle(color: Color(background_darkgrey)),
                     onChanged: (str) => {
                       print("onChanged: " + str + " controller: " + pass.text)
                     },
@@ -146,29 +180,46 @@ class _ProfileState extends State<Profile> {
                   ),
                 ),
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  child: ElevatedButton(
-                    child: const Text('Logout'),
-                    onPressed: () {},
-                  ),
-                ),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 10),
+                    // child: ElevatedButton(
+                    //   child: const Text('Logout', style: TextStyle(color: Color(background_darkgrey)),),
+                    //   onPressed: () {},
+                    // ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(golden_yellow),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: TextButton(
+                          onPressed: () {},
+                          child: Text("Logout",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900,
+                                  color: Color(background_darkgrey)))),
+                    )),
 
                 //CAN REMOVE SNACKBAR IF REQUIRED.
                 Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
-                  child: ElevatedButton(
-                    onPressed: () {
-                      if (_formKey.currentState!.validate()) {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Form Submitted')),
-                        );
-                        uname.text = pass.text = "";
-                      }
-                    },
-                    child: const Text("Submit"),
-                  ),
+                  child: Container(
+                      decoration: BoxDecoration(
+                          color: Color(golden_yellow),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: TextButton(
+                        onPressed: () {
+                          if (_formKey.currentState!.validate()) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Form Submitted')),
+                            );
+                            uname.text = pass.text = "";
+                          }
+                        },
+                        child: Text("Submit",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900,
+                                color: Color(background_darkgrey))),
+                      )),
                 ),
               ],
             ),
