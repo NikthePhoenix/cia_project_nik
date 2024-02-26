@@ -52,19 +52,17 @@ class _BookedTicketState extends State<BookedTicket> {
       ),
       body: SafeArea(
         child: Center(
-          child: SingleChildScrollView(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TicketWidget(
-                  width: 350,
-                  height: 500,
-                  isCornerRounded: true,
-                  padding: EdgeInsets.all(20),
-                  child: TicketData(),
-                ),
-              ],
-            ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              TicketWidget(
+                width: 350,
+                height: 520,
+                isCornerRounded: true,
+                padding: EdgeInsets.all(20),
+                child: TicketData(),
+              ),
+            ],
           ),
         ),
       ),
