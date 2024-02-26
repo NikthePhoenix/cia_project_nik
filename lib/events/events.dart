@@ -146,7 +146,7 @@ class _EventsState extends State<Events> {
                     height: 5,
                   ),
                   Container(
-                    height: 40,
+                    // height: 40,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0)),
                     child: Center(

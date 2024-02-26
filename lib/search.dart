@@ -39,6 +39,7 @@ class _SearchSectionState extends State<SearchSection> {
             SearchBar(
               hintText: "Search for an event or department",
               leading: Icon(Icons.search),
+              
             ),
             SizedBox(
               height: 15,
