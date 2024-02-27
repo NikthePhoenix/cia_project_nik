@@ -31,8 +31,10 @@ class _HomePageState extends State<HomePage> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text("Whats your plans for today?",
-                    style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color(text_dm_offwhite))),
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Color(text_dm_offwhite))),
                 // SizedBox(height: 15),
                 InkWell(
                   onTap: () {
@@ -42,20 +44,26 @@ class _HomePageState extends State<HomePage> {
                       height: 100,
                       width: 300,
                       decoration: BoxDecoration(
-                        border: Border.all(width: 3, color: Color(golden_yellow)),
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(golden_yellow)
-                      ),
+                          border:
+                              Border.all(width: 3, color: Color(golden_yellow)),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(golden_yellow)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
                             "Upcoming events",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(background_darkgrey)),
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(background_darkgrey)),
                           ),
 
                           // SizedBox(width: 3),
-                          Icon(Icons.arrow_forward_ios, color: Color(background_darkgrey),)
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Color(background_darkgrey),
+                          )
                         ],
                       )),
                 ),
@@ -69,20 +77,26 @@ class _HomePageState extends State<HomePage> {
                       height: 100,
                       width: 300,
                       decoration: BoxDecoration(
-                        border: Border.all(width: 3, color: Color(golden_yellow)),
-                        borderRadius: BorderRadius.circular(20),
-                        color: Color(golden_yellow)
-                      ),
+                          border:
+                              Border.all(width: 3, color: Color(golden_yellow)),
+                          borderRadius: BorderRadius.circular(20),
+                          color: Color(golden_yellow)),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
                             "Booked Events",
-                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(background_darkgrey)),
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w600,
+                                color: Color(background_darkgrey)),
                           ),
 
                           // SizedBox(width: 3),
-                          Icon(Icons.arrow_forward_ios, color: Color(background_darkgrey),)
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Color(background_darkgrey),
+                          )
                         ],
                       )),
                 ),
@@ -94,9 +108,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget addSection(String departmentName) {
     return InkWell(
-      onTap: () {
-        // Navigator.pushNamed(context, Routes.departments);
-      },
+      onTap: () {},
       child: Container(
           height: 100,
           width: 300,
