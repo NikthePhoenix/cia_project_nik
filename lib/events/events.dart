@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:seproject/events/event_description.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/other/api_calls.dart';
+import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 
 class Events extends StatefulWidget {
@@ -42,7 +43,8 @@ class _EventsState extends State<Events> {
           height: 150,
           width: 150,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
+            border: Border.all(color: Color(golden_yellow)),
+            // borderRadius: BorderRadius.circular(10)
           ),
           child: Column(
             children: [
@@ -52,6 +54,7 @@ class _EventsState extends State<Events> {
               // ),
               Container(
                 height: 100,
+                
                 child: Image.network(image,
                     // height: 100,
                     width: 150,
@@ -63,13 +66,16 @@ class _EventsState extends State<Events> {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Color(0xffECFFD1)),
+                    overflow: TextOverflow.ellipsis,
                 // textAlign: TextAlign.left,
               ),
               Text(organizer,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w300,
-                      color: Color(0xffECFFD1)))
+                      color: Color(0xffECFFD1)),
+                      overflow: TextOverflow.ellipsis,
+                      ),
             ],
           )),
     );
