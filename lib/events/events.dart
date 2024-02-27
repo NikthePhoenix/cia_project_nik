@@ -24,14 +24,15 @@ class Events extends StatefulWidget {
 }
 
 class _EventsState extends State<Events> {
-  Widget addEvents(eventName, organizer, eventVenue, eventDesc, image,
+  Widget addEvents(eventId, eventName, organizer, eventVenue, eventDesc, image,
       eventDateTime, eccPoints) {
     return InkWell(
       onTap: () {
         print(eventVenue);
         Navigator.pushNamed(context, Routes.eventDescription, arguments: {
+          'eventId': eventId.toString(),
           'eventName': eventName,
-          'organizer': organizer,
+          'organizer': "Organizer name",
           'eventVenue': eventVenue,
           'eventDesc': eventDesc,
           'url': image,
@@ -95,8 +96,9 @@ class _EventsState extends State<Events> {
                 var eventsData = snapshot.data as List<dynamic>;
                 for (var event in eventsData) {
                   Widget builtEvent = addEvents(
+                      event['eventId'],
                       event['eventName'],
-                      event['orgName'].toString(),
+                      event['organizer']['orgName'].toString(),
                       event['eventVenue'],
                       event['eventDesc'],
                       event['url'],
