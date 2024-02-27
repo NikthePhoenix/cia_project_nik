@@ -3,6 +3,7 @@ import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
 import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/events/events.dart';
+import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
@@ -31,6 +32,7 @@ class _EventDescriptionState extends State<EventDescription> {
   Widget build(BuildContext context) {
     final Map<String, dynamic>? args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
+    final eventId = args?['eventId'] ?? "";
     final eventName = args?['eventName'] ?? "";
     final organizer = args?['organizer'] ?? "";
     final eventVenue = args?['eventVenue'] ?? "";
@@ -167,22 +169,29 @@ class _EventDescriptionState extends State<EventDescription> {
                                 ),
                                 TextButton(
                                   onPressed: () async {
-                                    print(eventName);
-
-                                    bookedEvents.add(eventName);
-                                    tickets['eventName'] = eventName;
-                                    tickets['organizer'] = organizer;
-                                    print(bookedEvents);
-                                    await Future.delayed(Duration(seconds: 1));
-                                    Navigator.pushNamed(
-                                        context, Routes.bookedTicket,
-                                        arguments: {
-                                          'eventName': eventName,
-                                          'organizer': organizer,
-                                          'eventDate': eventDate,
-                                          'eventTime': eventTime,
-                                          'eventVenue': eventVenue
-                                        });
+                                    // print(eventName);
+                                    // bookedEvents.add(eventName);
+                                    // tickets['eventName'] = eventName;
+                                    // tickets['organizer'] = organizer;
+                                    // print(bookedEvents);
+                                    // await Future.delayed(Duration(seconds: 1));
+                                    bool status =
+                                        await ApiRequester.addBookedTicket(
+                                            222333, int.parse(eventId));
+                                    //TODO Fucking remove this static UID when and if hive shows up
+                                    print(status);
+                                    if (status) {
+                                      // TODO Make this shit go back to the home page after someone clicks on this
+                                      Navigator.pushNamed(
+                                          context, Routes.bookedTicket,
+                                          arguments: {
+                                            'eventName': eventName,
+                                            'organizer': organizer,
+                                            'eventDate': eventDate,
+                                            'eventTime': eventTime,
+                                            'eventVenue': eventVenue
+                                          });
+                                    }
                                   },
                                   child: Text("Proceed"),
                                 ),

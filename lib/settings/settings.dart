@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/other/color_palette.dart';
 
 void main() {
   runApp(const SettingsPage());
@@ -28,6 +29,7 @@ class _SettingsPageState extends State<SettingsPage> {
       debugShowCheckedModeBanner: false,
       theme: _isDarkMode ? ThemeData.dark() : ThemeData.light(),
       home: Scaffold(
+        backgroundColor: Color(background_darkgrey),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -39,7 +41,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       alignment: Alignment.topLeft,
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.grey[300],
+                            color: Color(golden_yellow),
                             borderRadius: BorderRadius.circular(20.0)),
                         child: TextButton(
                             onPressed: () {
@@ -47,7 +49,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             },
                             child: Icon(
                               Icons.arrow_back,
-                              color: Colors.black,
+                              color: Color(background_darkgrey),
                             )),
                       )),
                   SizedBox(
@@ -58,6 +60,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.bold,
+                      color: Color(text_dm_offwhite)
                     ),
                   ),
                   SizedBox(
@@ -68,7 +71,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                      color: Color(text_dm_offwhite),
                     ),
                   ),
                   SizedBox(height: 10),
@@ -79,8 +82,8 @@ class _SettingsPageState extends State<SettingsPage> {
                     child: Row(
                       children: <Widget>[
                         CircleAvatar(
-                          backgroundColor: Colors.black,
-                          foregroundColor: Colors.white,
+                          backgroundColor: Color(golden_yellow),
+                          foregroundColor: Color(background_darkgrey),
                           child: Icon(
                             Icons.person,
                             size: 30,
@@ -93,13 +96,14 @@ class _SettingsPageState extends State<SettingsPage> {
                             Text(
                               'Name',
                               style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold),
+                                  fontSize: 17, fontWeight: FontWeight.bold, color: Color(text_dm_offwhite)),
                             ),
                             Text(
                               'UID',
                               style: TextStyle(
                                 fontSize: 17,
                                 fontWeight: FontWeight.w300,
+                                color: Color(text_dm_offwhite)
                               ),
                             ),
                           ],
@@ -109,7 +113,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           onPressed: () {
                             // Implement action for forward button
                           },
-                          icon: const Icon(Icons.arrow_forward_ios),
+                          icon: const Icon(Icons.arrow_forward_ios, color: Color(text_dm_offwhite),),
                         ),
                       ],
                     ),
@@ -122,24 +126,29 @@ class _SettingsPageState extends State<SettingsPage> {
                     thickness: 2,
                     indent: 0,
                     endIndent: 0,
-                    color: Colors.grey,
+                    color: Color(text_dm_offwhite),
                   ),
                   Text(
                     'Appearance',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                      color: Color(text_dm_offwhite),
                     ),
                   ),
                   Row(
                     children: <Widget>[
                       const Text(
                         'Change Theme',
-                        style: TextStyle(fontSize: 16),
+                        style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)), 
                       ),
                       const Spacer(),
                       Switch(
+                        inactiveThumbColor: Color(text_dm_offwhite),
+                        inactiveTrackColor: Color(golden_yellow),
+                        activeColor: Color(text_dm_offwhite),
+                        activeTrackColor: Color(golden_yellow),
+                        splashRadius: 0,
                         value: _isDarkMode,
                         onChanged: _toggleTheme,
                       ),
@@ -150,7 +159,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     thickness: 2,
                     indent: 0,
                     endIndent: 0,
-                    color: Colors.grey,
+                    color: Color(text_dm_offwhite),
                   ),
                   const SizedBox(height: 24),
                   Text(
@@ -158,7 +167,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: Colors.grey,
+                      color: Color(text_dm_offwhite),
                     ),
                   ),
                   SizedBox(
@@ -212,21 +221,25 @@ Widget _buildSettingRow(IconData icon, String title) {
     padding: const EdgeInsets.symmetric(horizontal: 16.0),
     child: Row(
       children: <Widget>[
-        Icon(
-          icon,
-          size: 30,
+        CircleAvatar(
+          backgroundColor: Color(golden_yellow),
+          foregroundColor: Color(background_darkgrey),
+          child: Icon(
+            icon,
+            size: 30
+          ),
         ),
         const SizedBox(width: 8),
         Text(
           title,
-          style: TextStyle(fontSize: 16),
+          style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)),
         ),
         const Spacer(),
         IconButton(
           onPressed: () {
             // Implement action for forward button
           },
-          icon: const Icon(Icons.arrow_forward_ios),
+          icon: const Icon(Icons.arrow_forward_ios, color: Color(text_dm_offwhite),),
         ),
         SizedBox(
           height: 10,

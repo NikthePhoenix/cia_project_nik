@@ -3,11 +3,28 @@ import 'dart:io';
 
 import 'package:http/http.dart';
 
-const baseUrl = "castelinos.com";
+
+const baseUrl = "localhost:3000";
+
 
 class ApiRequester {
+  static const baseUrl = "localhost:3000";
   static String buildUrl(String filename) {
-    return "http://${baseUrl}/uploads/$filename";
+    return "http://$baseUrl/uploads/$filename";
+  }
+
+  static Future<bool> validateOrganizers(String email, String password) async {
+    Response resp = await post(Uri.http(baseUrl, "organizers/"),
+        body: {"email": email, "password": password});
+    switch (resp.statusCode) {
+      case 200:
+        return true;
+      case 422:
+        print("Password not entered");
+        return false;
+      default:
+        return false;
+    }
   }
 
   /*
