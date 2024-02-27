@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/organizers/create_event.dart';
+import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 
 class EditEvents extends StatefulWidget {
@@ -11,48 +12,68 @@ class EditEvents extends StatefulWidget {
 
 class _EditEventstate extends State<EditEvents> {
   static Map<String, dynamic> created_events = Create_event.created_events;
+  //TODO change this shit
+  static const dept = "ECC";
+  Future<dynamic> events = ApiRequester.getEventbyDept(dept);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(),
       body: SafeArea(
           child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Center(
-                  child: Column(
-                children: [
-                  Align(
-                      alignment: Alignment.topLeft,
-                      child: Container(
-                        decoration: BoxDecoration(
-                            color: Colors.grey[300],
-                            borderRadius: BorderRadius.circular(20.0)),
-                        child: TextButton(
-                            onPressed: () {
-                              // Navigator.pushNamed(context, Routes.bookedEvents);
-                              Navigator.pushNamed(
-                                context,
-                                Routes.navigator,
-                              );
-                            },
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: Colors.black,
-                            )),
-                      )),
-                  Column(
-                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      addBookedEvent("Open mic", "ECC & LFL", "open_mic.jpg"),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      addBookedEvent(created_events?["eventName"] ?? "",
-                          created_events?['organizer'] ?? "", "open_mic.jpg"),
-                    ],
-                  )
-                ],
-              )))),
+        padding: const EdgeInsets.all(16),
+        child: Center(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Colors.grey[300],
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: TextButton(
+                        onPressed: () {
+                          // Navigator.pushNamed(context, Routes.bookedEvents);
+                          Navigator.pushNamed(
+                            context,
+                            Routes.navigator,
+                          );
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        )),
+                  )),
+              FutureBuilder(
+                future: events,
+                builder: (context, snapshot) {
+                  List<Widget> children = [];
+                  if (snapshot.hasData) {
+                    for (var event in snapshot.data) {
+                      children.add(addBookedEvent(event['eventName'],
+                          event['organizer']['orgName'], event['url']));
+                    }
+                  }
+                  return Column(
+                    children: children,
+                  );
+                },
+              )
+              // Column(
+              //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //   children: [
+              //     addBookedEvent("Open mic", "ECC & LFL", "open_mic.jpg"),
+              //     SizedBox(
+              //       height: 10,
+              //     ),
+              //     addBookedEvent(created_events?["eventName"] ?? "",
+              //         created_events?['organizer'] ?? "", "open_mic.jpg"),
+              //   ],
+              // )
+            ],
+          ),
+        )),
+      )),
     );
   }
 
@@ -94,14 +115,17 @@ class _EditEventstate extends State<EditEvents> {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
-                child: Image.asset("assets/images/" + image,
+                child: Image.network(image,
                     height: 150, width: 150, fit: BoxFit.cover),
               ),
               Column(
                 children: [
                   Text(eventName,
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                      overflow: TextOverflow.ellipsis,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          overflow: TextOverflow.ellipsis)),
                   Text(organizer,
                       style: TextStyle(
                         fontSize: 17,
