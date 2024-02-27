@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:seproject/events/event_description.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
+import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/date_pick.dart';
-import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/time_pick.dart';
+
+import 'package:seproject/other/color_palette.dart';
 
 class UpdateEvents extends StatefulWidget {
   final eventName;
@@ -20,13 +21,12 @@ class _UpdateEventsState extends State<UpdateEvents> {
   TextEditingController updatedEventName = TextEditingController();
   TextEditingController updatedEventVenue = TextEditingController();
   TextEditingController updatedEventDesc = TextEditingController();
-  TextEditingController updatedEventTime = TextEditingController();
+  TextEditingController points = TextEditingController();
+  TextEditingController captroller = TextEditingController();
   String eventDate = DateSelectionScreen.eventDate;
   static Map<String, dynamic> created_events = Create_event.created_events;
 
   static Map<String, dynamic> updated_events = {};
-
-  String collaborator = "";
 
   final List<String> collaborators = [
     "ECC",
@@ -36,12 +36,16 @@ class _UpdateEventsState extends State<UpdateEvents> {
     "MVM",
     "Wpa Dance"
   ];
+  String collaborator = "";
+  int collaboratorId = 0;
 
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic>? eventDetails =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final eventName = eventDetails?['eventName'] ?? "";
+    final eventId = eventDetails?['eventId'] ?? "";
+    final Future<dynamic> collabData = ApiRequester.getAllOrganizers();
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
@@ -126,6 +130,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
               ),
               TextField(
                   keyboardType: TextInputType.number,
+                  controller: points,
                   decoration: InputDecoration(
                     hintText: "Update Event ECC Points ",
                     border: OutlineInputBorder(
@@ -140,6 +145,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
               ),
               TextField(
                   keyboardType: TextInputType.number,
+                  controller: captroller,
                   decoration: InputDecoration(
                     hintText: "Update Event Max Capacity ",
                     border: OutlineInputBorder(
@@ -185,124 +191,28 @@ class _UpdateEventsState extends State<UpdateEvents> {
               SizedBox(
                 height: 20,
               ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[0],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[0], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[1],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[1], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[2],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[2], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[3],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[3], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[4],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[4], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Row(
-                    children: [
-                      Radio(
-                        value: collaborators[5],
-                        groupValue: collaborator,
-                        onChanged: (String? value) {
-                          setState(() {
-                            collaborator = value!;
-                          });
-                          print(collaborator);
-                        },
-                      ),
-                      SizedBox(width: 8),
-                      Text(collaborators[5], style: TextStyle(fontSize: 16)),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                ],
+              FutureBuilder(
+                future: collabData,
+                builder: ((context, snapshot) {
+                  List<Widget> children;
+                  children = [];
+                  if (snapshot.hasData) {
+                    var organizerData = snapshot.data as List<dynamic>;
+                    for (var elem in organizerData) {
+                      children.add(RadioOpt(elem));
+                      children.add(
+                        const SizedBox(
+                          height: 20,
+                        ),
+                      );
+                    }
+                  }
+                  // children.removeLast();
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: children,
+                  );
+                }),
               ),
               SizedBox(
                 height: 100,
@@ -320,13 +230,83 @@ class _UpdateEventsState extends State<UpdateEvents> {
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                    // print(eventName);
+                    // created_events['eventName'] = eventName.text;
+                    // created_events['organizer'] = collaborator;
+                    // created_events['eventVenue'] = updatedEventVenue.text;
+                    // created_events['eventDate'] = eventDate;
+                    // created_events['eventDesc'] = updatedEventDesc.text;
+
+                    DateTime? date = DateSelectionScreen.dateObj;
+                    TimeOfDay? time = TimeSelectionScreen.timeObj;
+                    DateTime? eventDateTime;
+                    if (date != null && time != null) {
+                      eventDateTime = DateTime(date!.year, date.month,
+                          date.day, time!.hour, time.minute);
+                    }
+                    String fname = "";
+                    String? upStatus = await Image_pic_pre.upload();
+                    fname = upStatus ?? "";
+
+                    Map<String, dynamic> data = {
+                      "eventId": eventId.toString(),
+                      "orgId": 1.toString(),
+                      "tagId": 5.toString(), //deprecated perchance
+                      "eventName": updatedEventName.text,
+                      "eventDateTime": eventDateTime?.toIso8601String(),
+                      "eventVenue": updatedEventVenue.text,
+                      "maxCapacity": captroller.text,
+                      "eccPoints": points.text,
+                      "description": updatedEventDesc.text,
+                      "colaborator1": collaboratorId.toString(),
+                      "url": fname,
+                    };
+                    List<String> removal = [];
+                    for (var val in data.entries) {
+                      if (val.value == null || val.value.toString().isEmpty) {
+                        removal.add(val.key);
+                      }
+                    }
+                    for (var val in removal) {
+                      data.remove(val);
+                    }
+
+                    if (data['url'] != null) {
+                      data['url'] = ApiRequester.buildUrl(data['url']);
+                    }
+                    print(data);
+                    bool status = await ApiRequester.updateEvents(data);
+                    print("Addition succeeded: ${status.toString()}");
+                  },
                 ),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Row RadioOpt(elem) {
+    return Row(
+      children: [
+        Radio(
+            toggleable: true,
+            value: elem['orgDept'] as String,
+            groupValue: collaborator,
+            activeColor: Color(golden_yellow),
+            onChanged: (String? value) {
+              setState(() {
+                collaborator = elem['orgDept'].toString();
+                collaboratorId = elem['orgId'];
+                print(collaborator);
+              });
+            }),
+        SizedBox(width: 8),
+        Text(elem['orgDept'] as String,
+            style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite))),
+      ],
     );
   }
 }

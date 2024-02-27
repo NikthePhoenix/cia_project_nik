@@ -57,8 +57,10 @@ class _Create_eventState extends State<Create_event> {
             children: [
               Text(
                 "Create Event",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color: Color(text_dm_offwhite)),
-                
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28,
+                    color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 40,
@@ -130,13 +132,12 @@ class _Create_eventState extends State<Create_event> {
                   controller: points,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: "Enter Event ECC Points ",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    filled: true,
-                    fillColor: Color(text_dm_offwhite),
-                    hintStyle: TextStyle(color: Color(background_darkgrey))
-                  )),
+                      hintText: "Enter Event ECC Points ",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      filled: true,
+                      fillColor: Color(text_dm_offwhite),
+                      hintStyle: TextStyle(color: Color(background_darkgrey)))),
               SizedBox(height: 30.0),
               Text(
                 " Enter Event Max Capacity :",
@@ -146,13 +147,12 @@ class _Create_eventState extends State<Create_event> {
                   controller: captroller,
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: "Enter Event Max Capacity ",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    filled: true,
-                    fillColor: Color(text_dm_offwhite),
-                    hintStyle: TextStyle(color: Color(background_darkgrey))
-                  )),
+                      hintText: "Enter Event Max Capacity ",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      filled: true,
+                      fillColor: Color(text_dm_offwhite),
+                      hintStyle: TextStyle(color: Color(background_darkgrey)))),
               SizedBox(
                 height: 30,
               ),
@@ -164,13 +164,12 @@ class _Create_eventState extends State<Create_event> {
                   maxLines: 8,
                   controller: eventDesc,
                   decoration: InputDecoration(
-                    hintText: "Enter Event Description ",
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    filled: true,
-                    fillColor: Color(text_dm_offwhite),
-                    hintStyle: TextStyle(color: Color(background_darkgrey))
-                  )),
+                      hintText: "Enter Event Description ",
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15)),
+                      filled: true,
+                      fillColor: Color(text_dm_offwhite),
+                      hintStyle: TextStyle(color: Color(background_darkgrey)))),
               SizedBox(
                 height: 30,
               ),
@@ -186,7 +185,10 @@ class _Create_eventState extends State<Create_event> {
               ),
               Text(
                 "Chose the collaborator (if any)",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Color(text_dm_offwhite)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 20,
@@ -232,7 +234,9 @@ class _Create_eventState extends State<Create_event> {
                     child: Text(
                       "Create Event ",
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold, color: Color(0xff181816)),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xff181816)),
                     ),
                   ),
                   onTap: () async {
@@ -243,11 +247,13 @@ class _Create_eventState extends State<Create_event> {
                     created_events['eventDate'] = eventDate;
                     created_events['eventDesc'] = eventDesc.text;
 
-                    DateTime date = DateSelectionScreen.dateObj;
-                    TimeOfDay time = TimeSelectionScreen.timeObj;
-
-                    DateTime eventDateTime = DateTime(date.year, date.month,
-                        date.day, time.hour, time.minute);
+                    DateTime? date = DateSelectionScreen.dateObj;
+                    TimeOfDay? time = TimeSelectionScreen.timeObj;
+                    DateTime? eventDateTime;
+                    if (date != null && time != null) {
+                      eventDateTime = DateTime(date!.year, date.month,
+                          date.day, time!.hour, time.minute);
+                    }
                     String fname = "";
                     String? upStatus = await Image_pic_pre.upload();
                     fname = upStatus ?? "";
@@ -256,7 +262,7 @@ class _Create_eventState extends State<Create_event> {
                       "orgId": 1.toString(),
                       "tagId": 5.toString(), //deprecated perchance
                       "eventName": eventName.text,
-                      "eventDateTime": eventDateTime.toIso8601String(),
+                      "eventDateTime": eventDateTime?.toIso8601String(),
                       "eventVenue": eventVenue.text,
                       "maxCapacity": captroller.text,
                       "eccPoints": points.text,
@@ -291,7 +297,6 @@ class _Create_eventState extends State<Create_event> {
             value: elem['orgDept'] as String,
             groupValue: collaborator,
             activeColor: Color(golden_yellow),
-            
             onChanged: (String? value) {
               setState(() {
                 collaborator = elem['orgDept'].toString();
@@ -300,7 +305,8 @@ class _Create_eventState extends State<Create_event> {
               });
             }),
         SizedBox(width: 8),
-        Text(elem['orgDept'] as String, style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite))),
+        Text(elem['orgDept'] as String,
+            style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite))),
       ],
     );
   }

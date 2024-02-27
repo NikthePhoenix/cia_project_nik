@@ -166,6 +166,27 @@ class ApiRequester {
         return null;
     }
   }
+
+  static Future<bool> updateEvents(Map<String, dynamic> data) async {
+    Response resp = await put(Uri.http(baseUrl, "events/"), body: data);
+    print(resp.statusCode);
+    switch (resp.statusCode) {
+      case 200:
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  static Future<bool> deleteEvent(String eventName) async {
+    Response resp = await delete(Uri.http(baseUrl, "events/$eventName"));
+    switch (resp.statusCode) {
+      case 200:
+        return true;
+      default:
+        return false;
+    }
+  }
 }
 
 // void main() async {
