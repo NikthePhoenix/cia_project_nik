@@ -5,7 +5,7 @@ import 'package:seproject/hive/hive.dart';
 import 'package:http/http.dart';
 
 
-const baseUrl = "localhost:3000";
+const baseUrl = "castelinos.com";
 
 
 class ApiRequester {
