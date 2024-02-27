@@ -27,26 +27,6 @@ class _BookedTicketState extends State<BookedTicket> {
 
     return Scaffold(
       backgroundColor: Colors.amber[200],
-
-      // appBar: AppBar(
-      //   backgroundColor: Colors.black26,
-      // title: Align(
-      //     alignment: Alignment.topLeft,
-      //     child: Container(
-      //       decoration: BoxDecoration(
-      //           color: Colors.grey[300],
-      //           borderRadius: BorderRadius.circular(20.0)),
-      //       child: TextButton(
-      //           onPressed: () {
-
-      //             Navigator.pushNamed(context, Routes.navigator);
-      //           },
-      //           child: Icon(
-      //             Icons.person,
-      //             color: Colors.black,
-      //           )),
-      //     )),
-      // ),
       appBar: AppBar(
         backgroundColor: Colors.amber[200],
       ),
@@ -75,8 +55,22 @@ class TicketData extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
+  Map<String, dynamic> user = {
+    "name": "Shalom Castelino",
+    "sname": "",
+    "uid": 225005,
+    "year": "SY",
+    "course": "BSc-IT"
+  };
+
   @override
   Widget build(BuildContext context) {
+    List<String> nameSpl = (user["name"] as String).split(" ");
+    if (nameSpl.length > 1) {
+      user["name"] = nameSpl[0];
+      user["sname"] = nameSpl[1];
+    }
+
     final Map<String, dynamic>? args =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
     final eventName = args?['eventName'] ?? '';
@@ -90,26 +84,6 @@ class TicketData extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Align(
-            //     alignment: Alignment.topLeft,
-            //     child: Container(
-            //       decoration: BoxDecoration(
-            //           color: Colors.grey[300],
-            //           borderRadius: BorderRadius.circular(20.0)),
-            //       child: TextButton(
-            //           onPressed: () {
-            //             // Navigator.pushNamed(context, Routes.bookedEvents);
-            //             Navigator.push(
-            //                 context,
-            //                 MaterialPageRoute(
-            //                   builder: (context) => BookedEvents(),
-            //                 ));
-            //           },
-            //           child: Icon(
-            //             Icons.arrow_back,
-            //             color: Colors.black,
-            //           )),
-            //     )),
             SizedBox(
               height: 15,
             ),
@@ -141,12 +115,12 @@ class TicketData extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ticketDetailsWidget(
-                      'First Name', 'First name', 'UID', 'UID number'),
+                  ticketDetailsWidget('First Name', user["name"] as String,
+                      'UID', user["uid"].toString()),
                   Padding(
                     padding: EdgeInsets.only(top: 12.0),
-                    child: ticketDetailsWidget('Last Name', 'Last name',
-                        'Year and Course', 'Year and Course'),
+                    child: ticketDetailsWidget('Last Name', user['sname'],
+                        'Course', '${user['year']}${user["course"]}'),
                   ),
                   SizedBox(height: 32.0),
                   DashedLine(),
