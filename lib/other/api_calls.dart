@@ -5,7 +5,7 @@ import 'package:seproject/hive/hive.dart';
 import 'package:http/http.dart';
 
 
-const baseUrl = "castelinos.com";
+const baseUrl = "localhost:3000";
 
 
 class ApiRequester {
@@ -13,6 +13,11 @@ class ApiRequester {
   static String buildUrl(String filename) {
     return "http://$baseUrl/uploads/$filename";
   }
+
+  // @override
+  // void initState(){
+
+  // }
 
   static Future<bool> validateOrganizers(String email, String password) async {
     Response resp = await post(Uri.http(baseUrl, "organizers/"),
@@ -35,11 +40,12 @@ class ApiRequester {
   static Future<dynamic> getAllOrganizers() async {
     Response resp = await get(Uri.http(baseUrl, "organizers/getAll"));
     final myBox = HiveManager.myBox;
-    final data  = myBox.get("OrgAll");
+    final data = myBox.get("OrgAll");
     switch (resp.statusCode) {
       case 200:
-        if(data == null){
-          myBox.put("OrgAll" , JsonDecoder().convert(resp.body.toString()));
+        if (data == null) {
+          myBox.put("OrgAll", JsonDecoder().convert(resp.body.toString()));
+          
         }
         return JsonDecoder().convert(resp.body.toString());
       case 404:
@@ -207,3 +213,4 @@ class ApiRequester {
 // dynamic data = await ApiRequester.getBookedTickets(214535);
 // print(data);
 // }
+

@@ -29,7 +29,11 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
   @override
   void initState() {
     super.initState();
+    callOrg();
     autofill();
+  }
+  callOrg ()async {
+    await ApiRequester.getAllOrganizers();
   }
 
   autofill() {
