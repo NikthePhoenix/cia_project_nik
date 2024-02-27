@@ -1,10 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
-// flaws so far (found by rd)
-// 1. tick mark icon not displaying on the click of the create button
-// 2. The app crashes when clicking on the 'Create' Button without displaying text in Visibility Class
-// PLS NOTE; DO NOT DELETE THE AWAIT FUTURE DELAYED FUNCTION AS IT IS AN VITAL PART OF THIS CODE
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seproject/hive/hive.dart';

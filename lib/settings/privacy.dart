@@ -77,6 +77,7 @@ class Privacy extends StatelessWidget {
                         color: Color(text_dm_offwhite),
                         fontSize: 16,
                       ),
+                      textAlign: TextAlign.justify
                     ),
                   ),
                   Divider(
