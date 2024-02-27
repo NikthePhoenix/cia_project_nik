@@ -4,6 +4,7 @@ import 'package:seproject/home/home_page.dart';
 import 'package:seproject/search.dart';
 import 'package:seproject/settings/settings.dart';
 import 'package:seproject/settings/user_profile.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class BottomNavbar extends StatefulWidget {
   const BottomNavbar({Key? key}) : super(key: key);
@@ -23,13 +24,18 @@ class _BottomNavbarState extends State<BottomNavbar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Color(background_darkgrey),
       body: pages[selectedPage],
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.shifting,
-        backgroundColor: Colors.grey[200],
-        unselectedItemColor: Colors.black54,
-        selectedItemColor: Colors.purple,
+        backgroundColor: Color(background_darkgrey),
+        unselectedItemColor: Color(background_darkgrey),
+        unselectedIconTheme: IconThemeData(color: Color(background_darkgrey)),
+        selectedItemColor: Color(selected_maroon),
+        selectedIconTheme: IconThemeData(color: Color(selected_maroon)),
+        showUnselectedLabels: false,
+        useLegacyColorScheme: false,
+        // fixedColor: Color(background_darkgrey),
         elevation: 5.0,
         currentIndex: selectedPage,
         onTap: (int index) {
@@ -38,14 +44,10 @@ class _BottomNavbarState extends State<BottomNavbar> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.event),
-            label: "Events",
-          ),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: "Search"),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.settings), label: "Settings"),
+          BottomNavigationBarItem(icon: Icon(Icons.home, ), label: "Home", backgroundColor: Color(golden_yellow)),
+          BottomNavigationBarItem(icon: Icon(Icons.event,),label: "Events", backgroundColor: Color(golden_yellow)),
+          BottomNavigationBarItem(icon: Icon(Icons.search, ), label: "Search", backgroundColor: Color(golden_yellow)),
+          BottomNavigationBarItem(icon: Icon(Icons.settings, ), label: "Settings", backgroundColor: Color(golden_yellow)),
         ],
       ),
     );

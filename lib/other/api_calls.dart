@@ -4,10 +4,12 @@ import 'package:seproject/hive/hive.dart';
 
 import 'package:http/http.dart';
 
-const baseUrl = "castelinos.com";
+
+const baseUrl = "localhost:3000";
+
 
 class ApiRequester {
-  static const baseUrl = "castelinos.com";
+  static const baseUrl = "localhost:3000";
   static String buildUrl(String filename) {
     return "http://$baseUrl/uploads/$filename";
   }

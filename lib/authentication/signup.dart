@@ -55,7 +55,7 @@ class SignUpPageState extends State<SignUpPage> {
       String uid, String phone) async {
     try {
       Response response =
-          await post(Uri.http("localhost:3000", "users/signup"), body: {
+          await post(Uri.http("castelinos.com", "users/signup"), body: {
         "name": name,
         "email": email,
         "password": password,

@@ -32,15 +32,17 @@ class LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   Future<bool> checkData(String uid, String password) async {
-    Response response = await post(Uri.http("localhost:3000", "users/login/"),
+    Response response = await post(Uri.http("castelinos.com", "users/login/"),
         body: {"uid": uid, "password": password});
 
     if (response.statusCode == 200) {
       return true;
     } else if (response.statusCode == 401) {
       print("Incorrect Password");
+      valid = false;
     } else {
       print("Empty Password");
+      valid = true;
     }
     return false;
   }
@@ -179,36 +181,36 @@ class LoginPageState extends State<LoginPage> {
                                 isButtonClicked = true;
                               });
 
-                          // await Future.delayed(Duration(seconds: 2));
-                          if (_formKey.currentState!.validate()) {
-                            // print("email: ${emailController.text}");
-                            // print("Password: ${passwordController.text}");
-                            valid = await checkData(
-                                uidcontroller.text, passwordController.text);
-                            if (valid) {
-                              myBox.put('User', [
-                                uidcontroller.text,
-                                passwordController.text
-                              ]);
-                              Navigator.pushReplacementNamed(
-                                context,
-                                Routes.navigator,
-                              );
-                            }
-                            uidcontroller.clear();
-                            passwordController.clear();
-                            // await Navigator.pushNamed(
-                            //   context,
-                            //   Routes.navigator,
-                            // );
-                            // next
-                            //     ? await Navigator.pushReplacementNamed(
-                            //         context,
-                            //         Routes.homePage,
-                            //       )
-                            //     : print("");
-                          }
+                              // await Future.delayed(Duration(seconds: 2));
+                              if (_formKey.currentState!.validate()) {
+                                // print("email: ${emailController.text}");
+                                // print("Password: ${passwordController.text}");
+                                valid = await checkData(uidcontroller.text,
+                                    passwordController.text);
 
+                                if (valid) {
+                                  myBox.put('User', [
+                                    uidcontroller.text,
+                                    passwordController.text
+                                  ]);
+                                  Navigator.pushReplacementNamed(
+                                    context,
+                                    Routes.navigator,
+                                  );
+                                }
+                                uidcontroller.clear();
+                                passwordController.clear();
+                                // await Navigator.pushNamed(
+                                //   context,
+                                //   Routes.navigator,
+                                // );
+                                // next
+                                //     ? await Navigator.pushReplacementNamed(
+                                //         context,
+                                //         Routes.homePage,
+                                //       )
+                                //     : print("");
+                              }
 
                               setState(() {
                                 isButtonClicked = false;
@@ -284,6 +286,19 @@ class LoginPageState extends State<LoginPage> {
                               child: Text("Create now",
                                   style: TextStyle(
                                       fontSize: 16, color: Colors.amber[100])),
+                            ),
+                            SizedBox(height: 10),
+                            Visibility(
+                              visible: isButtonClicked && valid,
+                              child: Text(
+                                valid
+                                    ? "Account created successfully "
+                                    : "Incorrect username or password", // ERROR: error msg is null everytime
+                                style: TextStyle(
+                                    color: valid ? Colors.white : Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ],
                         ),
