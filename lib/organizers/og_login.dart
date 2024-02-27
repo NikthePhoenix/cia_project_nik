@@ -220,7 +220,6 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
                         ),
                       ],
                     ),
-                   
                   ],
                 )),
           ),
