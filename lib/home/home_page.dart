@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/other/color_palette.dart';
 // import 'package:seproject/user_functions.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(background_darkgrey),
       body: SafeArea(
         // minimum: EdgeInsets.symmetric(horizontal: 5),
 
@@ -30,7 +32,7 @@ class _HomePageState extends State<HomePage> {
               children: [
                 Text("Whats your plans for today?",
                     style:
-                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold, color: Color(text_dm_offwhite))),
                 // SizedBox(height: 15),
                 InkWell(
                   onTap: () {
@@ -40,19 +42,20 @@ class _HomePageState extends State<HomePage> {
                       height: 100,
                       width: 300,
                       decoration: BoxDecoration(
-                        border: Border.all(width: 3),
+                        border: Border.all(width: 3, color: Color(golden_yellow)),
                         borderRadius: BorderRadius.circular(20),
+                        color: Color(golden_yellow)
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
                             "Upcoming events",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(background_darkgrey)),
                           ),
 
                           // SizedBox(width: 3),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(Icons.arrow_forward_ios, color: Color(background_darkgrey),)
                         ],
                       )),
                 ),
@@ -66,19 +69,20 @@ class _HomePageState extends State<HomePage> {
                       height: 100,
                       width: 300,
                       decoration: BoxDecoration(
-                        border: Border.all(width: 3),
+                        border: Border.all(width: 3, color: Color(golden_yellow)),
                         borderRadius: BorderRadius.circular(20),
+                        color: Color(golden_yellow)
                       ),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
                             "Booked Events",
-                            style: TextStyle(fontSize: 20),
+                            style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Color(background_darkgrey)),
                           ),
 
                           // SizedBox(width: 3),
-                          Icon(Icons.arrow_forward_ios)
+                          Icon(Icons.arrow_forward_ios, color: Color(background_darkgrey),)
                         ],
                       )),
                 ),
