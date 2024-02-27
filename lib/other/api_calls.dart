@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:seproject/hive/hive.dart';
 
 import 'package:http/http.dart';
 
@@ -33,8 +34,13 @@ class ApiRequester {
    */
   static Future<dynamic> getAllOrganizers() async {
     Response resp = await get(Uri.http(baseUrl, "organizers/getAll"));
+    final myBox = HiveManager.myBox;
+    final data  = myBox.get("OrgAll");
     switch (resp.statusCode) {
       case 200:
+        if(data == null){
+          myBox.put("OrgAll" , JsonDecoder().convert(resp.body.toString()));
+        }
         return JsonDecoder().convert(resp.body.toString());
       case 404:
         print("No data found");
