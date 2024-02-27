@@ -44,7 +44,7 @@ class _EventsState extends State<Events> {
           width: 150,
           decoration: BoxDecoration(
             border: Border.all(color: Color(golden_yellow)),
-            // borderRadius: BorderRadius.circular(10)
+            borderRadius: BorderRadius.circular(10)
           ),
           child: Column(
             children: [
@@ -54,11 +54,20 @@ class _EventsState extends State<Events> {
               // ),
               Container(
                 height: 100,
-                
-                child: Image.network(image,
-                    // height: 100,
-                    width: 150,
-                    fit: BoxFit.cover),
+                /*
+                ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(image, width: 150, fit: Boxfit.cover),
+              ),
+                */
+                child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(image, width: 150, fit:BoxFit.cover),
+              ),
+                // child: Image.network(image,
+                //     // height: 100,
+                //     width: 150,
+                //     fit: BoxFit.cover),
               ),
               Text(
                 eventName,
