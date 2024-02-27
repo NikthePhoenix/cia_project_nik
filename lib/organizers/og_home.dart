@@ -1,6 +1,7 @@
 // import 'package:b/create_event.dart';
 import 'package:flutter/material.dart';
 import 'package:seproject/organizers/create_event.dart';
+import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 
 class OrganizerHomePage extends StatelessWidget {
@@ -20,6 +21,12 @@ class OrganizerHomePage extends StatelessWidget {
 class MyCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    Map<String, dynamic> args =
+        (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
+    String imageurl = ApiRequester.buildUrl('org${args['orgId']}.jpg');
+    print(imageurl);
+    String orgName = args['orgDept'];
+
     return SingleChildScrollView(
       child: Container(
         width: MediaQuery.of(context).size.width,
@@ -42,7 +49,8 @@ class MyCardList extends StatelessWidget {
                     ),
                     child: ClipOval(
                       child: Image.network(
-                        'https://media.istockphoto.com/id/165746829/vector/dancer-silhouette.jpg?s=612x612&w=0&k=20&c=3D0BA_SO51RUJQ0TFAWg3sOwrWxIV081ZJ47r-Gj_uE=',
+                        imageurl,
+                        // 'https://media.istockphoto.com/id/165746829/vector/dancer-silhouette.jpg?s=612x612&w=0&k=20&c=3D0BA_SO51RUJQ0TFAWg3sOwrWxIV081ZJ47r-Gj_uE=',
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -51,7 +59,8 @@ class MyCardList extends StatelessWidget {
                     width: 20,
                   ),
                   Text(
-                    "WPA Music",
+                    // "WPA Music",
+                    orgName,
                     style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                   )
                 ],
