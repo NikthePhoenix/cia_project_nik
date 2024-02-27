@@ -76,6 +76,7 @@ class HelpCenter extends StatelessWidget {
                     child: Text(
                       'BookMyEvents is a platform designed to simplify the process of booking and managing college events. Whether you\'re a student looking for exciting activities to attend or a club organizing an event, our app has you covered.',
                       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite),),
+                      textAlign: TextAlign.justify
                     ),
                   ),
                   Padding(
@@ -84,6 +85,7 @@ class HelpCenter extends StatelessWidget {
                       'How to Use BookMyEvents',
                       style: TextStyle(
                           fontSize: 18.0, fontWeight: FontWeight.bold, color: Color(text_dm_offwhite),),
+                          textAlign: TextAlign.justify
                     ),
                   ),
                   Padding(
@@ -99,6 +101,7 @@ class HelpCenter extends StatelessWidget {
                       '2. Manage Attendees: Easily keep track of attendees and communicate important event details.\n'
                       '3. Engage with Participants: Connect with students who share your club\'s interests and values.',
                       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite),),
+                      textAlign: TextAlign.justify
                     ),
                   ),
                   Padding(
@@ -125,6 +128,7 @@ class HelpCenter extends StatelessWidget {
                       'Is [Your App Name] available on multiple platforms?\n'
                       'Yes, [Your App Name] is available for download on both iOS and Android devices.',
                       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite),),
+                      textAlign: TextAlign.justify,
                     ),
                   ),
                   Padding(
@@ -143,6 +147,7 @@ class HelpCenter extends StatelessWidget {
                       'Can I invite friends to events?\n'
                       'Absolutely! You can share event details with friends through social media, messaging apps, or by sending them an invite directly from the app.',
                       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite),),
+                      textAlign: TextAlign.justify
                     ),
                   ),
                   Padding(
@@ -161,6 +166,7 @@ class HelpCenter extends StatelessWidget {
                       'Can I manage multiple events simultaneously?\n'
                       'Yes, you can manage multiple events from your club\'s dashboard. Simply click on the event you wish to manage and make any necessary updates or changes.',
                       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite),),
+                      textAlign: TextAlign.justify
                     ),
                   ),
                   Divider(

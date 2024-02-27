@@ -160,7 +160,7 @@ class _EditEventstate extends State<EditEvents> {
                               // 'eventVenue': eventVenue
                             });
                       },
-                      child: Text("Edit Event"),
+                      child: Text("Update Event"),
                     ),
                   ),
                   InkWell(
