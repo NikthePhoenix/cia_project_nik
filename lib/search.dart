@@ -9,6 +9,8 @@ class SearchSection extends StatefulWidget {
 }
 
 class _SearchSectionState extends State<SearchSection> {
+  late Future<dynamic> matchedEvents;
+  late String searchTerm = "";
   Widget addEventsTag(departmentName) {
     return InkWell(
       onTap: () {
@@ -54,7 +56,6 @@ class _SearchSectionState extends State<SearchSection> {
 
   // // This list holds the data for the list view
   // List<Map<String, dynamic>> _foundUsers = [];
-  
 
   // // This function is called whenever the text field changes
   // void _runFilter(String enteredKeyword) {
@@ -80,6 +81,10 @@ class _SearchSectionState extends State<SearchSection> {
           padding: const EdgeInsets.all(16.0),
           child: Column(children: [
             TextFormField(
+                onFieldSubmitted: (value) async {
+                  print("Submitted $value");
+                  print(await ApiRequester.getEventbyName(value));
+                },
                 // onChanged: (value) => searchEvents(value),
                 decoration: InputDecoration(
                     filled: true,
@@ -165,7 +170,7 @@ class _SearchSectionState extends State<SearchSection> {
                         ]),
                   )),
             ),
-            //  
+            //
           ]),
         ),
       ),
