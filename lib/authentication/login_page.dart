@@ -56,7 +56,9 @@ class LoginPageState extends State<LoginPage> {
   autoFill() {
     final data = myBox.get('User');
     if (data == null) {
-      myBox.put('User', [uidcontroller.text, passwordController.text]);
+    } else {
+      uidcontroller.text = data[0];
+      passwordController.text = data[1];
     }
   }
 
@@ -181,6 +183,10 @@ class LoginPageState extends State<LoginPage> {
                             valid = await checkData(
                                 uidcontroller.text, passwordController.text);
                             if (valid) {
+                              myBox.put('User', [
+                                uidcontroller.text,
+                                passwordController.text
+                              ]);
                               Navigator.pushReplacementNamed(
                                 context,
                                 Routes.navigator,

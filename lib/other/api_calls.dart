@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:http/http.dart';
 
-const baseUrl = "localhost:3000";
+const baseUrl = "castelinos.com";
 
 class ApiRequester {
   static String buildUrl(String filename) {

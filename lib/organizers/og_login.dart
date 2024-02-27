@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:seproject/hive/hive.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 class OrganizerLogin extends StatefulWidget {
   const OrganizerLogin({Key? key}) : super(key: key);
@@ -20,6 +23,23 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
   bool forgotPwd = false;
   String errorMsg = "";
   final _formKey = GlobalKey<FormState>();
+  final myBox = HiveManager.myBox;
+
+  @override
+  void initState() {
+    super.initState();
+    autofill();
+  }
+
+  autofill() {
+    final data = myBox.get("Org");
+    if (data == null) {
+    } else {
+      emailController.text = data[0];
+      passwordController.text = data[1];
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -141,17 +161,19 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
                           // await Future.delayed(Duration(seconds: 2));
                           if (_formKey.currentState!.validate()) {
-                            // print("email: ${emailController.text}");
-                            // print("Password: ${passwordController.text}");
+                            //  if (valid) {
+                            myBox.put('Org', [
+                              emailController.text,
+                              passwordController.text
+                            ]);
+                            Navigator.pushNamed(
+                              context,
+                              Routes.organizerHome,
+                            );
+                            // }
                             // valid = await checkData(
                             //     uidcontroller.text, passwordController.text);
-                            if (valid) {
-                              Navigator.pushReplacementNamed(
-                                context,
-                                Routes.organizerHome,
-                              );
-                            }
-                            uidcontroller.clear();
+                            emailController.clear();
                             passwordController.clear();
                             // await Navigator.pushNamed(
                             //   context,
