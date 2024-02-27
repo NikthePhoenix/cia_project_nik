@@ -56,7 +56,9 @@ class LoginPageState extends State<LoginPage> {
   autoFill() {
     final data = myBox.get('User');
     if (data == null) {
-      myBox.put('User', [uidcontroller.text, passwordController.text]);
+    } else {
+      uidcontroller.text = data[0];
+      passwordController.text = data[1];
     }
   }
 
@@ -177,31 +179,36 @@ class LoginPageState extends State<LoginPage> {
                                 isButtonClicked = true;
                               });
 
-                              // await Future.delayed(Duration(seconds: 2));
-                              if (_formKey.currentState!.validate()) {
-                                // print("email: ${emailController.text}");
-                                // print("Password: ${passwordController.text}");
-                                valid = await checkData(uidcontroller.text,
-                                    passwordController.text);
-                                if (valid) {
-                                  Navigator.pushReplacementNamed(
-                                    context,
-                                    Routes.navigator,
-                                  );
-                                }
-                                uidcontroller.clear();
-                                passwordController.clear();
-                                // await Navigator.pushNamed(
-                                //   context,
-                                //   Routes.navigator,
-                                // );
-                                // next
-                                //     ? await Navigator.pushReplacementNamed(
-                                //         context,
-                                //         Routes.homePage,
-                                //       )
-                                //     : print("");
-                              }
+                          // await Future.delayed(Duration(seconds: 2));
+                          if (_formKey.currentState!.validate()) {
+                            // print("email: ${emailController.text}");
+                            // print("Password: ${passwordController.text}");
+                            valid = await checkData(
+                                uidcontroller.text, passwordController.text);
+                            if (valid) {
+                              myBox.put('User', [
+                                uidcontroller.text,
+                                passwordController.text
+                              ]);
+                              Navigator.pushReplacementNamed(
+                                context,
+                                Routes.navigator,
+                              );
+                            }
+                            uidcontroller.clear();
+                            passwordController.clear();
+                            // await Navigator.pushNamed(
+                            //   context,
+                            //   Routes.navigator,
+                            // );
+                            // next
+                            //     ? await Navigator.pushReplacementNamed(
+                            //         context,
+                            //         Routes.homePage,
+                            //       )
+                            //     : print("");
+                          }
+
 
                               setState(() {
                                 isButtonClicked = false;

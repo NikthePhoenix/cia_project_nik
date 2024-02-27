@@ -39,6 +39,7 @@ class TermsCondtion extends StatelessWidget {
             Text(
               "By accessing and using our services, you agree to abide by these terms and conditions. Users are responsible for the confidentiality of their account information and are prohibited from engaging in any unlawful activities on our platform. We reserve the right to modify or terminate services at our discretion, and users are encouraged to review these terms regularly for updates.",
               style: TextStyle(fontSize: 17, color: Color(text_dm_offwhite)),
+              textAlign: TextAlign.justify,
             ),
           ]),
         ),

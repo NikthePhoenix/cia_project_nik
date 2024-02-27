@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:ticket_widget/ticket_widget.dart';
+import '../other/color_palette.dart';
 
 class BookedTicket extends StatefulWidget {
   final eventName, organiser, img, eventDate, eventTime, eventVenue;
@@ -26,9 +27,13 @@ class _BookedTicketState extends State<BookedTicket> {
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     return Scaffold(
-      backgroundColor: Colors.amber[200],
+
+      backgroundColor: Color(background_darkgrey),
+
       appBar: AppBar(
-        backgroundColor: Colors.amber[200],
+        backgroundColor:  Color(background_darkgrey),
+        // foregroundColor: Color(golden_yellow)
+        
       ),
       body: SafeArea(
         child: Center(
@@ -36,6 +41,7 @@ class _BookedTicketState extends State<BookedTicket> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               TicketWidget(
+                color: Color(golden_yellow),
                 width: 350,
                 height: 520,
                 isCornerRounded: true,
@@ -79,6 +85,7 @@ class TicketData extends StatelessWidget {
     final eventTime = args?["eventTime"] ?? '';
     final eventVenue = args?['eventVenue'] ?? '';
     return Material(
+      color: Color(golden_yellow),
       child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -104,7 +111,7 @@ class TicketData extends StatelessWidget {
               child: Text(
                 organizer,
                 style: TextStyle(
-                    color: Colors.grey,
+                    color: Colors.white,
                     fontSize: 15.0,
                     fontWeight: FontWeight.bold),
                 textAlign: TextAlign.center,
@@ -186,9 +193,9 @@ class TicketData extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(left: 8.0),
                   child: Text(
-                    'Confirmed',
+                    'CONFIRMED',
                     style: TextStyle(
-                        color: Colors.green,
+                        color: Colors.green[800],
                         fontSize: (30.0),
                         fontWeight: FontWeight.bold),
                   ),
@@ -214,7 +221,7 @@ Widget ticketDetailsWidget(String firstTitle, String firstDesc,
           children: <Widget>[
             Text(
               firstTitle,
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Color(text_dm_offwhite)),
             ),
             Padding(
               padding: EdgeInsets.only(top: 4.0),
@@ -233,7 +240,7 @@ Widget ticketDetailsWidget(String firstTitle, String firstDesc,
           children: [
             Text(
               secondTitle,
-              style: TextStyle(color: Colors.grey),
+              style: TextStyle(color: Color(text_dm_offwhite)),
             ),
             Padding(
               padding: EdgeInsets.only(top: 4.0),

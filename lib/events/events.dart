@@ -7,7 +7,13 @@ import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 
 class Events extends StatefulWidget {
-  final eventName, eventVenue, organizer, eventDate, eventDesc;
+  final eventName,
+      eventVenue,
+      organizer,
+      eventDate,
+      eventDesc,
+      eccPoints,
+      maxCapacity;
 
   const Events(
       {Key? key,
@@ -15,7 +21,9 @@ class Events extends StatefulWidget {
       this.organizer,
       this.eventVenue,
       this.eventDate,
-      this.eventDesc})
+      this.eventDesc,
+      this.eccPoints,
+      this.maxCapacity})
       : super(key: key);
   // const Events({Key? key,}): super(key: key);
 
@@ -37,7 +45,9 @@ class _EventsState extends State<Events> {
           'eventDesc': eventDesc,
           'url': image,
           'isEventBooked': false,
-          'eventDateTime': eventDateTime
+          'eventDateTime': eventDateTime,
+          'eccPoints' : eccPoints,
+          
         });
       },
       child: Container(
@@ -139,6 +149,7 @@ class _EventsState extends State<Events> {
               child: Center(
                   child: Column(
                 children: [
+                  
                   Row(
                     children: [
                       Align(
