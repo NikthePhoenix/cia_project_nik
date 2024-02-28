@@ -8,6 +8,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:seproject/authentication/email_verification.dart';
 import 'package:seproject/hive/hive.dart';
 import 'package:seproject/home/booked_events.dart';
+import 'package:seproject/home/upcoming.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/events/events.dart';
 import 'package:seproject/events/event_description.dart';
@@ -44,7 +45,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
+  @override  
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
       ),
       // initialRoute: Routes.createEvent,
       routes: {
-        "/": (context) => Create_event(),
+        "/": (context) => BottomNavbar(),
 
 
         // Routes.splashScreen: (context) => SplashScreen(),
@@ -80,6 +81,7 @@ class MyApp extends StatelessWidget {
         Routes.organizerHome: (context) => OrganizerHomePage(),
         Routes.createEvent: (context) => Create_event(),
         Routes.bookedEvents: (context) => BookedEvents(),
+        Routes.upcomingEvents: (context) => Upcoming(),
         Routes.editEvents: (context) => EditEvents(),
         Routes.updateEvents: (context) => UpdateEvents(),
       },
