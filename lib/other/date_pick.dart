@@ -4,7 +4,7 @@ import 'package:seproject/other/color_palette.dart';
 
 class DateSelectionScreen extends StatefulWidget {
   static String eventDate = "";
-  static late DateTime dateObj;
+  static DateTime? dateObj;
   @override
   _DateSelectionScreenState createState() => _DateSelectionScreenState();
 }

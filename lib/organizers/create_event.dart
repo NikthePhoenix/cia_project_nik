@@ -180,6 +180,7 @@ class _Create_eventState extends State<Create_event> {
                 endIndent: 0,
                 color: Color(golden_yellow),
               ),
+
               // SizedBox(
               //   height: 20,
               // ),
@@ -189,7 +190,7 @@ class _Create_eventState extends State<Create_event> {
               // ),
               // SizedBox(
               //   height: 20,
-              // ),
+              // )
               // ignore: prefer_const_constructors
               // Column(
               //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -246,11 +247,13 @@ class _Create_eventState extends State<Create_event> {
                     created_events['eccPoints'] = points.text;
                     created_events['maxCapacity'] = captroller.text;
 
-                    DateTime date = DateSelectionScreen.dateObj;
-                    TimeOfDay time = TimeSelectionScreen.timeObj;
-
-                    DateTime eventDateTime = DateTime(date.year, date.month,
-                        date.day, time.hour, time.minute);
+                    DateTime? date = DateSelectionScreen.dateObj;
+                    TimeOfDay? time = TimeSelectionScreen.timeObj;
+                    DateTime? eventDateTime;
+                    if (date != null && time != null) {
+                      eventDateTime = DateTime(date!.year, date.month,
+                          date.day, time!.hour, time.minute);
+                    }
                     String fname = "";
                     String? upStatus = await Image_pic_pre.upload();
                     fname = upStatus ?? "";
@@ -259,7 +262,7 @@ class _Create_eventState extends State<Create_event> {
                       "orgId": 1.toString(),
                       "tagId": 5.toString(), //deprecated perchance
                       "eventName": eventName.text,
-                      "eventDateTime": eventDateTime.toIso8601String(),
+                      "eventDateTime": eventDateTime?.toIso8601String(),
                       "eventVenue": eventVenue.text,
                       "maxCapacity": captroller.text,
                       "eccPoints": points.text,

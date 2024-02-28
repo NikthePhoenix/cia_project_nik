@@ -19,29 +19,6 @@ class _EditEventstate extends State<EditEvents> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(background_darkgrey),
-      appBar: AppBar(
-        backgroundColor: Color(background_darkgrey),
-        leading: Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(golden_yellow),
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: TextButton(
-                        onPressed: () {
-                          // Navigator.pushNamed(context, Routes.bookedEvents);
-                          Navigator.pushNamed(
-                            context,
-                            Routes.navigator,
-                          );
-                        },
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                        )),
-                  )),
-      ),
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(16),
@@ -49,36 +26,38 @@ class _EditEventstate extends State<EditEvents> {
             child: SingleChildScrollView(
           child: Column(
             children: [
-              // Align(
-              //     alignment: Alignment.topLeft,
-              //     child: Container(
-              //       decoration: BoxDecoration(
-              //           color: Color(golden_yellow),
-              //           borderRadius: BorderRadius.circular(20.0)),
-              //       child: TextButton(
-              //           onPressed: () {
-              //             // Navigator.pushNamed(context, Routes.bookedEvents);
-              //             Navigator.pushNamed(
-              //               context,
-              //               Routes.navigator,
-              //             );
-              //           },
-              //           child: Icon(
-              //             Icons.arrow_back,
-              //             color: Colors.black,
-              //           )),
-              //     )),
-                  SizedBox(
-                    height: 15,
+              Align(
+                alignment: Alignment.topLeft,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: TextButton(
+                    onPressed: () {
+                      // Navigator.pushNamed(context, Routes.bookedEvents);
+                      Navigator.pushNamed(
+                        context,
+                        Routes.navigator,
+                      );
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    ),
                   ),
+                ),
+              ),
               FutureBuilder(
                 future: events,
                 builder: (context, snapshot) {
                   List<Widget> children = [];
                   if (snapshot.hasData) {
                     for (var event in snapshot.data) {
-                      children.add(addBookedEvent(event['eventName'],
-                          event['organizer']['orgName'], event['url']));
+                      children.add(addBookedEvent(
+                          event['eventId'],
+                          event['eventName'],
+                          event['organizer']['orgName'],
+                          event['url']));
                     }
                   }
                   return Column(
@@ -86,17 +65,6 @@ class _EditEventstate extends State<EditEvents> {
                   );
                 },
               )
-              // Column(
-              //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   children: [
-              //     addBookedEvent("Open mic", "ECC & LFL", "open_mic.jpg"),
-              //     SizedBox(
-              //       height: 10,
-              //     ),
-              //     addBookedEvent(created_events?["eventName"] ?? "",
-              //         created_events?['organizer'] ?? "", "open_mic.jpg"),
-              //   ],
-              // )
             ],
           ),
         )),
@@ -104,32 +72,9 @@ class _EditEventstate extends State<EditEvents> {
     );
   }
 
-  Widget addBookedEvent(eventName, organizer, image) {
+  Widget addBookedEvent(eventId, eventName, organizer, image) {
     return InkWell(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text("Booking Confirmation"),
-                content: Text("Are you sure about booking this event?"),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Cancel"),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      // k
-                    },
-                    child: Text("Proceed"),
-                  ),
-                ],
-              );
-            });
-      },
+      onTap: () {},
       child: Container(
         width: MediaQuery.of(context)!.size.width * 0.75,
         decoration: BoxDecoration(
@@ -180,14 +125,10 @@ class _EditEventstate extends State<EditEvents> {
                   InkWell(
                     child: TextButton(
                       onPressed: () {
-                        print(created_events);
                         Navigator.pushNamed(context, Routes.updateEvents,
                             arguments: {
                               'eventName': eventName,
-                              // 'organizer': organizer,
-                              // 'eventDate': eventDate,
-                              // 'eventTime': eventTime,
-                              // 'eventVenue': eventVenue
+                              'eventId': eventId
                             });
                       },
                       child: Text("Update Event", style: TextStyle(color: Color(text_dm_offwhite)),),
@@ -195,8 +136,16 @@ class _EditEventstate extends State<EditEvents> {
                   ),
                   InkWell(
                     child: TextButton(
-                      onPressed: () {},
-                      child: Text("Delete Event", style: TextStyle(color: Color(text_dm_offwhite)),),
+                      onPressed: () async {
+                        bool status = await ApiRequester.deleteEvent(eventName);
+                        if (status) {
+                          setState(() {
+                            events = ApiRequester.getEventbyDept(dept);
+                          });
+                          ;
+                        }
+                      },
+                      child: Text("Delete Event"),
                     ),
                   )
                 ],
