@@ -46,17 +46,15 @@ class _EventsState extends State<Events> {
           'url': image,
           'isEventBooked': false,
           'eventDateTime': eventDateTime,
-          'eccPoints' : eccPoints,
-          
+          'eccPoints': eccPoints,
         });
       },
       child: Container(
           height: 150,
           width: 150,
           decoration: BoxDecoration(
-            border: Border.all(color: Color(golden_yellow)),
-            borderRadius: BorderRadius.circular(10)
-          ),
+              border: Border.all(color: Color(golden_yellow)),
+              borderRadius: BorderRadius.circular(10)),
           child: Column(
             children: [
               // Container(
@@ -72,9 +70,9 @@ class _EventsState extends State<Events> {
               ),
                 */
                 child: ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(image, width: 150, fit:BoxFit.cover),
-              ),
+                  borderRadius: BorderRadius.circular(8.0),
+                  child: Image.network(image, width: 150, fit: BoxFit.cover),
+                ),
                 // child: Image.network(image,
                 //     // height: 100,
                 //     width: 150,
@@ -86,16 +84,17 @@ class _EventsState extends State<Events> {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Color(0xffECFFD1)),
-                    overflow: TextOverflow.ellipsis,
+                overflow: TextOverflow.ellipsis,
                 // textAlign: TextAlign.left,
               ),
-              Text(organizer,
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xffECFFD1)),
-                      overflow: TextOverflow.ellipsis,
-                      ),
+              Text(
+                organizer,
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w300,
+                    color: Color(0xffECFFD1)),
+                overflow: TextOverflow.ellipsis,
+              ),
             ],
           )),
     );
@@ -149,7 +148,6 @@ class _EventsState extends State<Events> {
               child: Center(
                   child: Column(
                 children: [
-                  
                   Row(
                     children: [
                       Align(

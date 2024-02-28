@@ -9,6 +9,7 @@ import 'signup.dart';
 import 'package:http/http.dart';
 import '../other/routes.dart';
 import 'package:hive/hive.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -67,7 +68,7 @@ class LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black45,
+        backgroundColor: Color(background_darkgrey),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
