@@ -13,7 +13,7 @@ class EditEvents extends StatefulWidget {
 
 class _EditEventstate extends State<EditEvents> {
   static Map<String, dynamic> created_events = Create_event.created_events;
-  //TODO change this shit
+  //TODO change this shit to the depart of the org who is signed in
   static const dept = "ECC";
   Future<dynamic> events = ApiRequester.getEventbyDept(dept);
   @override

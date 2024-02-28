@@ -212,4 +212,18 @@ class ApiRequester {
         return false;
     }
   }
+  static Future<dynamic> getUser(int uid) async {
+    Response resp = await get(Uri.http(baseUrl, "user/$uid"));
+    final myBox = HiveManager.myBox;
+    switch (resp.statusCode) {
+      case 200:
+        myBox.put("CurUser", JsonDecoder().convert(resp.body.toString()));
+        return JsonDecoder().convert(resp.body.toString());
+      case 422:
+        print("No data found");
+      case 500:
+        print("Shit");
+        return null;
+    }
+  }
 }

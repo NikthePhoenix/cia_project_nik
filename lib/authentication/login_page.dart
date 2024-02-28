@@ -5,11 +5,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seproject/hive/hive.dart';
+import 'package:seproject/other/api_calls.dart';
 import 'signup.dart';
 import 'package:http/http.dart';
 import '../other/routes.dart';
 import 'package:hive/hive.dart';
 import 'package:seproject/other/color_palette.dart';
+
+
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -56,10 +59,13 @@ class LoginPageState extends State<LoginPage> {
     autoFill();
   }
 
+  callUsers(var id) async {
+    await ApiRequester.getUser(id);
+  }
+
   autoFill() {
     final data = myBox.get('User');
-    if (data == null) {
-    } else {
+    if (data != null) {
       uidcontroller.text = data[0];
       passwordController.text = data[1];
     }
@@ -191,6 +197,10 @@ class LoginPageState extends State<LoginPage> {
                                     uidcontroller.text,
                                     passwordController.text
                                   ]);
+                                  if (myBox.get("CurUser") == null) {
+                                    var parsed = int.parse(uidcontroller.text);
+                                    callUsers(parsed);
+                                  }
                                   Navigator.pushReplacementNamed(
                                     context,
                                     Routes.navigator,

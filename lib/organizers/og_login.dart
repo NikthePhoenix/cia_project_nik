@@ -6,6 +6,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
 import 'package:seproject/other/color_palette.dart';
 
+late final org;
+
 class OrganizerLogin extends StatefulWidget {
   const OrganizerLogin({Key? key}) : super(key: key);
 
@@ -16,7 +18,6 @@ class OrganizerLogin extends StatefulWidget {
 class _OrganizerLoginState extends State<OrganizerLogin> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  TextEditingController uidcontroller = TextEditingController();
 
   bool isButtonClicked = false;
   bool valid = false;
@@ -40,10 +41,21 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
   autofill() {
     final data = myBox.get("Org");
-    if (data == null) {
-    } else {
+    if (data != null) {
       emailController.text = data[0];
       passwordController.text = data[1];
+    }
+  }
+
+  findOrg() {
+    final data = myBox.get('OrgAll');
+    final orgEmail = myBox.get("Org")[0];
+
+    for (var i = 0; i < data.length; i++) {
+      var temp = data[i];
+      if (data['orgEmail'] == orgEmail) {
+        org = temp;
+      }
     }
   }
 
@@ -170,31 +182,36 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
                             // await Future.delayed(Duration(seconds: 2));
                             if (_formKey.currentState!.validate()) {
+    
                               //  if (valid) {
                               myBox.put('Org', [
                                 emailController.text,
                                 passwordController.text
                               ]);
+                              findOrg();
                               Navigator.pushNamed(
                                 context,
                                 Routes.organizerHome,
                               );
-                              // }
-                              // valid = await checkData(
-                              //     uidcontroller.text, passwordController.text);
+                            } else {
                               emailController.clear();
                               passwordController.clear();
-                              // await Navigator.pushNamed(
-                              //   context,
-                              //   Routes.navigator,
-                              // );
-                              // next
-                              //     ? await Navigator.pushReplacementNamed(
-                              //         context,
-                              //         Routes.homePage,
-                              //       )
-                              //     : print("");
                             }
+                            // }
+                            // valid = await checkData(
+                            //     uidcontroller.text, passwordController.text);
+
+                            // await Navigator.pushNamed(
+                            //   context,
+                            //   Routes.navigator,
+                            // );
+                            // next
+                            //     ? await Navigator.pushReplacementNamed(
+                            //         context,
+                            //         Routes.homePage,
+                            //       )
+                            //     : print("");
+
                             setState(() {
                               isButtonClicked = false;
                             });

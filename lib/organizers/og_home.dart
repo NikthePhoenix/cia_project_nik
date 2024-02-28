@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/organizers/og_login.dart';
 
 class OrganizerHomePage extends StatelessWidget {
   @override
@@ -21,11 +22,12 @@ class OrganizerHomePage extends StatelessWidget {
 class MyCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> args =
-        (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
-    String imageurl = ApiRequester.buildUrl('org${args['orgId']}.jpg');
+    // Map<String, dynamic> args =
+    //     (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
+    String imageurl = ApiRequester.buildUrl('org${org["orgID"]}.jpg');
     print(imageurl);
-    String orgName = args['orgDept'];
+    String orgName = org['orgDept'];
+    print(org);
 
     return SingleChildScrollView(
       

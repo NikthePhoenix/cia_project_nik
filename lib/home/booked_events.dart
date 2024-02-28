@@ -5,6 +5,7 @@ import 'package:seproject/events/event_description.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/color_palette.dart';
+import 'package:seproject/organizers/og_login.dart';
 
 class BookedEvents extends StatefulWidget {
   const BookedEvents({Key? key}) : super(key: key);
@@ -15,8 +16,10 @@ class BookedEvents extends StatefulWidget {
 }
 
 class _BookedEventsState extends State<BookedEvents> {
+  //
   static bool isEventBooked = false;
   static Map<String, dynamic>? tickets = EventDescription.tickets;
+  //change the uid user signed in
   Future<dynamic> bookedEvents = ApiRequester.getBookedTickets(222333);
 
   @override
@@ -83,7 +86,7 @@ class _BookedEventsState extends State<BookedEvents> {
                               dynamic event = entry["event"];
                               children.add(addBookedEvent(
                                 event["eventName"] ?? "",
-                                "Organizer" ?? "",
+                                org["orgName"],
                                 event["url"],
                               ));
                             }

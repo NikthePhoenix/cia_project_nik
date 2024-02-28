@@ -5,6 +5,7 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/color_palette.dart';
+import 'package:seproject/hive/hive.dart';
 // import 'package:seproject/user_functions.dart';
 
 class HomePage extends StatefulWidget {
@@ -13,9 +14,16 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
-
+late final user;
 class _HomePageState extends State<HomePage> {
   final departments = {"ECC", "MVM", "IMG", "SSL"};
+ final myBox = HiveManager.myBox;
+  @override
+  void initState() {
+    super.initState();
+    user = myBox.get("CurUser");
+
+  }
 
   // int
   @override
