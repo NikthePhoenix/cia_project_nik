@@ -58,28 +58,14 @@ class _EventsState extends State<Events> {
               borderRadius: BorderRadius.circular(10)),
           child: Column(
             children: [
-              // Container(
-              //   child: Image.asset("assets/images/" + image + ".jpg",
-              //       height: 100, width: 100, fit: BoxFit.cover),
-              // ),
               Container(
                 height: 100,
-                /*
-                ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(image, width: 150, fit: Boxfit.cover),
-              ),
-                */
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(image, width: 150, fit: BoxFit.cover),
                 ),
-                // child: Image.network(image,
-                //     // height: 100,
-                //     width: 150,
-                //     fit: BoxFit.cover),
               ),
-              
+
               Text(
                 eventName,
                 style: TextStyle(
@@ -103,7 +89,8 @@ class _EventsState extends State<Events> {
   }
 
   Widget eventsList(BuildContext context) {
-    final Future<dynamic> events = ApiRequester.getAllEvents();
+    //TODO HIVEEEEEEEEEEEEEEEEEEEEEEEEEEE
+    final Future<dynamic> events = ApiRequester.getEventbyDept("ECC");
 
     return SizedBox(
       child: SingleChildScrollView(
@@ -122,7 +109,6 @@ class _EventsState extends State<Events> {
                       event['eventVenue'],
                       event['eventDesc'],
                       event['url'],
-                      /* change this to event['url'] */
                       event['eventDateTime'],
                       event['eccPoints']);
                   children.add(builtEvent);
@@ -161,7 +147,8 @@ class _EventsState extends State<Events> {
                             child: TextButton(
                                 onPressed: () {
                                   // Navigator.pop(context);
-                                  Navigator.pushNamed(context, Routes.navigator);
+                                  Navigator.pushNamed(
+                                      context, Routes.navigator);
                                 },
                                 child: Icon(
                                   Icons.arrow_back,
