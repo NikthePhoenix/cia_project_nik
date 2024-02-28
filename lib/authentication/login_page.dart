@@ -195,6 +195,12 @@ class LoginPageState extends State<LoginPage> {
                                     Routes.navigator,
                                   );
                                 }
+                                else{
+                                  const snackBar =
+                                  SnackBar(content: Text('Incorrect username & password'));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
+                                }
                                 uidcontroller.clear();
                                 passwordController.clear();
                               }

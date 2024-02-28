@@ -109,67 +109,67 @@ class _SearchSectionState extends State<SearchSection> {
             SizedBox(
               height: 5,
             ),
-            SingleChildScrollView(
-              scrollDirection: Axis.horizontal,
-              child: Row(children: [
-                addEventsTag("Open Mic"),
-                SizedBox(
-                  width: 10,
-                ),
-                addEventsTag("LFL"),
-                SizedBox(
-                  width: 10,
-                ),
-                addEventsTag("Yoga Committee"),
-                SizedBox(
-                  width: 10,
-                ),
-                addEventsTag("Rewire your brain"),
-                SizedBox(
-                  width: 10,
-                ),
-              ]),
-            ),
-            SizedBox(height: 15),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Text("Browse Departments",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Align(
-              alignment: Alignment.centerLeft,
-              child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    width: 200,
+            // SingleChildScrollView(
+            //   scrollDirection: Axis.horizontal,
+            //   child: Row(children: [
+            //     addEventsTag("Open Mic"),
+            //     SizedBox(
+            //       width: 10,
+            //     ),
+            //     addEventsTag("LFL"),
+            //     SizedBox(
+            //       width: 10,
+            //     ),
+            //     addEventsTag("Yoga Committee"),
+            //     SizedBox(
+            //       width: 10,
+            //     ),
+            //     addEventsTag("Rewire your brain"),
+            //     SizedBox(
+            //       width: 10,
+            //     ),
+            //   ]),
+            // ),
+            // SizedBox(height: 15),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: Text("Browse Departments",
+            //       style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold)),
+            // ),
+            // SizedBox(
+            //   height: 10,
+            // ),
+            // Align(
+            //   alignment: Alignment.centerLeft,
+            //   child: InkWell(
+            //       onTap: () {},
+            //       child: Container(
+            //         width: 200,
 
-                    decoration: BoxDecoration(
-                      border: Border.all(width: 2),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    // padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Checkbox(
-                              value: false,
-                              shape: CircleBorder(),
-                              onChanged: (bool? value) {
-                                setState(() {
-                                  // checked = value!;
-                                });
-                              }),
-                          Text(
-                            "ECC",
-                            style: TextStyle(
-                                fontSize: 25, fontWeight: FontWeight.w400),
-                          )
-                        ]),
-                  )),
-            ),
+            //         decoration: BoxDecoration(
+            //           border: Border.all(width: 2),
+            //           borderRadius: BorderRadius.circular(10),
+            //         ),
+            //         // padding: EdgeInsets.symmetric(vertical: 8, horizontal: 24),
+                    // child: Row(
+                    //     mainAxisAlignment: MainAxisAlignment.center,
+                    //     children: [
+                    //       Checkbox(
+                    //           value: false,
+                    //           shape: CircleBorder(),
+                    //           onChanged: (bool? value) {
+                    //             setState(() {
+                    //               // checked = value!;
+                    //             });
+                    //           }),
+                    //       Text(
+                    //         "ECC",
+                    //         style: TextStyle(
+                    //             fontSize: 25, fontWeight: FontWeight.w400),
+                    //       )
+                        // ]),
+                  // )),
+            // ),
             //
           ]),
         ),
