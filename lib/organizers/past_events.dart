@@ -38,18 +38,8 @@ class _PastEventsState extends State<PastEvents> {
               borderRadius: BorderRadius.circular(10)),
           child: Column(
             children: [
-              // Container(
-              //   child: Image.asset("assets/images/" + image + ".jpg",
-              //       height: 100, width: 100, fit: BoxFit.cover),
-              // ),
               Container(
                 height: 100,
-                /*
-                ClipRRect(
-                borderRadius: BorderRadius.circular(8.0),
-                child: Image.network(image, width: 150, fit: Boxfit.cover),
-              ),
-                */
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(image, width: 150, fit: BoxFit.cover),
@@ -59,7 +49,6 @@ class _PastEventsState extends State<PastEvents> {
                 //     width: 150,
                 //     fit: BoxFit.cover),
               ),
-              
               Text(
                 eventName,
                 style: TextStyle(
@@ -83,7 +72,8 @@ class _PastEventsState extends State<PastEvents> {
   }
 
   Widget eventsList(BuildContext context) {
-    final Future<dynamic> events = ApiRequester.getAllEvents();
+    //TODO HIVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
+    final Future<dynamic> events = ApiRequester.getEventbyDept("ECC");
 
     return SizedBox(
       child: SingleChildScrollView(
@@ -141,7 +131,8 @@ class _PastEventsState extends State<PastEvents> {
                             child: TextButton(
                                 onPressed: () {
                                   // Navigator.pop(context);
-                                  Navigator.pushNamed(context, Routes.navigator);
+                                  Navigator.pushNamed(
+                                      context, Routes.navigator);
                                 },
                                 child: Icon(
                                   Icons.arrow_back,
@@ -158,7 +149,7 @@ class _PastEventsState extends State<PastEvents> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0)),
                     child: Center(
-                      child: Text("BOOKED EVENTS",
+                      child: Text("ALL EVENTS",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,

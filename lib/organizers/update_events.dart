@@ -3,6 +3,7 @@ import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/date_pick.dart';
+import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
@@ -267,8 +268,8 @@ class _UpdateEventsState extends State<UpdateEvents> {
                     TimeOfDay? time = TimeSelectionScreen.timeObj;
                     DateTime? eventDateTime;
                     if (date != null && time != null) {
-                      eventDateTime = DateTime(date!.year, date.month,
-                          date.day, time!.hour, time.minute);
+                      eventDateTime = DateTime(date!.year, date.month, date.day,
+                          time!.hour, time.minute);
                     }
                     String fname = "";
                     String? upStatus = await Image_pic_pre.upload();
@@ -300,8 +301,9 @@ class _UpdateEventsState extends State<UpdateEvents> {
                     if (data['url'] != null) {
                       data['url'] = ApiRequester.buildUrl(data['url']);
                     }
-                    print(data);
                     bool status = await ApiRequester.updateEvents(data);
+                    Navigator.of(context)
+                        .pushReplacementNamed(Routes.organizerHome);
                     print("Addition succeeded: ${status.toString()}");
                   },
                 ),

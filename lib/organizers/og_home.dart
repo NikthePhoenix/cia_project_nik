@@ -26,7 +26,7 @@ class MyCardList extends StatelessWidget {
     Map<String, dynamic>? args =
         (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>?);
     // String imageurl = ApiRequester.buildUrl('org${args?['orgId']}.jpg');
-        String imageurl = ApiRequester.buildUrl('org1.jpg');
+    String imageurl = ApiRequester.buildUrl('org1.jpg');
 
     print(imageurl);
     String orgName = args?['orgDept'] ?? "";
@@ -97,8 +97,8 @@ class MyCardList extends StatelessWidget {
 
             SizedBox(height: 20.0),
             CardItem(
-              title: 'Past Event',
-              icon: Icons.history,
+              title: 'All Events',
+              icon: Icons.event_sharp,
               onTap: () {
                 Navigator.pushNamed(context, Routes.pastEvents);
               },
