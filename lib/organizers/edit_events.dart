@@ -23,26 +23,26 @@ class _EditEventstate extends State<EditEvents> {
       appBar: AppBar(
         backgroundColor: Color(background_darkgrey),
         leading: Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Color(golden_yellow),
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, Routes.bookedEvents);
-                      Navigator.pushNamed(
-                        context,
-                        Routes.navigator,
-                      );
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+          alignment: Alignment.topLeft,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Color(golden_yellow),
+                borderRadius: BorderRadius.circular(20.0)),
+            child: TextButton(
+              onPressed: () {
+                // Navigator.pushNamed(context, Routes.organizerHome);
+                Navigator.pushReplacementNamed(
+                  context,
+                  Routes.organizerHome,
+                );
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
               ),
+            ),
+          ),
+        ),
       ),
       body: SafeArea(
           child: Padding(
@@ -80,7 +80,6 @@ class _EditEventstate extends State<EditEvents> {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
-        
         onTap: () {},
         child: Container(
           width: MediaQuery.of(context)!.size.width * 0.85,
@@ -100,25 +99,25 @@ class _EditEventstate extends State<EditEvents> {
                 Column(
                   children: [
                     Container(
-                      constraints: BoxConstraints.tight(Size(150, 25)),
-                      child: Text(eventName,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color(text_dm_offwhite),
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.ellipsis))),
+                        constraints: BoxConstraints.tight(Size(150, 25)),
+                        child: Text(eventName,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color(text_dm_offwhite),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis))),
                     Container(
-                      constraints: BoxConstraints.tight(Size(150, 25)),
-                      child: Text(organizer,
-                        overflow: TextOverflow.ellipsis,
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: Color(text_dm_offwhite),
-                            fontSize: 20,
-                            // fontWeight: FontWeight.bold,
-                            overflow: TextOverflow.ellipsis))),
+                        constraints: BoxConstraints.tight(Size(150, 25)),
+                        child: Text(organizer,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                color: Color(text_dm_offwhite),
+                                fontSize: 20,
+                                // fontWeight: FontWeight.bold,
+                                overflow: TextOverflow.ellipsis))),
                     // Text(organizer,
                     //     style: TextStyle(
                     //       color: Color(text_dm_offwhite),
@@ -144,37 +143,48 @@ class _EditEventstate extends State<EditEvents> {
                     // ),
                     InkWell(
                       child: Container(
-                        // color: Color(golden_yellow),  
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Color(golden_yellow)),
-                      child: TextButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, Routes.updateEvents,
-                              arguments: {
-                                'eventName': eventName,
-                                'eventId': eventId
-                              });
-                        },
-                        child: Text("Update Event", style: TextStyle(color: Color(text_dm_offwhite)),),
-                      )),
+                          // color: Color(golden_yellow),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(20),
+                              color: Color(golden_yellow)),
+                          child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.updateEvents,
+                                  arguments: {
+                                    'eventName': eventName,
+                                    'eventId': eventId
+                                  });
+                            },
+                            child: Text(
+                              "Update Event",
+                              style: TextStyle(color: Color(text_dm_offwhite)),
+                            ),
+                          )),
                     ),
                     SizedBox(
-                  height: 10,
-                ),
+                      height: 10,
+                    ),
                     InkWell(
                       child: Container(
-                        decoration: BoxDecoration(borderRadius: BorderRadius.circular(25), color: Color.fromRGBO(255, 0, 0, 1)),
-                      child: TextButton(
-                        onPressed: () async {
-                          bool status = await ApiRequester.deleteEvent(eventName);
-                          if (status) {
-                            setState(() {
-                              events = ApiRequester.getEventbyDept(dept);
-                            });
-                            ;
-                          }
-                        },
-                        child: Text("Delete Event", style: TextStyle(color: Color(text_dm_offwhite)),),
-                      )),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(25),
+                              color: Color.fromRGBO(255, 0, 0, 1)),
+                          child: TextButton(
+                            onPressed: () async {
+                              bool status =
+                                  await ApiRequester.deleteEvent(eventName);
+                              if (status) {
+                                setState(() {
+                                  events = ApiRequester.getEventbyDept(dept);
+                                });
+                                ;
+                              }
+                            },
+                            child: Text(
+                              "Delete Event",
+                              style: TextStyle(color: Color(text_dm_offwhite)),
+                            ),
+                          )),
                     )
                   ],
                 ),
