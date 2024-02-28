@@ -181,10 +181,7 @@ class LoginPageState extends State<LoginPage> {
                                 isButtonClicked = true;
                               });
 
-                              // await Future.delayed(Duration(seconds: 2));
                               if (_formKey.currentState!.validate()) {
-                                // print("email: ${emailController.text}");
-                                // print("Password: ${passwordController.text}");
                                 valid = await checkData(uidcontroller.text,
                                     passwordController.text);
 
@@ -200,16 +197,6 @@ class LoginPageState extends State<LoginPage> {
                                 }
                                 uidcontroller.clear();
                                 passwordController.clear();
-                                // await Navigator.pushNamed(
-                                //   context,
-                                //   Routes.navigator,
-                                // );
-                                // next
-                                //     ? await Navigator.pushReplacementNamed(
-                                //         context,
-                                //         Routes.homePage,
-                                //       )
-                                //     : print("");
                               }
 
                               setState(() {

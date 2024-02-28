@@ -28,6 +28,7 @@ class MyCardList extends StatelessWidget {
     String orgName = args['orgDept'];
 
     return SingleChildScrollView(
+      
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(

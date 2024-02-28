@@ -26,24 +26,26 @@ class _EditEventstate extends State<EditEvents> {
           child: Column(
             children: [
               Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: TextButton(
-                        onPressed: () {
-                          // Navigator.pushNamed(context, Routes.bookedEvents);
-                          Navigator.pushNamed(
-                            context,
-                            Routes.navigator,
-                          );
-                        },
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                        )),
-                  )),
+                alignment: Alignment.topLeft,
+                child: Container(
+                  decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: TextButton(
+                    onPressed: () {
+                      // Navigator.pushNamed(context, Routes.bookedEvents);
+                      Navigator.pushNamed(
+                        context,
+                        Routes.navigator,
+                      );
+                    },
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.black,
+                    ),
+                  ),
+                ),
+              ),
               FutureBuilder(
                 future: events,
                 builder: (context, snapshot) {
@@ -59,17 +61,6 @@ class _EditEventstate extends State<EditEvents> {
                   );
                 },
               )
-              // Column(
-              //   // mainAxisAlignment: MainAxisAlignment.spaceAround,
-              //   children: [
-              //     addBookedEvent("Open mic", "ECC & LFL", "open_mic.jpg"),
-              //     SizedBox(
-              //       height: 10,
-              //     ),
-              //     addBookedEvent(created_events?["eventName"] ?? "",
-              //         created_events?['organizer'] ?? "", "open_mic.jpg"),
-              //   ],
-              // )
             ],
           ),
         )),

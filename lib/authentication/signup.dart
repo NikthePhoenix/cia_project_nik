@@ -7,9 +7,6 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class SignUpPage extends StatefulWidget {
-  /*var myBox = Hive.box('myBox');
-  SignUpPage({required this.myBox});*/
-
   @override
   State<SignUpPage> createState() => SignUpPageState();
 }
@@ -28,28 +25,6 @@ class SignUpPageState extends State<SignUpPage> {
   bool isConfirmPwdVisible = false;
 
   final _formKey = GlobalKey<FormState>();
-// <<<<<<< hive
-
-//   // saveUserDataLocally() {
-//   //   myBox.put('User', [
-//   //     nameController.text,
-//   //     uidController.text,
-//   //     emailController.text,
-//   //     phoneController.text,
-//   //     passwordController.text
-//   //   ]);
-//   // }
-// =======
-//   saveUserDataLocally() {
-//     myBox.put('User', [
-//       nameController.text,
-//       uidController.text,
-//       emailController.text,
-//       phoneController.text,
-//       passwordController.text
-//     ]);
-//   }
-// >>>>>>> main
 
   Future<bool> validateData(String name, String email, String password,
       String uid, String phone) async {
