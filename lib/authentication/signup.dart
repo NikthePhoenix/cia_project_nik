@@ -228,7 +228,7 @@ class SignUpPageState extends State<SignUpPage> {
                       Material(
                         borderRadius: BorderRadius.circular(35),
                         color: Color(0xFFFFC107),
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () async {
                             // saveUserDataLocally();
                             setState(() {
@@ -249,6 +249,11 @@ class SignUpPageState extends State<SignUpPage> {
                                   arguments: {
                                     'uid': uidController.text,
                                   });
+                            } else {
+                              const snackBar =
+                                  SnackBar(content: Text('Kindly fill appropriate values'));
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(snackBar);
                             }
                             setState(() {
                               isButtonClicked = false;
