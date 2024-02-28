@@ -23,7 +23,28 @@ class _BookedEventsState extends State<BookedEvents> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(background_darkgrey),
-      // appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color(background_darkgrey),
+        leading: Align(
+                  alignment: Alignment.topLeft,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        color: Color(golden_yellow),
+                        borderRadius: BorderRadius.circular(20.0)),
+                    child: TextButton(
+                        onPressed: () {
+                          // Navigator.pushNamed(context, Routes.bookedEvents);
+                          Navigator.pushNamed(
+                            context,
+                            Routes.navigator,
+                          );
+                        },
+                        child: Icon(
+                          Icons.arrow_back,
+                          color: Colors.black,
+                        )),
+                  )),
+      ),
       body: SafeArea(
           child: Padding(
               padding: const EdgeInsets.all(16),
@@ -31,25 +52,25 @@ class _BookedEventsState extends State<BookedEvents> {
                   child: SingleChildScrollView(
                 child: Column(
                   children: [
-                    Align(
-                        alignment: Alignment.topLeft,
-                        child: Container(
-                          decoration: BoxDecoration(
-                              color: Color(golden_yellow),
-                              borderRadius: BorderRadius.circular(20.0)),
-                          child: TextButton(
-                              onPressed: () {
-                                // Navigator.pushNamed(context, Routes.bookedEvents);
-                                Navigator.pushNamed(
-                                  context,
-                                  Routes.navigator,
-                                );
-                              },
-                              child: Icon(
-                                Icons.arrow_back,
-                                color: Colors.black,
-                              )),
-                        )),
+                    // Align(
+                    //     alignment: Alignment.topLeft,
+                    //     child: Container(
+                    //       decoration: BoxDecoration(
+                    //           color: Color(golden_yellow),
+                    //           borderRadius: BorderRadius.circular(20.0)),
+                    //       child: TextButton(
+                    //           onPressed: () {
+                    //             // Navigator.pushNamed(context, Routes.bookedEvents);
+                    //             Navigator.pushNamed(
+                    //               context,
+                    //               Routes.navigator,
+                    //             );
+                    //           },
+                    //           child: Icon(
+                    //             Icons.arrow_back,
+                    //             color: Colors.black,
+                    //           )),
+                    //     )),
                         SizedBox(
                           height: 20,
                         ),

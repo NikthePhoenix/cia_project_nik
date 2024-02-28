@@ -19,6 +19,9 @@ class Image_pic_pre extends StatefulWidget {
   }
 
   static Future<String?> upload() async {
+    if (_imageFile == null) {
+      return null;
+    }
     final resp = await ApiRequester.uploadImage(_imageFile!.path);
     return resp;
   }

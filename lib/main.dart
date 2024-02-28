@@ -54,7 +54,8 @@ class MyApp extends StatelessWidget {
       ),
       // initialRoute: Routes.createEvent,
       routes: {
-        "/": (context) => SearchSection(),
+        "/": (context) => Create_event(),
+
 
         // Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
