@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seproject/hive/hive.dart';
+import 'package:seproject/other/color_palette.dart';
 import '../other/routes.dart';
 import 'package:hive/hive.dart';
 import 'dart:convert';
@@ -53,7 +54,7 @@ class SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black45,
+        backgroundColor: Color(background_darkgrey),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Form(

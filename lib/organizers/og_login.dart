@@ -4,6 +4,7 @@ import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:hive/hive.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class OrganizerLogin extends StatefulWidget {
   const OrganizerLogin({Key? key}) : super(key: key);
@@ -32,7 +33,8 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
     callOrg();
     autofill();
   }
-  callOrg ()async {
+
+  callOrg() async {
     await ApiRequester.getAllOrganizers();
   }
 
@@ -48,7 +50,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.black45,
+        backgroundColor: Color(background_darkgrey),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 40.0, vertical: 30.0),
