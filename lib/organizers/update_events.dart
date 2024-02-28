@@ -3,9 +3,14 @@ import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/date_pick.dart';
+import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/time_pick.dart';
+import 'package:seproject/hive/hive.dart';
 import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
+
+final myBox = HiveManager.myBox;
+final org = myBox.get('CurrentOrg');
 
 class UpdateEvents extends StatefulWidget {
   final eventName;
@@ -51,26 +56,26 @@ class _UpdateEventsState extends State<UpdateEvents> {
       appBar: AppBar(
         backgroundColor: Color(background_darkgrey),
         leading: Align(
-                alignment: Alignment.topLeft,
-                child: Container(
-                  decoration: BoxDecoration(
-                      color: Color(golden_yellow),
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: TextButton(
-                    onPressed: () {
-                      // Navigator.pushNamed(context, Routes.bookedEvents);
-                      Navigator.pushNamed(
-                        context,
-                        Routes.navigator,
-                      );
-                    },
-                    child: Icon(
-                      Icons.arrow_back,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+          alignment: Alignment.topLeft,
+          child: Container(
+            decoration: BoxDecoration(
+                color: Color(golden_yellow),
+                borderRadius: BorderRadius.circular(20.0)),
+            child: TextButton(
+              onPressed: () {
+                // Navigator.pushNamed(context, Routes.bookedEvents);
+                Navigator.pushNamed(
+                  context,
+                  Routes.navigator,
+                );
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: Colors.black,
               ),
+            ),
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -82,7 +87,10 @@ class _UpdateEventsState extends State<UpdateEvents> {
             children: [
               Text(
                 "Update Event",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 28, color: Color(text_dm_offwhite)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 28,
+                    color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 40,
@@ -102,7 +110,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
                 " Update Event Name :",
                 style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
               ),
-              InputField(                
+              InputField(
                 hintText: 'Update Event Name',
                 controller: updatedEventName,
                 // defaultValue: created_events['eventName'] ?? "",
@@ -210,7 +218,10 @@ class _UpdateEventsState extends State<UpdateEvents> {
               ),
               Text(
                 "Chose the organizer department",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Color(text_dm_offwhite)),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 22,
+                    color: Color(text_dm_offwhite)),
               ),
               SizedBox(
                 height: 20,
@@ -245,14 +256,16 @@ class _UpdateEventsState extends State<UpdateEvents> {
                 color: Color(golden_yellow),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
-                  side: BorderSide( width: 1.0),
+                  side: BorderSide(width: 1.0),
                 ),
                 child: ListTile(
                   title: Center(
                     child: Text(
                       "Update Event ",
                       style: TextStyle(
-                          fontSize: 20.0, fontWeight: FontWeight.bold, color: Color(background_darkgrey)),
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Color(background_darkgrey)),
                     ),
                   ),
                   onTap: () async {
@@ -267,8 +280,8 @@ class _UpdateEventsState extends State<UpdateEvents> {
                     TimeOfDay? time = TimeSelectionScreen.timeObj;
                     DateTime? eventDateTime;
                     if (date != null && time != null) {
-                      eventDateTime = DateTime(date!.year, date.month,
-                          date.day, time!.hour, time.minute);
+                      eventDateTime = DateTime(date!.year, date.month, date.day,
+                          time!.hour, time.minute);
                     }
                     String fname = "";
                     String? upStatus = await Image_pic_pre.upload();
@@ -276,7 +289,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
 
                     Map<String, dynamic> data = {
                       "eventId": eventId.toString(),
-                      "orgId": 1.toString(),
+                      "orgId": org["orgId"],
                       "tagId": 5.toString(), //deprecated perchance
                       "eventName": updatedEventName.text,
                       "eventDateTime": eventDateTime?.toIso8601String(),
@@ -300,8 +313,9 @@ class _UpdateEventsState extends State<UpdateEvents> {
                     if (data['url'] != null) {
                       data['url'] = ApiRequester.buildUrl(data['url']);
                     }
-                    print(data);
                     bool status = await ApiRequester.updateEvents(data);
+                    Navigator.of(context)
+                        .pushReplacementNamed(Routes.organizerHome);
                     print("Addition succeeded: ${status.toString()}");
                   },
                 ),

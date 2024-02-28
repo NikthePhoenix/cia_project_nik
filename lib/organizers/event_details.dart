@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EventDetails extends StatefulWidget {
   const EventDetails({Key? key}) : super(key: key);
@@ -11,9 +12,6 @@ class EventDetails extends StatefulWidget {
 }
 
 class _EventDetailsState extends State<EventDetails> {
-  // static List<String> bookedEvents = [""];
-  // static Map<String, dynamic> tickets = {};
-
   static bool isEventBooked = false;
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class _EventDetailsState extends State<EventDetails> {
     final eventVenue = args?['eventVenue'] ?? "";
     final eccPoints = args?['eccPoints'] ?? "";
     final image = args?['image'] ?? "";
-    final url = args?['url']?? "";
+    final url = args?['url'] ?? "";
     final eventDesc = args?['eventDesc'] ?? "";
     final eventDateTime = args?['eventDateTime'] ?? "";
     var isEventBooked = args?['isEventBooked'] ?? '';
@@ -36,9 +34,6 @@ class _EventDetailsState extends State<EventDetails> {
 
     return Scaffold(
         backgroundColor: Color(0xff181816),
-        // appBar: AppBar(
-        //   foregroundColor: Color(0xffE1A730)
-        // ),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(16),
@@ -154,7 +149,19 @@ class _EventDetailsState extends State<EventDetails> {
                   height: 15,
                 ),
                 InkWell(
-                  onTap: () async {},
+                  onTap: () async {
+                    bool status = await ApiRequester.generateRegPage(eventId);
+                    if (status) {
+                      if (!await launchUrl(
+                          Uri.parse(ApiRequester.buildUrl('event$eventId.csv')),
+                          mode: LaunchMode.externalApplication)) {
+                        print("Launch failed perhaps");
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("No data for this event")));
+                    }
+                  },
                   child: Container(
                     width: 200,
                     decoration: BoxDecoration(
@@ -166,11 +173,7 @@ class _EventDetailsState extends State<EventDetails> {
                         borderRadius: BorderRadius.circular(5)),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                            "Download Registration page!"
-                          )
-                        ]),
+                        children: [Text("Download Registration page!")]),
                   ),
                 ),
               ]),

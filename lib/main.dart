@@ -47,7 +47,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override  
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
@@ -57,9 +57,8 @@ class MyApp extends StatelessWidget {
       ),
       // initialRoute: Routes.createEvent,
       routes: {
-        "/": (context) => BottomNavbar(),
-
-        // Routes.splashScreen: (context) => SplashScreen(),
+        // "/": (context) => (),
+        Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
         Routes.agreement: (context) => UserAgreementPage(),

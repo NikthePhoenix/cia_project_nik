@@ -3,6 +3,7 @@ import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import '../other/color_palette.dart';
+import 'package:seproject/hive/hive.dart';
 
 class BookedTicket extends StatefulWidget {
   final eventName, organiser, img, eventDate, eventTime, eventVenue;
@@ -19,9 +20,13 @@ class BookedTicket extends StatefulWidget {
   @override
   State<BookedTicket> createState() => _BookedTicketState();
 }
+final myBox = HiveManager.myBox;
+  final temp = myBox.get('CurUser');
 
 class _BookedTicketState extends State<BookedTicket> {
   @override
+  
+
   Widget build(BuildContext context) {
     final Map<String, dynamic>? eventDetails =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
@@ -48,6 +53,29 @@ class _BookedTicketState extends State<BookedTicket> {
                 padding: EdgeInsets.all(20),
                 child: TicketData(),
               ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  constraints: BoxConstraints.tight(Size(200,50)),
+                  decoration: BoxDecoration(
+                      color: Color(0xffE1A730),
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: TextButton(
+                      onPressed: () {
+                        // Navigator.pop(context);
+                        Navigator.pushNamed(context, Routes.navigator);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                          ),
+                          Text("return to home", style: TextStyle(fontSize: 20, color: Color(background_darkgrey)),textAlign: TextAlign.center,)
+                        ],
+                      )),
+                )),
             ],
           ),
         ),
@@ -61,13 +89,7 @@ class TicketData extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Map<String, dynamic> user = {
-    "name": "Shalom Castelino",
-    "sname": "",
-    "uid": 225005,
-    "year": "SY",
-    "course": "BSc-IT"
-  };
+  Map<String, dynamic> user = temp;
 
   @override
   Widget build(BuildContext context) {
@@ -199,7 +221,7 @@ class TicketData extends StatelessWidget {
                         fontSize: (30.0),
                         fontWeight: FontWeight.bold),
                   ),
-                )
+                ),
               ],
             )
           ],
