@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:seproject/events/event_description.dart';
+import 'package:seproject/events/ticket.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/color_palette.dart';
@@ -85,6 +87,8 @@ class _BookedEventsState extends State<BookedEvents> {
                                 event["eventName"] ?? "",
                                 "Organizer" ?? "",
                                 event["url"],
+                                event["eventDateTime"],
+                                event["eventVenue"]
                               ));
                             }
                           }
@@ -101,8 +105,22 @@ class _BookedEventsState extends State<BookedEvents> {
     );
   }
 
-  Widget addBookedEvent(eventName, organizer, image) {
+  Widget addBookedEvent(eventName, organizer, image, eventDateTime, eventVenue) {
+    final DateTime localTime = DateTime.parse(eventDateTime);
+    final String eventDate = DateFormat.yMd().format(localTime);
+    final String eventTime = DateFormat.jm().format(localTime);
+
     return InkWell(
+      onTap: () => {
+        Navigator.pushNamed(context, Routes.bookedTicket, 
+        arguments: {
+          'eventName': eventName,
+          'organizer': organizer,
+          'eventDate': eventDate,
+          'eventTime': eventTime,
+          'eventVenue': eventVenue
+        })
+      },
       child: Container(
         // width: MediaQuery.of(context)!.size.width * 0.75,
         decoration: BoxDecoration(

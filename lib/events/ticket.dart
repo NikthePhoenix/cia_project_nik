@@ -48,6 +48,29 @@ class _BookedTicketState extends State<BookedTicket> {
                 padding: EdgeInsets.all(20),
                 child: TicketData(),
               ),
+              Align(
+                alignment: Alignment.bottomCenter,
+                child: Container(
+                  constraints: BoxConstraints.tight(Size(200,50)),
+                  decoration: BoxDecoration(
+                      color: Color(0xffE1A730),
+                      borderRadius: BorderRadius.circular(20.0)),
+                  child: TextButton(
+                      onPressed: () {
+                        // Navigator.pop(context);
+                        Navigator.pushNamed(context, Routes.navigator);
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Icon(
+                            Icons.arrow_back,
+                            color: Colors.black,
+                          ),
+                          Text("return to home", style: TextStyle(fontSize: 20, color: Color(background_darkgrey)),textAlign: TextAlign.center,)
+                        ],
+                      )),
+                )),
             ],
           ),
         ),
@@ -199,7 +222,7 @@ class TicketData extends StatelessWidget {
                         fontSize: (30.0),
                         fontWeight: FontWeight.bold),
                   ),
-                )
+                ),
               ],
             )
           ],
