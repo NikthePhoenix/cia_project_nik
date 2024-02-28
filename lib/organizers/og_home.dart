@@ -4,6 +4,7 @@ import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/organizers/og_login.dart';
+import 'package:seproject/hive/hive.dart';
 
 class OrganizerHomePage extends StatelessWidget {
   @override
@@ -20,17 +21,20 @@ class OrganizerHomePage extends StatelessWidget {
 }
 
 class MyCardList extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
+  final org= HiveManager.myBox.get("CurrentOrg");
+    print(org);
     // Map<String, dynamic> args =
     //     (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
-    String imageurl = ApiRequester.buildUrl('org${org["orgID"]}.jpg');
+    String imageurl = ApiRequester.buildUrl('org${org["orgId"]}.jpg');
     print(imageurl);
     String orgName = org['orgDept'];
     print(org);
 
     return SingleChildScrollView(
-      
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(

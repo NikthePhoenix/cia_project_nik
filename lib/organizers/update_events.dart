@@ -4,8 +4,12 @@ import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
+import 'package:seproject/hive/hive.dart';
 
 import 'package:seproject/other/color_palette.dart';
+
+final myBox = HiveManager.myBox;
+final org = myBox.get('CurrentOrg');
 
 class UpdateEvents extends StatefulWidget {
   final eventName;
@@ -242,8 +246,8 @@ class _UpdateEventsState extends State<UpdateEvents> {
                     TimeOfDay? time = TimeSelectionScreen.timeObj;
                     DateTime? eventDateTime;
                     if (date != null && time != null) {
-                      eventDateTime = DateTime(date!.year, date.month,
-                          date.day, time!.hour, time.minute);
+                      eventDateTime = DateTime(date!.year, date.month, date.day,
+                          time!.hour, time.minute);
                     }
                     String fname = "";
                     String? upStatus = await Image_pic_pre.upload();
@@ -251,7 +255,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
 
                     Map<String, dynamic> data = {
                       "eventId": eventId.toString(),
-                      "orgId": 1.toString(),
+                      "orgId": org["orgId"],
                       "tagId": 5.toString(), //deprecated perchance
                       "eventName": updatedEventName.text,
                       "eventDateTime": eventDateTime?.toIso8601String(),

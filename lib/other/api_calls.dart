@@ -212,9 +212,12 @@ class ApiRequester {
         return false;
     }
   }
-  static Future<dynamic> getUser(int uid) async {
-    Response resp = await get(Uri.http(baseUrl, "user/$uid"));
+
+  static Future<dynamic> getUser(String uid) async {
+
+    Response resp = await get(Uri.http(baseUrl, "users/$uid"));
     final myBox = HiveManager.myBox;
+        print(resp.statusCode);
     switch (resp.statusCode) {
       case 200:
         myBox.put("CurUser", JsonDecoder().convert(resp.body.toString()));

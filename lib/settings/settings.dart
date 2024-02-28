@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/color_palette.dart';
+import 'package:seproject/hive/hive.dart';
 
 void main() {
   runApp(const SettingsPage());
 }
+
+final myBox = HiveManager.myBox;
+final user = myBox.get('CurUser');
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -46,7 +50,10 @@ class _SettingsPageState extends State<SettingsPage> {
                         child: TextButton(
                             onPressed: () {
                               // Navigator.pop(context);
-                              Navigator.pushNamed(context, Routes.navigator,);
+                              Navigator.pushNamed(
+                                context,
+                                Routes.navigator,
+                              );
                             },
                             child: Icon(
                               Icons.arrow_back,
@@ -59,10 +66,9 @@ class _SettingsPageState extends State<SettingsPage> {
                   Text(
                     'Settings',
                     style: TextStyle(
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                      color: Color(text_dm_offwhite)
-                    ),
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Color(text_dm_offwhite)),
                   ),
                   SizedBox(
                     height: 20,
@@ -95,17 +101,18 @@ class _SettingsPageState extends State<SettingsPage> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Name',
+                              user['name'],
                               style: TextStyle(
-                                  fontSize: 17, fontWeight: FontWeight.bold, color: Color(text_dm_offwhite)),
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                  color: Color(text_dm_offwhite)),
                             ),
                             Text(
-                              'UID',
+                              user['uid'].toString(),
                               style: TextStyle(
-                                fontSize: 17,
-                                fontWeight: FontWeight.w300,
-                                color: Color(text_dm_offwhite)
-                              ),
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w300,
+                                  color: Color(text_dm_offwhite)),
                             ),
                           ],
                         ),
@@ -114,7 +121,10 @@ class _SettingsPageState extends State<SettingsPage> {
                           onPressed: () {
                             // Implement action for forward button
                           },
-                          icon: const Icon(Icons.arrow_forward_ios, color: Color(text_dm_offwhite),),
+                          icon: const Icon(
+                            Icons.arrow_forward_ios,
+                            color: Color(text_dm_offwhite),
+                          ),
                         ),
                       ],
                     ),
@@ -225,10 +235,7 @@ Widget _buildSettingRow(IconData icon, String title) {
         CircleAvatar(
           backgroundColor: Color(golden_yellow),
           foregroundColor: Color(background_darkgrey),
-          child: Icon(
-            icon,
-            size: 30
-          ),
+          child: Icon(icon, size: 30),
         ),
         const SizedBox(width: 8),
         Text(
@@ -240,7 +247,10 @@ Widget _buildSettingRow(IconData icon, String title) {
           onPressed: () {
             // Implement action for forward button
           },
-          icon: const Icon(Icons.arrow_forward_ios, color: Color(text_dm_offwhite),),
+          icon: const Icon(
+            Icons.arrow_forward_ios,
+            color: Color(text_dm_offwhite),
+          ),
         ),
         SizedBox(
           height: 10,

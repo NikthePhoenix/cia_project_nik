@@ -3,6 +3,7 @@ import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:ticket_widget/ticket_widget.dart';
 import '../other/color_palette.dart';
+import 'package:seproject/hive/hive.dart';
 
 class BookedTicket extends StatefulWidget {
   final eventName, organiser, img, eventDate, eventTime, eventVenue;
@@ -19,9 +20,13 @@ class BookedTicket extends StatefulWidget {
   @override
   State<BookedTicket> createState() => _BookedTicketState();
 }
+final myBox = HiveManager.myBox;
+  final temp = myBox.get('CurUser');
 
 class _BookedTicketState extends State<BookedTicket> {
   @override
+  
+
   Widget build(BuildContext context) {
     final Map<String, dynamic>? eventDetails =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
@@ -61,13 +66,7 @@ class TicketData extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  Map<String, dynamic> user = {
-    "name": "Shalom Castelino",
-    "sname": "",
-    "uid": 225005,
-    "year": "SY",
-    "course": "BSc-IT"
-  };
+  Map<String, dynamic> user = temp;
 
   @override
   Widget build(BuildContext context) {

@@ -55,9 +55,8 @@ class MyApp extends StatelessWidget {
       ),
       // initialRoute: Routes.createEvent,
       routes: {
-        "/": (context) => BottomNavbar(),
-
-        // Routes.splashScreen: (context) => SplashScreen(),
+        // "/": (context) => (),
+        Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
         Routes.agreement: (context) => UserAgreementPage(),

@@ -6,6 +6,7 @@ import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/organizers/og_login.dart';
+import 'package:seproject/hive/hive.dart';
 
 class BookedEvents extends StatefulWidget {
   const BookedEvents({Key? key}) : super(key: key);
@@ -14,14 +15,15 @@ class BookedEvents extends StatefulWidget {
   @override
   State<BookedEvents> createState() => _BookedEventsState();
 }
-
+final myBox = HiveManager.myBox;
+final user = myBox.get('CurUser');
 class _BookedEventsState extends State<BookedEvents> {
   //
   static bool isEventBooked = false;
   static Map<String, dynamic>? tickets = EventDescription.tickets;
-  //change the uid user signed in
-  Future<dynamic> bookedEvents = ApiRequester.getBookedTickets(222333);
 
+//change the snapshot thingy  
+  Future<dynamic> bookedEvents = ApiRequester.getBookedTickets(user['uid']);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

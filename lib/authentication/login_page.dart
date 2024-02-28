@@ -12,8 +12,6 @@ import '../other/routes.dart';
 import 'package:hive/hive.dart';
 import 'package:seproject/other/color_palette.dart';
 
-
-
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
@@ -52,6 +50,7 @@ class LoginPageState extends State<LoginPage> {
   }
 
   final myBox = HiveManager.myBox;
+  late dynamic user;
 
   @override
   void initState() {
@@ -59,9 +58,7 @@ class LoginPageState extends State<LoginPage> {
     autoFill();
   }
 
-  callUsers(var id) async {
-    await ApiRequester.getUser(id);
-  }
+
 
   autoFill() {
     final data = myBox.get('User');
@@ -197,20 +194,23 @@ class LoginPageState extends State<LoginPage> {
                                     uidcontroller.text,
                                     passwordController.text
                                   ]);
-                                  if (myBox.get("CurUser") == null) {
-                                    var parsed = int.parse(uidcontroller.text);
-                                    callUsers(parsed);
+                                  if (myBox.get('CurUser') == null) {
+                                    var parsed = uidcontroller.text;
+                                    var temp = await ApiRequester.getUser(parsed);
+                                    setState(() {
+                                      user = temp;
+                                    });
                                   }
                                   Navigator.pushReplacementNamed(
                                     context,
                                     Routes.navigator,
                                   );
-                                }
-                                else{
-                                  const snackBar =
-                                  SnackBar(content: Text('Incorrect username & password'));
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
+                                } else {
+                                  const snackBar = SnackBar(
+                                      content: Text(
+                                          'Incorrect username & password'));
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(snackBar);
                                 }
                                 uidcontroller.clear();
                                 passwordController.clear();
