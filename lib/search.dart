@@ -100,12 +100,12 @@ class _SearchSectionState extends State<SearchSection> {
             SizedBox(
               height: 15,
             ),
-            Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Search History",
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
-                )),
+            // Align(
+            //     alignment: Alignment.topLeft,
+            //     child: Text(
+            //       "Search History",
+            //       style: TextStyle(fontSize: 17, fontWeight: FontWeight.bold),
+            //     )),
             SizedBox(
               height: 5,
             ),
