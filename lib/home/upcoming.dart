@@ -6,7 +6,7 @@ import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 
-class Events extends StatefulWidget {
+class Upcoming extends StatefulWidget {
   final eventName,
       eventVenue,
       organizer,
@@ -15,7 +15,7 @@ class Events extends StatefulWidget {
       eccPoints,
       maxCapacity;
 
-  const Events(
+  const Upcoming(
       {Key? key,
       this.eventName,
       this.organizer,
@@ -25,13 +25,13 @@ class Events extends StatefulWidget {
       this.eccPoints,
       this.maxCapacity})
       : super(key: key);
-  // const Events({Key? key,}): super(key: key);
+  // const Upcoming({Key? key,}): super(key: key);
 
   @override
-  State<Events> createState() => _EventsState();
+  State<Upcoming> createState() => _EventsState();
 }
 
-class _EventsState extends State<Events> {
+class _EventsState extends State<Upcoming> {
   Widget addEvents(eventId, eventName, organizer, eventVenue, eventDesc, image,
       eventDateTime, eccPoints) {
     return InkWell(

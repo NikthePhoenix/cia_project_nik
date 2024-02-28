@@ -3,6 +3,7 @@
 // import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:seproject/organizers/update_events.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/color_palette.dart';
 // import 'package:seproject/user_functions.dart';
@@ -38,7 +39,8 @@ class _HomePageState extends State<HomePage> {
                 // SizedBox(height: 15),
                 InkWell(
                   onTap: () {
-                    // Navigate to the events not yet booked
+                    // Navigate to the events happening in the next 7 days
+                    Navigator.pushNamed(context, Routes.upcomingEvents);
                   },
                   child: Container(
                       height: 100,

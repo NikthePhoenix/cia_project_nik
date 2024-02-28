@@ -22,6 +22,7 @@ class Routes {
   static String organizerHome = "/og_home";
   static String createEvent = "/create_event";
   static String bookedEvents = "/booked_events";
+  static String upcomingEvents = "/upcoming";
   static String editEvents = "/edit_event";
   static String updateEvents = "/update_events";
 }
