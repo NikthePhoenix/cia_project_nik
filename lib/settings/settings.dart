@@ -122,46 +122,46 @@ class _SettingsPageState extends State<SettingsPage> {
                   SizedBox(
                     height: 20,
                   ),
-                  Divider(
-                    height: 25,
-                    thickness: 2,
-                    indent: 0,
-                    endIndent: 0,
-                    color: Color(text_dm_offwhite),
-                  ),
-                  Text(
-                    'Appearance',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Color(text_dm_offwhite),
-                    ),
-                  ),
-                  Row(
-                    children: <Widget>[
-                      const Text(
-                        'Change Theme',
-                        style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)), 
-                      ),
-                      const Spacer(),
-                      Switch(
-                        inactiveThumbColor: Color(text_dm_offwhite),
-                        inactiveTrackColor: Color(golden_yellow),
-                        activeColor: Color(text_dm_offwhite),
-                        activeTrackColor: Color(golden_yellow),
-                        splashRadius: 0,
-                        value: _isDarkMode,
-                        onChanged: _toggleTheme,
-                      ),
-                    ],
-                  ),
-                  Divider(
-                    height: 25,
-                    thickness: 2,
-                    indent: 0,
-                    endIndent: 0,
-                    color: Color(text_dm_offwhite),
-                  ),
+                  // Divider(
+                  //   height: 25,
+                  //   thickness: 2,
+                  //   indent: 0,
+                  //   endIndent: 0,
+                  //   color: Color(text_dm_offwhite),
+                  // ),
+                  // Text(
+                  //   'Appearance',
+                  //   style: TextStyle(
+                  //     fontSize: 20,
+                  //     fontWeight: FontWeight.bold,
+                  //     color: Color(text_dm_offwhite),
+                  //   ),
+                  // ),
+                  // Row(
+                  //   children: <Widget>[
+                  //     const Text(
+                  //       'Change Theme',
+                  //       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)), 
+                  //     ),
+                  //     const Spacer(),
+                  //     Switch(
+                  //       inactiveThumbColor: Color(text_dm_offwhite),
+                  //       inactiveTrackColor: Color(golden_yellow),
+                  //       activeColor: Color(text_dm_offwhite),
+                  //       activeTrackColor: Color(golden_yellow),
+                  //       splashRadius: 0,
+                  //       value: _isDarkMode,
+                  //       onChanged: _toggleTheme,
+                  //     ),
+                  //   ],
+                  // ),
+                  // Divider(
+                  //   height: 25,
+                  //   thickness: 2,
+                  //   indent: 0,
+                  //   endIndent: 0,
+                  //   color: Color(text_dm_offwhite),
+                  // ),
                   const SizedBox(height: 24),
                   Text(
                     'Settings',

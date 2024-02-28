@@ -126,19 +126,31 @@ class _BookedEventsState extends State<BookedEvents> {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  Text(eventName,
+                  Container(
+                    constraints: BoxConstraints.tight(Size(150, 25)),
+                  child:Text(eventName,
                       style:
                           TextStyle(fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Color(text_dm_offwhite)
                       ),
-                      overflow: TextOverflow.ellipsis),
-                  Text(organizer,
-                      style: TextStyle(
-                        fontSize: 17,
-                        color: Color(text_dm_offwhite)
+                      overflow: TextOverflow.ellipsis)),
+                  
+                  Container(
+                    constraints: BoxConstraints.tight(Size(150, 25)),
+                  child:Text(organizer,
+                      style:
+                          TextStyle(fontSize: 20,
+                          // fontWeight: FontWeight.bold,
+                          color: Color(text_dm_offwhite)
                       ),
-                      overflow: TextOverflow.ellipsis),
+                      overflow: TextOverflow.ellipsis)),
+                  // Text(organizer,
+                  //     style: TextStyle(
+                  //       fontSize: 17,
+                  //       color: Color(text_dm_offwhite)
+                  //     ),
+                  //     overflow: TextOverflow.ellipsis),
                   SizedBox(
                     height: 10,
                   ),
