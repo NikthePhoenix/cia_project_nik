@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/events/events.dart';
 import 'package:seproject/other/api_calls.dart';
+import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
@@ -174,15 +175,16 @@ class _EventDescriptionState extends State<EventDescription> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text("Booking Confirmation"),
+                              backgroundColor: Color(background_darkgrey),
+                              title: Text("Booking Confirmation", style: TextStyle(color: Color(text_dm_offwhite)),),
                               content: Text(
-                                  "Are you sure about booking this event?"),
+                                  "Are you sure about booking this event?", style: TextStyle(color: Color(text_dm_offwhite))),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text("Cancel"),
+                                  child: Text("Cancel", style: TextStyle(color: Color(golden_yellow))),
                                 ),
                                 TextButton(
                                   onPressed: () async {
@@ -210,7 +212,7 @@ class _EventDescriptionState extends State<EventDescription> {
                                           });
                                     }
                                   },
-                                  child: Text("Proceed"),
+                                  child: Text("Proceed", style: TextStyle(color: Color(golden_yellow))),
                                 ),
                               ],
                             );
