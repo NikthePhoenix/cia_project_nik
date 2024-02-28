@@ -3,10 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:seproject/events/event_description.dart';
 import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/other/api_calls.dart';
+import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 
 class Events extends StatefulWidget {
-  final eventName, eventVenue, organizer, eventDate, eventDesc;
+  final eventName,
+      eventVenue,
+      organizer,
+      eventDate,
+      eventDesc,
+      eccPoints,
+      maxCapacity;
 
   const Events(
       {Key? key,
@@ -14,7 +21,9 @@ class Events extends StatefulWidget {
       this.organizer,
       this.eventVenue,
       this.eventDate,
-      this.eventDesc})
+      this.eventDesc,
+      this.eccPoints,
+      this.maxCapacity})
       : super(key: key);
   // const Events({Key? key,}): super(key: key);
 
@@ -36,14 +45,17 @@ class _EventsState extends State<Events> {
           'eventDesc': eventDesc,
           'url': image,
           'isEventBooked': false,
-          'eventDateTime': eventDateTime
+          'eventDateTime': eventDateTime,
+          'eccPoints' : eccPoints,
+          
         });
       },
       child: Container(
           height: 150,
           width: 150,
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.black),
+            border: Border.all(color: Color(golden_yellow)),
+            borderRadius: BorderRadius.circular(10)
           ),
           child: Column(
             children: [
@@ -53,10 +65,20 @@ class _EventsState extends State<Events> {
               // ),
               Container(
                 height: 100,
-                child: Image.network(image,
-                    // height: 100,
-                    width: 150,
-                    fit: BoxFit.cover),
+                /*
+                ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(image, width: 150, fit: Boxfit.cover),
+              ),
+                */
+                child: ClipRRect(
+                borderRadius: BorderRadius.circular(8.0),
+                child: Image.network(image, width: 150, fit:BoxFit.cover),
+              ),
+                // child: Image.network(image,
+                //     // height: 100,
+                //     width: 150,
+                //     fit: BoxFit.cover),
               ),
               Text(
                 eventName,
@@ -64,13 +86,16 @@ class _EventsState extends State<Events> {
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: Color(0xffECFFD1)),
+                    overflow: TextOverflow.ellipsis,
                 // textAlign: TextAlign.left,
               ),
               Text(organizer,
                   style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w300,
-                      color: Color(0xffECFFD1)))
+                      color: Color(0xffECFFD1)),
+                      overflow: TextOverflow.ellipsis,
+                      ),
             ],
           )),
     );
@@ -124,6 +149,7 @@ class _EventsState extends State<Events> {
               child: Center(
                   child: Column(
                 children: [
+                  
                   Row(
                     children: [
                       Align(

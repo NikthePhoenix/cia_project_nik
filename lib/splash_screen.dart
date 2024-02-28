@@ -31,8 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
         body: Center(
             child: Image.asset(
           "assets/images/bookmyevent.jpeg",
-          
-          height: MediaQuery.of(context).size.height * .4,
+          height: MediaQuery.of(context).size.height * 0.4,
         )));
   }
 }

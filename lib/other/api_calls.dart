@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:seproject/hive/hive.dart';
 
 import 'package:http/http.dart';
 
@@ -7,6 +8,26 @@ class ApiRequester {
   static const baseUrl = "localhost:3000";
   static String buildUrl(String filename) {
     return "http://$baseUrl/uploads/$filename";
+  }
+
+  static Future<bool> updateUser(Map<String, dynamic> data) async {
+    List<String> removal = [];
+    for (var val in data.entries) {
+      if (val.value == null || val.value.toString().isEmpty) {
+        removal.add(val.key);
+      }
+    }
+    for (var val in removal) {
+      data.remove(val);
+    }
+    Response resp = await put(Uri.http(baseUrl, "users/"), body: data);
+    print(resp.statusCode);
+    switch (resp.statusCode) {
+      case 201:
+        return true;
+      default:
+        return false;
+    }
   }
 
   static Future<bool> validateOrganizers(String email, String password) async {
@@ -29,8 +50,13 @@ class ApiRequester {
    */
   static Future<dynamic> getAllOrganizers() async {
     Response resp = await get(Uri.http(baseUrl, "organizers/getAll"));
+    final myBox = HiveManager.myBox;
+    final data = myBox.get("OrgAll");
     switch (resp.statusCode) {
       case 200:
+        if (data == null) {
+          myBox.put("OrgAll", JsonDecoder().convert(resp.body.toString()));
+        }
         return JsonDecoder().convert(resp.body.toString());
       case 404:
         print("No data found");
@@ -65,7 +91,6 @@ class ApiRequester {
     }
   }
 
-  // you will have to parse the eventDateTime to indian time using intl package
   /*
     List of objects with keys
     {
@@ -188,33 +213,3 @@ class ApiRequester {
     }
   }
 }
-
-// void main() async {
-// dynamic data = await ApiRequester.getAllEvents();
-// print(data);
-
-// dynamic data = await ApiRequester.getAllOrganizers();
-// (data as List<dynamic>).forEach((element) {
-//   var dta = (element as Map<String, dynamic>).values;
-//   print(dta);
-// });
-
-// dynamic data = await ApiRequester.getOrganizer("Jamarcus19@gmail.com");
-// print(data!["orgPass"]);
-
-// dynamic data = await ApiRequester.getEventbyDept("Murray, Corwin and Wilkinson");
-// print(data);
-
-// dynamic data = await ApiRequester.getEventbyName("dcascs");
-// print(data);
-
-// await ApiRequester.addBookedTicket(221059, 2);
-// await ApiRequester.addBookedTicket(221059, 1);
-// await ApiRequester.addBookedTicket(214535, 1);
-// await ApiRequester.addBookedTicket(214535, 2);
-// await ApiRequester.addBookedTicket(215789, 3);
-// await ApiRequester.addBookedTicket(215789, 2);
-
-// dynamic data = await ApiRequester.getBookedTickets(214535);
-// print(data);
-// }

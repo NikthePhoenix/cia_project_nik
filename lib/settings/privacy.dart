@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class Privacy extends StatelessWidget {
   const Privacy({Key? key}) : super(key: key);
@@ -8,6 +9,7 @@ class Privacy extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
+        backgroundColor: Color(background_darkgrey),
         body: SafeArea(
           child: SingleChildScrollView(
             child: Padding(
@@ -15,19 +17,35 @@ class Privacy extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      // Implement action to go back
-                      Navigator.pop(context);
-                    },
-                    child: Icon(Icons.arrow_back),
-                  ),
+                  // ElevatedButton(
+                    
+                  //   onPressed: () {
+                  //     // Implement action to go back
+                  //     Navigator.pop(context);
+                  //   },
+                  //   child: Icon(Icons.arrow_back, color: Color(background_darkgrey),),
+                  // ),
+                  Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: Color(golden_yellow),
+                            borderRadius: BorderRadius.circular(20.0)),
+                        child: TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, Routes.settings);
+                            },
+                            child: Icon(
+                              Icons.arrow_back,
+                              color: Color(background_darkgrey),
+                            )),
+                      )),
                   Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                     child: Text(
                       "Privacy Policy",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Color(text_dm_offwhite),
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
@@ -38,7 +56,7 @@ class Privacy extends StatelessWidget {
                     child: Text(
                       "Effective date: January 1, 2024",
                       style: TextStyle(
-                        color: Colors.grey,
+                        color: Color(text_dm_offwhite),
                         fontSize: 16,
                       ),
                     ),
@@ -56,9 +74,10 @@ class Privacy extends StatelessWidget {
                       "Your continued use of our app will be regarded as acceptance of our practices around privacy and personal information. If you have any questions about how we handle user data and personal information, feel free to contact us.\n"
                       "\nThis policy is effective as of 1 January 2024.",
                       style: TextStyle(
-                        color: Colors.black,
+                        color: Color(text_dm_offwhite),
                         fontSize: 16,
                       ),
+                      textAlign: TextAlign.justify
                     ),
                   ),
                   Divider(
@@ -66,7 +85,7 @@ class Privacy extends StatelessWidget {
                     thickness: 2,
                     indent: 15,
                     endIndent: 15,
-                    color: Colors.grey,
+                    color: Color(text_dm_offwhite),
                   ),
                 ],
               ),

@@ -1,10 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
-// flaws so far (found by rd)
-// 1. tick mark icon not displaying on the click of the create button
-// 2. The app crashes when clicking on the 'Create' Button without displaying text in Visibility Class
-// PLS NOTE; DO NOT DELETE THE AWAIT FUTURE DELAYED FUNCTION AS IT IS AN VITAL PART OF THIS CODE
-
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:seproject/hive/hive.dart';
@@ -14,9 +7,6 @@ import 'dart:convert';
 import 'package:http/http.dart';
 
 class SignUpPage extends StatefulWidget {
-  /*var myBox = Hive.box('myBox');
-  SignUpPage({required this.myBox});*/
-
   @override
   State<SignUpPage> createState() => SignUpPageState();
 }
@@ -35,34 +25,12 @@ class SignUpPageState extends State<SignUpPage> {
   bool isConfirmPwdVisible = false;
 
   final _formKey = GlobalKey<FormState>();
-// <<<<<<< hive
-
-//   // saveUserDataLocally() {
-//   //   myBox.put('User', [
-//   //     nameController.text,
-//   //     uidController.text,
-//   //     emailController.text,
-//   //     phoneController.text,
-//   //     passwordController.text
-//   //   ]);
-//   // }
-// =======
-//   saveUserDataLocally() {
-//     myBox.put('User', [
-//       nameController.text,
-//       uidController.text,
-//       emailController.text,
-//       phoneController.text,
-//       passwordController.text
-//     ]);
-//   }
-// >>>>>>> main
 
   Future<bool> validateData(String name, String email, String password,
       String uid, String phone) async {
     try {
       Response response =
-          await post(Uri.http("localhost:3000", "users/signup"), body: {
+          await post(Uri.http("castelinos.com", "users/signup"), body: {
         "name": name,
         "email": email,
         "password": password,

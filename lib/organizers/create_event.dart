@@ -180,19 +180,17 @@ class _Create_eventState extends State<Create_event> {
                 endIndent: 0,
                 color: Color(golden_yellow),
               ),
-              SizedBox(
-                height: 20,
-              ),
-              Text(
-                "Chose the collaborator (if any)",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 22,
-                    color: Color(text_dm_offwhite)),
-              ),
-              SizedBox(
-                height: 20,
-              ),
+
+              // SizedBox(
+              //   height: 20,
+              // ),
+              // Text(
+              //   "Chose the collaborator (if any)",
+              //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Color(text_dm_offwhite)),
+              // ),
+              // SizedBox(
+              //   height: 20,
+              // )
               // ignore: prefer_const_constructors
               // Column(
               //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -240,12 +238,14 @@ class _Create_eventState extends State<Create_event> {
                     ),
                   ),
                   onTap: () async {
-                    print(eventName.text);
+                    print(points.text);
                     created_events['eventName'] = eventName.text;
                     created_events['organizer'] = collaborator;
                     created_events['eventVenue'] = eventVenue.text;
                     created_events['eventDate'] = eventDate;
                     created_events['eventDesc'] = eventDesc.text;
+                    created_events['eccPoints'] = points.text;
+                    created_events['maxCapacity'] = captroller.text;
 
                     DateTime? date = DateSelectionScreen.dateObj;
                     TimeOfDay? time = TimeSelectionScreen.timeObj;
@@ -277,7 +277,10 @@ class _Create_eventState extends State<Create_event> {
                       'organizer': collaborator,
                       'eventVenue': eventVenue.text,
                       'eventDate': eventDate,
-                      'eventDesc': eventDesc.text
+                      'eventDesc': eventDesc.text,
+                      'eccPoints': points.text,
+                      'maxCapacity': captroller.text,
+
                     });
                   },
                 ),

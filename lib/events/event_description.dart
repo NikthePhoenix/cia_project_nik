@@ -36,6 +36,7 @@ class _EventDescriptionState extends State<EventDescription> {
     final eventName = args?['eventName'] ?? "";
     final organizer = args?['organizer'] ?? "";
     final eventVenue = args?['eventVenue'] ?? "";
+    final eccPoints = args?['eccPoints'] ?? "";
     final image = args?['image'] ?? "";
     final url = args?['url'];
     final eventDesc = args?['eventDesc'] ?? "";
@@ -56,6 +57,7 @@ class _EventDescriptionState extends State<EventDescription> {
             padding: EdgeInsets.all(16),
             child: SingleChildScrollView(
               child: Column(children: [
+                
                 Align(
                     alignment: Alignment.topLeft,
                     child: Container(
@@ -131,6 +133,21 @@ class _EventDescriptionState extends State<EventDescription> {
                     ),
                     Text(
                       "Venue: $eventVenue",
+                      style: TextStyle(fontSize: 16, color: Color(0xffECFFD1)),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    Icon(Icons.location_pin, color: Color(0xffECFFD1)),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "Ecc Points: $eccPoints",
                       style: TextStyle(fontSize: 16, color: Color(0xffECFFD1)),
                     ),
                   ],
