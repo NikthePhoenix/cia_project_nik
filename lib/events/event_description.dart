@@ -8,6 +8,7 @@ import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/hive/hive.dart';
 
 class EventDescription extends StatefulWidget {
   final eventName, organiser, img;
@@ -23,6 +24,9 @@ class EventDescription extends StatefulWidget {
   @override
   State<EventDescription> createState() => _EventDescriptionState();
 }
+
+final myBox = HiveManager.myBox;
+final user = myBox.get('CurUser');
 
 class _EventDescriptionState extends State<EventDescription> {
   static List<String> bookedEvents = [];
@@ -58,7 +62,6 @@ class _EventDescriptionState extends State<EventDescription> {
             padding: EdgeInsets.all(16),
             child: SingleChildScrollView(
               child: Column(children: [
-                
                 Align(
                     alignment: Alignment.topLeft,
                     child: Container(
@@ -196,7 +199,7 @@ class _EventDescriptionState extends State<EventDescription> {
                                     // await Future.delayed(Duration(seconds: 1));
                                     bool status =
                                         await ApiRequester.addBookedTicket(
-                                            222333, int.parse(eventId));
+                                            user['uid'], int.parse(eventId));
                                     //TODO Fucking remove this static UID when and if hive shows up
                                     print(status);
                                     if (status) {

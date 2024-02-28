@@ -40,7 +40,7 @@ class _EventsState extends State<Events> {
         Navigator.pushNamed(context, Routes.eventDescription, arguments: {
           'eventId': eventId.toString(),
           'eventName': eventName,
-          'organizer': "Organizer name",
+          'organizer': organizer,
           'eventVenue': eventVenue,
           'eventDesc': eventDesc,
           'url': image,
