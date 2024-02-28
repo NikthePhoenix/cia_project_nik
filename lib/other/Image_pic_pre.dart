@@ -52,6 +52,7 @@ class _Image_pic_preState extends State<Image_pic_pre> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Color(background_darkgrey),
             title: Text('Image Preview'),
             content: SingleChildScrollView(
               child: Column(
@@ -59,10 +60,11 @@ class _Image_pic_preState extends State<Image_pic_pre> {
                   Image.file(Image_pic_pre._imageFile!),
                   SizedBox(height: 20),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Color(golden_yellow)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Close'),
+                    child: Text('Close', style: TextStyle(color: Color(background_darkgrey)),),
                   ),
                 ],
               ),
@@ -75,21 +77,23 @@ class _Image_pic_preState extends State<Image_pic_pre> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
+            backgroundColor: Color(background_darkgrey),
             title: Text('Image Preview'),
             content: SingleChildScrollView(
               child: Column(
                 children: [
                   Wrap(
                     children: [
-                      Text("No Image Selected Please select one from Photos")
+                      Text("No Image Selected Please select one from Photos",style: TextStyle(color: Color(text_dm_offwhite), fontWeight: FontWeight.w600))
                     ],
                   ),
                   SizedBox(height: 20),
                   ElevatedButton(
+                    style: ElevatedButton.styleFrom(backgroundColor: Color(golden_yellow)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
-                    child: Text('Close'),
+                    child: Text('Close', style: TextStyle(color: Color(background_darkgrey))),
                   ),
                 ],
               ),
@@ -109,11 +113,11 @@ class _Image_pic_preState extends State<Image_pic_pre> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Image_pic_pre._imageFile == null
-              ? Text('No image selected.')
+              ? Text('No image selected.', style: TextStyle(color: Color(text_dm_offwhite)),)
               : Wrap(
                   children: [
                     Text('Chosen Image : $fileName',
-                        style: TextStyle(color: Colors.amber[50]))
+                        style: TextStyle(color: Color(text_dm_offwhite)))
                   ],
                 ),
           SizedBox(
