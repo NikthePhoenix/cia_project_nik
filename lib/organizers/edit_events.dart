@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/other/color_palette.dart';
 
 class EditEvents extends StatefulWidget {
   const EditEvents({Key? key}) : super(key: key);
@@ -77,7 +78,7 @@ class _EditEventstate extends State<EditEvents> {
       child: Container(
         width: MediaQuery.of(context)!.size.width * 0.75,
         decoration: BoxDecoration(
-            border: Border.all(width: 2.0),
+            border: Border.all(width: 2.0, color: Color(golden_yellow)),
             borderRadius: BorderRadius.circular(10)),
         child: Padding(
           padding: EdgeInsets.all(8.0),
@@ -94,11 +95,13 @@ class _EditEventstate extends State<EditEvents> {
                   Text(eventName,
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
+                          color: Color(text_dm_offwhite),
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           overflow: TextOverflow.ellipsis)),
                   Text(organizer,
                       style: TextStyle(
+                        color: Color(text_dm_offwhite),
                         fontSize: 17,
                       )),
                   SizedBox(
@@ -106,12 +109,13 @@ class _EditEventstate extends State<EditEvents> {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                        color: Colors.grey,
+                        color: Colors.green,
                         borderRadius: BorderRadius.circular(12.0)),
                     child: Row(
                       children: [
                         Text("  Created  ",
                             style: TextStyle(
+                              color: Color(text_dm_offwhite),
                               fontSize: 15,
                             )),
                         Icon(Icons.done_all_rounded)
@@ -127,7 +131,7 @@ class _EditEventstate extends State<EditEvents> {
                               'eventId': eventId
                             });
                       },
-                      child: Text("Update Event"),
+                      child: Text("Update Event", style: TextStyle(color: Color(text_dm_offwhite)),),
                     ),
                   ),
                   InkWell(

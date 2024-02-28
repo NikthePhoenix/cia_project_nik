@@ -45,7 +45,8 @@ class _SettingsPageState extends State<SettingsPage> {
                             borderRadius: BorderRadius.circular(20.0)),
                         child: TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, Routes.events);
+                              // Navigator.pop(context);
+                              Navigator.pushNamed(context, Routes.navigator,);
                             },
                             child: Icon(
                               Icons.arrow_back,
