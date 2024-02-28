@@ -25,4 +25,6 @@ class Routes {
   static String upcomingEvents = "/upcoming";
   static String editEvents = "/edit_event";
   static String updateEvents = "/update_events";
+  static String pastEvents = "/past_events";
+  static String eventDetails = "/event_details";
 }

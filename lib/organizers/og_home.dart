@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/api_calls.dart';
+import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 
 class OrganizerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(background_darkgrey),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -21,14 +23,15 @@ class OrganizerHomePage extends StatelessWidget {
 class MyCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic> args =
-        (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
-    String imageurl = ApiRequester.buildUrl('org${args['orgId']}.jpg');
+    Map<String, dynamic>? args =
+        (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>?);
+    // String imageurl = ApiRequester.buildUrl('org${args?['orgId']}.jpg');
+        String imageurl = ApiRequester.buildUrl('org1.jpg');
+
     print(imageurl);
-    String orgName = args['orgDept'];
+    String orgName = args?['orgDept'] ?? "";
 
     return SingleChildScrollView(
-      
       child: Container(
         width: MediaQuery.of(context).size.width,
         child: Column(
@@ -72,7 +75,7 @@ class MyCardList extends StatelessWidget {
 
             Text(
               "What would you like to do?",
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
             ),
 
             SizedBox(height: 20.0),
@@ -91,26 +94,13 @@ class MyCardList extends StatelessWidget {
                 Navigator.pushNamed(context, Routes.editEvents);
               },
             ),
-            SizedBox(height: 20.0),
-            CardItem(
-              title: 'Delete Event',
-              icon: Icons.delete,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DetailScreen()),
-                );
-              },
-            ),
+
             SizedBox(height: 20.0),
             CardItem(
               title: 'Past Event',
               icon: Icons.history,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DetailScreen()),
-                );
+                Navigator.pushNamed(context, Routes.pastEvents);
               },
             ),
             SizedBox(height: 20.0),
@@ -126,11 +116,16 @@ class CardItem extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  CardItem({required this.title, required this.icon, required this.onTap});
+  CardItem({
+    required this.title,
+    required this.icon,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color(golden_yellow),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side: BorderSide(color: Colors.black, width: 1.0),
