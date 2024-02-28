@@ -13,9 +13,11 @@ import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/events/events.dart';
 import 'package:seproject/events/event_description.dart';
 import 'package:seproject/authentication/reset_password.dart';
+import 'package:seproject/organizers/event_details.dart';
 import 'package:seproject/organizers/og_home.dart';
 import 'package:seproject/organizers/edit_events.dart';
 import 'package:seproject/organizers/og_login.dart';
+import 'package:seproject/organizers/past_events.dart';
 import 'package:seproject/organizers/update_events.dart';
 import 'package:seproject/search.dart';
 import 'package:seproject/settings/about_us.dart';
@@ -45,7 +47,7 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override  
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
@@ -82,6 +84,8 @@ class MyApp extends StatelessWidget {
         Routes.upcomingEvents: (context) => Upcoming(),
         Routes.editEvents: (context) => EditEvents(),
         Routes.updateEvents: (context) => UpdateEvents(),
+        Routes.pastEvents: (context) => PastEvents(),
+        Routes.eventDetails: (context) => EventDetails(),
       },
       debugShowCheckedModeBanner: false,
     );

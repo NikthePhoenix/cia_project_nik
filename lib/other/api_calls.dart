@@ -135,6 +135,34 @@ class ApiRequester {
     }
   }
 
+  static Future<dynamic> getPastEventbyDept(String dept) async {
+    Response resp = await get(Uri.http(baseUrl, "events/bydeptpast/$dept"));
+    switch (resp.statusCode) {
+      case 200:
+        return JsonDecoder().convert(resp.body.toString());
+      case 404:
+        print("No data found");
+      case 500:
+        print("Shit");
+        return null;
+    }
+  }
+
+  static Future<bool> generateRegPage(String eventId) async {
+    Response resp = await get(Uri.http(baseUrl, "events/getlogs/$eventId"));
+    switch (resp.statusCode) {
+      case 200:
+        return true;
+      case 404:
+        return false;
+      case 500:
+        print("Internal Server Error");
+        return false;
+      default:
+        return false;
+    }
+  }
+
   // Same as above
   static Future<dynamic> getEventbyName(String name) async {
     Response resp = await get(Uri.http(baseUrl, "events/byevent/$name"));

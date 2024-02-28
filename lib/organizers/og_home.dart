@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/api_calls.dart';
+import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/organizers/og_login.dart';
 import 'package:seproject/hive/hive.dart';
@@ -10,6 +11,7 @@ class OrganizerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(background_darkgrey),
       body: Center(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),
@@ -78,7 +80,7 @@ class MyCardList extends StatelessWidget {
 
             Text(
               "What would you like to do?",
-              style: TextStyle(fontSize: 18),
+              style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
             ),
 
             SizedBox(height: 20.0),
@@ -97,26 +99,13 @@ class MyCardList extends StatelessWidget {
                 Navigator.pushNamed(context, Routes.editEvents);
               },
             ),
+
             SizedBox(height: 20.0),
             CardItem(
-              title: 'Delete Event',
-              icon: Icons.delete,
+              title: 'All Events',
+              icon: Icons.event_sharp,
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DetailScreen()),
-                );
-              },
-            ),
-            SizedBox(height: 20.0),
-            CardItem(
-              title: 'Past Event',
-              icon: Icons.history,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => DetailScreen()),
-                );
+                Navigator.pushNamed(context, Routes.pastEvents);
               },
             ),
             SizedBox(height: 20.0),
@@ -132,11 +121,16 @@ class CardItem extends StatelessWidget {
   final IconData icon;
   final VoidCallback onTap;
 
-  CardItem({required this.title, required this.icon, required this.onTap});
+  CardItem({
+    required this.title,
+    required this.icon,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Color(golden_yellow),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
         side: BorderSide(color: Colors.black, width: 1.0),

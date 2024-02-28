@@ -1,37 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:intl/date_symbol_data_file.dart';
 import 'package:intl/intl.dart';
-import 'package:seproject/home/booked_events.dart';
-import 'package:seproject/events/events.dart';
 import 'package:seproject/other/api_calls.dart';
-import 'package:seproject/other/color_palette.dart';
-import 'package:seproject/other/date_pick.dart';
-import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
-import 'package:seproject/hive/hive.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class EventDescription extends StatefulWidget {
-  final eventName, organiser, img;
-  final isEventBooked;
-  // static bool isBooked = false;
-  // static bool isEventBooked = _EventDescriptionState.isEventBooked;
-  static Map<String, dynamic> tickets = _EventDescriptionState.tickets;
-
-  const EventDescription(
-      {Key? key, this.eventName, this.organiser, this.img, this.isEventBooked})
-      : super(key: key);
+class EventDetails extends StatefulWidget {
+  const EventDetails({Key? key}) : super(key: key);
 
   @override
-  State<EventDescription> createState() => _EventDescriptionState();
+  State<EventDetails> createState() => _EventDetailsState();
 }
 
-final myBox = HiveManager.myBox;
-final user = myBox.get('CurUser');
-
-class _EventDescriptionState extends State<EventDescription> {
-  static List<String> bookedEvents = [];
-  static Map<String, dynamic> tickets = {};
-
+class _EventDetailsState extends State<EventDetails> {
   static bool isEventBooked = false;
   @override
   Widget build(BuildContext context) {
@@ -43,9 +23,9 @@ class _EventDescriptionState extends State<EventDescription> {
     final eventVenue = args?['eventVenue'] ?? "";
     final eccPoints = args?['eccPoints'] ?? "";
     final image = args?['image'] ?? "";
-    final url = args?['url'];
+    final url = args?['url'] ?? "";
     final eventDesc = args?['eventDesc'] ?? "";
-    final eventDateTime = args?['eventDateTime'];
+    final eventDateTime = args?['eventDateTime'] ?? "";
     var isEventBooked = args?['isEventBooked'] ?? '';
 
     final DateTime localTime = DateTime.parse(eventDateTime);
@@ -54,9 +34,6 @@ class _EventDescriptionState extends State<EventDescription> {
 
     return Scaffold(
         backgroundColor: Color(0xff181816),
-        // appBar: AppBar(
-        //   foregroundColor: Color(0xffE1A730)
-        // ),
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(16),
@@ -173,61 +150,22 @@ class _EventDescriptionState extends State<EventDescription> {
                 ),
                 InkWell(
                   onTap: () async {
-                    if (!bookedEvents.contains(eventName)) {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              backgroundColor: Color(background_darkgrey),
-                              title: Text("Booking Confirmation", style: TextStyle(color: Color(text_dm_offwhite)),),
-                              content: Text(
-                                  "Are you sure about booking this event?", style: TextStyle(color: Color(text_dm_offwhite))),
-                              actions: [
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text("Cancel", style: TextStyle(color: Color(golden_yellow))),
-                                ),
-                                TextButton(
-                                  onPressed: () async {
-                                    // print(eventName);
-                                    // bookedEvents.add(eventName);
-                                    // tickets['eventName'] = eventName;
-                                    // tickets['organizer'] = organizer;
-                                    // print(bookedEvents);
-                                    // await Future.delayed(Duration(seconds: 1));
-                                    bool status =
-                                        await ApiRequester.addBookedTicket(
-                                            user['uid'], int.parse(eventId));
-                                    //TODO Fucking remove this static UID when and if hive shows up
-                                    print(status);
-                                    if (status) {
-                                      // TODO Make this shit go back to the home page after someone clicks on this
-                                      Navigator.pushNamed(
-                                          context, Routes.bookedTicket,
-                                          arguments: {
-                                            'eventName': eventName,
-                                            'organizer': organizer,
-                                            'eventDate': eventDate,
-                                            'eventTime': eventTime,
-                                            'eventVenue': eventVenue
-                                          });
-                                    }
-                                  },
-                                  child: Text("Proceed", style: TextStyle(color: Color(golden_yellow))),
-                                ),
-                              ],
-                            );
-                          });
+                    bool status = await ApiRequester.generateRegPage(eventId);
+                    if (status) {
+                      if (!await launchUrl(
+                          Uri.parse(ApiRequester.buildUrl('event$eventId.csv')),
+                          mode: LaunchMode.externalApplication)) {
+                        print("Launch failed perhaps");
+                      }
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text("No data for this event")));
                     }
                   },
                   child: Container(
                     width: 200,
                     decoration: BoxDecoration(
-                        color: bookedEvents.contains(eventName)
-                            ? Colors.grey
-                            : Color(0xffE1A730),
+                        color: Color(0xffE1A730),
                         border: Border.all(
                           width: 2,
                           color: Colors.black,
@@ -235,21 +173,7 @@ class _EventDescriptionState extends State<EventDescription> {
                         borderRadius: BorderRadius.circular(5)),
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Text(
-                              bookedEvents.contains(eventName)
-                                  ? "Already Booked"
-                                  : "Book Now",
-                              style: bookedEvents.contains(eventName)
-                                  ? TextStyle(fontSize: 20, color: Colors.white)
-                                  : TextStyle(fontSize: 20)),
-                          Icon(
-                            Icons.arrow_forward,
-                            color: bookedEvents.contains(eventName)
-                                ? Colors.white
-                                : Colors.black,
-                          )
-                        ]),
+                        children: [Text("Download Registration page!")]),
                   ),
                 ),
               ]),

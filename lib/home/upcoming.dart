@@ -178,7 +178,7 @@ class _EventsState extends State<Upcoming> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0)),
                     child: Center(
-                      child: Text("EVENTS",
+                      child: Text("UPCOMING EVENTS",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,

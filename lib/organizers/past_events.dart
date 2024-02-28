@@ -1,46 +1,26 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:seproject/events/event_description.dart';
-import 'package:seproject/other/Image_pic_pre.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
 
-class Events extends StatefulWidget {
-  final eventName,
-      eventVenue,
-      organizer,
-      eventDate,
-      eventDesc,
-      eccPoints,
-      maxCapacity;
-
-  const Events(
-      {Key? key,
-      this.eventName,
-      this.organizer,
-      this.eventVenue,
-      this.eventDate,
-      this.eventDesc,
-      this.eccPoints,
-      this.maxCapacity})
-      : super(key: key);
-  // const Events({Key? key,}): super(key: key);
+class PastEvents extends StatefulWidget {
+  const PastEvents({Key? key}) : super(key: key);
 
   @override
-  State<Events> createState() => _EventsState();
+  State<PastEvents> createState() => _PastEventsState();
 }
 
-class _EventsState extends State<Events> {
+class _PastEventsState extends State<PastEvents> {
   Widget addEvents(eventId, eventName, organizer, eventVenue, eventDesc, image,
       eventDateTime, eccPoints) {
     return InkWell(
       onTap: () {
         print(eventVenue);
-        Navigator.pushNamed(context, Routes.eventDescription, arguments: {
+        Navigator.pushNamed(context, Routes.eventDetails, arguments: {
           'eventId': eventId.toString(),
           'eventName': eventName,
-          'organizer': organizer,
+          'organizer': "Organizer name",
           'eventVenue': eventVenue,
           'eventDesc': eventDesc,
           'url': image,
@@ -64,8 +44,11 @@ class _EventsState extends State<Events> {
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.network(image, width: 150, fit: BoxFit.cover),
                 ),
+                // child: Image.network(image,
+                //     // height: 100,
+                //     width: 150,
+                //     fit: BoxFit.cover),
               ),
-
               Text(
                 eventName,
                 style: TextStyle(
@@ -89,7 +72,7 @@ class _EventsState extends State<Events> {
   }
 
   Widget eventsList(BuildContext context) {
-    //TODO HIVEEEEEEEEEEEEEEEEEEEEEEEEEEE
+    //TODO HIVEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE
     final Future<dynamic> events = ApiRequester.getEventbyDept("ECC");
 
     return SizedBox(
@@ -109,6 +92,7 @@ class _EventsState extends State<Events> {
                       event['eventVenue'],
                       event['eventDesc'],
                       event['url'],
+                      /* change this to event['url'] */
                       event['eventDateTime'],
                       event['eccPoints']);
                   children.add(builtEvent);
@@ -165,7 +149,7 @@ class _EventsState extends State<Events> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20.0)),
                     child: Center(
-                      child: Text("EVENTS",
+                      child: Text("ALL EVENTS",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
