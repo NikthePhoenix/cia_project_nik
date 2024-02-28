@@ -63,7 +63,7 @@ class _VerificationPageState extends State<VerificationPage> {
                             foregroundColor: Colors.black),
                         onPressed: () async {
                           print("request for otp...");
-                          Response resp = await get(Uri.http("localhost:3000",
+                          Response resp = await get(Uri.http("castelinos.com",
                               "users/newotp/${int.parse(uidController.text)}"));
                           if (resp.statusCode == 200) {
                             print("OTP sent");
@@ -106,7 +106,7 @@ class _VerificationPageState extends State<VerificationPage> {
                               EdgeInsets.symmetric(horizontal: 7.0)),
                       onCompleted: (pin) async {
                         Response response = await post(
-                            Uri.http("localhost:3000", "users/otpcheck"),
+                            Uri.http("castelinos.com", "users/otpcheck"),
                             body: {
                               "uid": uidController.text,
                               "otp": pin.toString()
