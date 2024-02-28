@@ -3,7 +3,7 @@ import 'package:seproject/other/color_palette.dart';
 
 class TimeSelectionScreen extends StatefulWidget {
   static String eventTime = _TimeSelectionScreenState.time;
-  static late TimeOfDay timeObj;
+  static TimeOfDay? timeObj;
   @override
   _TimeSelectionScreenState createState() => _TimeSelectionScreenState();
 }

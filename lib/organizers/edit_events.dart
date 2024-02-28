@@ -52,8 +52,11 @@ class _EditEventstate extends State<EditEvents> {
                   List<Widget> children = [];
                   if (snapshot.hasData) {
                     for (var event in snapshot.data) {
-                      children.add(addBookedEvent(event['eventName'],
-                          event['organizer']['orgName'], event['url']));
+                      children.add(addBookedEvent(
+                          event['eventId'],
+                          event['eventName'],
+                          event['organizer']['orgName'],
+                          event['url']));
                     }
                   }
                   return Column(
@@ -68,32 +71,9 @@ class _EditEventstate extends State<EditEvents> {
     );
   }
 
-  Widget addBookedEvent(eventName, organizer, image) {
+  Widget addBookedEvent(eventId, eventName, organizer, image) {
     return InkWell(
-      onTap: () {
-        showDialog(
-            context: context,
-            builder: (context) {
-              return AlertDialog(
-                title: Text("Booking Confirmation"),
-                content: Text("Are you sure about booking this event?"),
-                actions: [
-                  TextButton(
-                    onPressed: () {
-                      Navigator.of(context).pop();
-                    },
-                    child: Text("Cancel"),
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      // k
-                    },
-                    child: Text("Proceed"),
-                  ),
-                ],
-              );
-            });
-      },
+      onTap: () {},
       child: Container(
         width: MediaQuery.of(context)!.size.width * 0.75,
         decoration: BoxDecoration(
@@ -141,14 +121,10 @@ class _EditEventstate extends State<EditEvents> {
                   InkWell(
                     child: TextButton(
                       onPressed: () {
-                        print(created_events);
                         Navigator.pushNamed(context, Routes.updateEvents,
                             arguments: {
                               'eventName': eventName,
-                              // 'organizer': organizer,
-                              // 'eventDate': eventDate,
-                              // 'eventTime': eventTime,
-                              // 'eventVenue': eventVenue
+                              'eventId': eventId
                             });
                       },
                       child: Text("Update Event"),
@@ -156,7 +132,15 @@ class _EditEventstate extends State<EditEvents> {
                   ),
                   InkWell(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        bool status = await ApiRequester.deleteEvent(eventName);
+                        if (status) {
+                          setState(() {
+                            events = ApiRequester.getEventbyDept(dept);
+                          });
+                          ;
+                        }
+                      },
                       child: Text("Delete Event"),
                     ),
                   )
