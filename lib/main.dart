@@ -57,7 +57,6 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (context) => BottomNavbar(),
 
-
         // Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
