@@ -10,12 +10,15 @@ import 'package:seproject/hive/hive.dart';
 class OrganizerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(background_darkgrey),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: MyCardList(),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: Color(background_darkgrey),
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: MyCardList(),
+          ),
         ),
       ),
     );
@@ -102,8 +105,8 @@ class MyCardList extends StatelessWidget {
 
             SizedBox(height: 20.0),
             CardItem(
-              title: 'All Events',
-              icon: Icons.event_sharp,
+              title: 'Past Event',
+              icon: Icons.history,
               onTap: () {
                 Navigator.pushNamed(context, Routes.pastEvents);
               },

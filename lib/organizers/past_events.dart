@@ -131,8 +131,8 @@ class _PastEventsState extends State<PastEvents> {
                             child: TextButton(
                                 onPressed: () {
                                   // Navigator.pop(context);
-                                  Navigator.pushNamed(
-                                      context, Routes.navigator);
+                                  Navigator.pushReplacementNamed(
+                                      context, Routes.organizerHome);
                                 },
                                 child: Icon(
                                   Icons.arrow_back,
