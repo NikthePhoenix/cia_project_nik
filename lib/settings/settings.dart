@@ -11,7 +11,7 @@ final myBox = HiveManager.myBox;
 final user = myBox.get('CurUser');
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({Key? key,}) : super(key: key);
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
