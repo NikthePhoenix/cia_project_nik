@@ -33,7 +33,7 @@ class _EditEventstate extends State<EditEvents> {
                       // Navigator.pushNamed(context, Routes.bookedEvents);
                       Navigator.pushNamed(
                         context,
-                        Routes.navigator,
+                        Routes.organizerHome,
                       );
                     },
                     child: Icon(
