@@ -181,38 +181,29 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
 
                               // await Future.delayed(Duration(seconds: 2));
                               if (_formKey.currentState!.validate()) {
-                                //  if (valid) {
-                                myBox.put('Org', [
-                                  emailController.text,
-                                  passwordController.text
-                                ]);
-                                await findOrg();
-                                Navigator.pushNamed(
-                                  context,
-                                  Routes.organizerHome,
-                                );
-                              } else {
-                                emailController.clear();
-                                passwordController.clear();
+                                bool valid =
+                                    await ApiRequester.validateOrganizers(
+                                        emailController.text,
+                                        passwordController.text);
+                                if (valid) {
+                                  myBox.put('Org', [
+                                    emailController.text,
+                                    passwordController.text
+                                  ]);
+                                  await findOrg();
+                                  Navigator.pushNamed(
+                                    context,
+                                    Routes.organizerHome,
+                                  );
+                                } else {
+                                  emailController.clear();
+                                  passwordController.clear();
+                                }
+
+                                setState(() {
+                                  isButtonClicked = false;
+                                });
                               }
-                              // }
-                              // valid = await checkData(
-                              //     uidcontroller.text, passwordController.text);
-
-                              // await Navigator.pushNamed(
-                              //   context,
-                              //   Routes.navigator,
-                              // );
-                              // next
-                              //     ? await Navigator.pushReplacementNamed(
-                              //         context,
-                              //         Routes.homePage,
-                              //       )
-                              //     : print("");
-
-                              setState(() {
-                                isButtonClicked = false;
-                              });
                             },
                             child: AnimatedContainer(
                               duration: Duration(seconds: 1),

@@ -20,63 +20,73 @@ class BookedTicket extends StatefulWidget {
   @override
   State<BookedTicket> createState() => _BookedTicketState();
 }
+
 final myBox = HiveManager.myBox;
-  final temp = myBox.get('CurUser');
+final user = myBox.get('CurUser');
 
 class _BookedTicketState extends State<BookedTicket> {
   @override
-  
-
   Widget build(BuildContext context) {
     final Map<String, dynamic>? eventDetails =
         ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;
 
     return Scaffold(
-
       backgroundColor: Color(background_darkgrey),
-
       appBar: AppBar(
-        backgroundColor:  Color(background_darkgrey),
+        backgroundColor: Color(background_darkgrey),
         // foregroundColor: Color(golden_yellow)
-        
       ),
       body: SafeArea(
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              TicketWidget(
-                color: Color(golden_yellow),
-                width: 350,
-                height: 520,
-                isCornerRounded: true,
-                padding: EdgeInsets.all(20),
-                child: TicketData(),
-              ),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: Container(
-                  constraints: BoxConstraints.tight(Size(200,50)),
-                  decoration: BoxDecoration(
-                      color: Color(0xffE1A730),
-                      borderRadius: BorderRadius.circular(20.0)),
-                  child: TextButton(
-                      onPressed: () {
-                        // Navigator.pop(context);
-                        Navigator.pushNamed(context, Routes.navigator);
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Icon(
-                            Icons.arrow_back,
-                            color: Colors.black,
-                          ),
-                          Text("return to home", style: TextStyle(fontSize: 20, color: Color(background_darkgrey)),textAlign: TextAlign.center,)
-                        ],
-                      )),
-                )),
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                TicketWidget(
+                  color: Color(golden_yellow),
+                  width: 350,
+                  height: 520,
+                  isCornerRounded: true,
+                  padding: EdgeInsets.all(20),
+                  child: TicketData(),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      constraints: BoxConstraints.tight(Size(200, 50)),
+                      decoration: BoxDecoration(
+                          color: Color(0xffE1A730),
+                          borderRadius: BorderRadius.circular(20.0)),
+                      child: TextButton(
+                          onPressed: () {
+                            // Navigator.pop(context);
+                            Navigator.pushNamed(context, Routes.navigator);
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Icon(
+                                Icons.arrow_back,
+                                color: Colors.black,
+                              ),
+                              Text(
+                                "return to home",
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    color: Color(background_darkgrey)),
+                                textAlign: TextAlign.center,
+                              )
+                            ],
+                          )),
+                    )),
+                SizedBox(
+                  height: 15,
+                ),
+              ],
+            ),
           ),
         ),
       ),
@@ -88,8 +98,6 @@ class TicketData extends StatelessWidget {
   TicketData({
     Key? key,
   }) : super(key: key);
-
-  Map<String, dynamic> user = temp;
 
   @override
   Widget build(BuildContext context) {
@@ -106,9 +114,9 @@ class TicketData extends StatelessWidget {
     final eventDate = args?['eventDate'] ?? '';
     final eventTime = args?["eventTime"] ?? '';
     final eventVenue = args?['eventVenue'] ?? '';
-    return Material(
-      color: Color(golden_yellow),
-      child: SingleChildScrollView(
+    return SingleChildScrollView(
+      child: Material(
+        color: Color(golden_yellow),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -144,12 +152,18 @@ class TicketData extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ticketDetailsWidget('First Name', user["name"] as String,
-                      'UID', user["uid"].toString()),
+                  ticketDetailsWidget(
+                      'First Name',
+                      user["name"].toString() as String,
+                      'UID',
+                      user["uid"].toString()),
                   Padding(
                     padding: EdgeInsets.only(top: 12.0),
-                    child: ticketDetailsWidget('Last Name', user['sname'],
-                        'Course', '${user['year']}${user["course"]}'),
+                    child: ticketDetailsWidget(
+                        'Last Name',
+                        (user['sname'] ?? "").toString(),
+                        'Course',
+                        '${user["course"].toString()}'),
                   ),
                   SizedBox(height: 32.0),
                   DashedLine(),
@@ -157,72 +171,74 @@ class TicketData extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 32.0, bottom: 10.0),
-                    child: Icon(
-                      Icons.calendar_month,
-                      color: Colors.black,
+            SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 32.0, bottom: 10.0),
+                      child: Icon(
+                        Icons.calendar_month,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
+                      child: Text(
+                        'Date: $eventDate',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 32.0, bottom: 10.0),
+                      child: Icon(
+                        Icons.access_time,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
+                      child: Text(
+                        'Time: $eventTime',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ]),
+                  Row(mainAxisAlignment: MainAxisAlignment.start, children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 32.0, bottom: 10.0),
+                      child: Icon(
+                        Icons.location_pin,
+                        color: Colors.black,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
+                      child: Text(
+                        'Venue: $eventVenue',
+                        style: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ]),
+                  SizedBox(height: 30.0),
                   Padding(
-                    padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
+                    padding: EdgeInsets.only(left: 8.0),
                     child: Text(
-                      'Date: $eventDate',
+                      'CONFIRMED',
                       style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
+                          color: Colors.green[800],
+                          fontSize: (30.0),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
-                ]),
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 32.0, bottom: 10.0),
-                    child: Icon(
-                      Icons.access_time,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
-                    child: Text(
-                      'Time: $eventTime',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ]),
-                Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 32.0, bottom: 10.0),
-                    child: Icon(
-                      Icons.location_pin,
-                      color: Colors.black,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(left: 15.0, bottom: 10.0),
-                    child: Text(
-                      'Venue: $eventVenue',
-                      style: TextStyle(
-                          color: Colors.black, fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ]),
-                SizedBox(height: 30.0),
-                Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    'CONFIRMED',
-                    style: TextStyle(
-                        color: Colors.green[800],
-                        fontSize: (30.0),
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-              ],
+                ],
+              ),
             )
           ],
         ),

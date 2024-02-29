@@ -15,9 +15,9 @@ class Profile extends StatefulWidget {
 }
 
 final myBox = HiveManager.myBox;
-final user = myBox.get('CurUser');
 
 class _ProfileState extends State<Profile> {
+  final user = myBox.get('CurUser');
   String str = "";
   // Map<String, dynamic> userData =user;
   late final TextEditingController email;
@@ -195,11 +195,12 @@ class _ProfileState extends State<Profile> {
                             'email': email.text,
                             'password': pass.text,
                             'name': uname.text
-                              
                           });
                           if (updated) {
-                            
-                        myBox.put('CurUser', await ApiRequester.getUser(user['uid'].toString()));
+                            myBox.put(
+                                'CurUser',
+                                await ApiRequester.getUser(
+                                    user['uid'].toString()));
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Details updated')),

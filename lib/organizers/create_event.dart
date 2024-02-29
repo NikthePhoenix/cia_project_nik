@@ -275,7 +275,7 @@ class _Create_eventState extends State<Create_event> {
                       fname = upStatus ?? "";
 
                       bool status = await ApiRequester.addEvent({
-                        "orgId": org['orgId'],
+                        "orgId": org['orgId'].toString(),
                         "tagId": 5.toString(), //deprecated perchance
                         "eventName": eventName.text,
                         "eventDateTime": eventDateTime?.toIso8601String(),

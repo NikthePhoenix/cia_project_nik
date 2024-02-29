@@ -23,18 +23,15 @@ class OrganizerHomePage extends StatelessWidget {
 }
 
 class MyCardList extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-  final org= HiveManager.myBox.get("CurrentOrg");
+    final org = HiveManager.myBox.get("CurrentOrg");
     print(org);
     // Map<String, dynamic> args =
     //     (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
     String imageurl = ApiRequester.buildUrl('org${org["orgId"]}.jpg');
     print(imageurl);
     String orgName = org['orgDept'];
-    print(org);
 
     return SingleChildScrollView(
       child: Container(
@@ -70,7 +67,10 @@ class MyCardList extends StatelessWidget {
                   Text(
                     // "WPA Music",
                     orgName,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   )
                 ],
               ),
