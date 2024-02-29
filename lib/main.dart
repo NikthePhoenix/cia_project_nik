@@ -57,9 +57,8 @@ class MyApp extends StatelessWidget {
       ),
       // initialRoute: Routes.createEvent,
       routes: {
-        "/": (context) => OrganizerHomePage(),
-
-        // Routes.splashScreen: (context) => SplashScreen(),
+        // "/": (context) => BookedEvents(),
+        Routes.splashScreen: (context) => SplashScreen(),
         Routes.signUp: (context) => SignUpPage(),
         Routes.verifyEmail: (context) => EmailVerification(),
         Routes.agreement: (context) => UserAgreementPage(),

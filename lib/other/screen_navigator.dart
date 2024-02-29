@@ -72,6 +72,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
                 backgroundColor: Color(golden_yellow)),
           ],
         ),
+
       ),
     );
   }

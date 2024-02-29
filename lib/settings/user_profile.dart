@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/hive/hive.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -13,13 +14,12 @@ class Profile extends StatefulWidget {
   State<Profile> createState() => _ProfileState();
 }
 
+final myBox = HiveManager.myBox;
+
 class _ProfileState extends State<Profile> {
+  final user = myBox.get('CurUser');
   String str = "";
-  Map<String, dynamic> userData = {
-    "uid": 222333,
-    "name": "Shelly",
-    "email": "mail@mail.com",
-  };
+  // Map<String, dynamic> userData =user;
   late final TextEditingController email;
   late final TextEditingController pass;
   late final TextEditingController uname;
@@ -36,9 +36,9 @@ class _ProfileState extends State<Profile> {
 
   @override
   void initState() {
-    email = TextEditingController(text: userData['email']);
-    pass = TextEditingController(text: userData['password']);
-    uname = TextEditingController(text: userData['name']);
+    email = TextEditingController(text: user['email']);
+    pass = TextEditingController(text: user['password']);
+    uname = TextEditingController(text: user['name']);
   }
 
   bool isReadOnly = true;
@@ -101,7 +101,7 @@ class _ProfileState extends State<Profile> {
                 padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                 child: TextFormField(
                   readOnly: true,
-                  initialValue: userData['uid'].toString(),
+                  initialValue: user['uid'].toString(),
                   decoration: InputDecoration(
                       labelText: 'UID',
                       labelStyle: TextStyle(color: Color(background_darkgrey)),
@@ -191,12 +191,17 @@ class _ProfileState extends State<Profile> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           bool updated = await ApiRequester.updateUser({
-                            'uid': userData['uid'].toString(),
+                            'uid': user['uid'].toString(),
                             'email': email.text,
                             'password': pass.text,
                             'name': uname.text
                           });
                           if (updated) {
+                            myBox.put(
+                                'CurUser',
+                                await ApiRequester.getUser(
+                                    user['uid'].toString()));
+
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Details updated')),
                             );
@@ -222,7 +227,8 @@ class _ProfileState extends State<Profile> {
                         borderRadius: BorderRadius.circular(20.0)),
                     child: TextButton(
                         onPressed: () {
-                          //TODO Hive, destroy the user login entry
+                          myBox.delete("CurUser");
+                          myBox.delete("User");
                           Navigator.of(context).pushNamedAndRemoveUntil(
                               Routes.loginPage, (route) => false);
                         },

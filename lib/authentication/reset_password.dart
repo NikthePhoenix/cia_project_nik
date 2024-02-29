@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/hive/hive.dart';
 
 class ResetPasswordPage extends StatefulWidget {
   const ResetPasswordPage({Key? key}) : super(key: key);
@@ -10,6 +11,9 @@ class ResetPasswordPage extends StatefulWidget {
   @override
   State<ResetPasswordPage> createState() => _ResetPasswordPageState();
 }
+
+final myBox = HiveManager.myBox;
+final user = myBox.get('CurUser');
 
 class _ResetPasswordPageState extends State<ResetPasswordPage> {
   TextEditingController passwordController = TextEditingController();
@@ -126,7 +130,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                               Response resp = await put(
                                   Uri.http("castelinos.com", "users/"),
                                   body: {
-                                    "uid": arguments?["uid"],
+                                    "uid": user['uid'],
                                     "password": passwordController.text
                                   });
                               if (resp.statusCode == 201) {

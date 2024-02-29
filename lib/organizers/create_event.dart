@@ -5,8 +5,12 @@ import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/hive/hive.dart';
 
 import 'package:seproject/other/color_palette.dart';
+
+final myBox = HiveManager.myBox;
+final org = myBox.get('CurrentOrg');
 
 class Create_event extends StatefulWidget {
   const Create_event({Key? key}) : super(key: key);
@@ -48,7 +52,7 @@ class _Create_eventState extends State<Create_event> {
       backgroundColor: Color(background_darkgrey),
       //appBar: AppBar(),
       body: SafeArea(
-              child: SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Container(
             // Set grey background color
             padding: EdgeInsets.all(20.0),
@@ -68,7 +72,8 @@ class _Create_eventState extends State<Create_event> {
                 ),
                 Text(
                   "Upload Event Image :",
-                  style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
                 ),
                 SizedBox(
                   height: 20,
@@ -79,7 +84,8 @@ class _Create_eventState extends State<Create_event> {
                 ),
                 Text(
                   " Enter Event Name :",
-                  style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
                 ),
                 InputField(
                   hintText: 'Enter Event Name',
@@ -88,7 +94,8 @@ class _Create_eventState extends State<Create_event> {
                 SizedBox(height: 30.0),
                 Text(
                   " Enter Event Date :",
-                  style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
                 ),
                 SizedBox(
                   height: 8,
@@ -97,7 +104,8 @@ class _Create_eventState extends State<Create_event> {
                 SizedBox(height: 30.0),
                 Text(
                   " Enter Event Time :",
-                  style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
                 ),
                 SizedBox(
                   height: 8,
@@ -106,7 +114,8 @@ class _Create_eventState extends State<Create_event> {
                 SizedBox(height: 30.0),
                 Text(
                   " Enter Event Venue :",
-                  style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
                 ),
                 InputField(
                   hintText: 'Enter Event Venue',
@@ -127,7 +136,8 @@ class _Create_eventState extends State<Create_event> {
                 ),
                 Text(
                   " Enter Event ECC Points : ",
-                  style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
                 ),
                 TextField(
                     controller: points,
@@ -138,11 +148,13 @@ class _Create_eventState extends State<Create_event> {
                             borderRadius: BorderRadius.circular(15)),
                         filled: true,
                         fillColor: Color(text_dm_offwhite),
-                        hintStyle: TextStyle(color: Color(background_darkgrey)))),
+                        hintStyle:
+                            TextStyle(color: Color(background_darkgrey)))),
                 SizedBox(height: 30.0),
                 Text(
                   " Enter Event Max Capacity :",
-                  style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 16, color: Color(text_dm_offwhite)),
                 ),
                 TextField(
                     controller: captroller,
@@ -153,13 +165,15 @@ class _Create_eventState extends State<Create_event> {
                             borderRadius: BorderRadius.circular(15)),
                         filled: true,
                         fillColor: Color(text_dm_offwhite),
-                        hintStyle: TextStyle(color: Color(background_darkgrey)))),
+                        hintStyle:
+                            TextStyle(color: Color(background_darkgrey)))),
                 SizedBox(
                   height: 30,
                 ),
                 Text(
                   " Enter Event Description :",
-                  style: TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
+                  style:
+                      TextStyle(fontSize: 18, color: Color(text_dm_offwhite)),
                 ),
                 TextField(
                     maxLines: 8,
@@ -170,7 +184,8 @@ class _Create_eventState extends State<Create_event> {
                             borderRadius: BorderRadius.circular(15)),
                         filled: true,
                         fillColor: Color(text_dm_offwhite),
-                        hintStyle: TextStyle(color: Color(background_darkgrey)))),
+                        hintStyle:
+                            TextStyle(color: Color(background_darkgrey)))),
                 SizedBox(
                   height: 30,
                 ),
@@ -181,17 +196,17 @@ class _Create_eventState extends State<Create_event> {
                   endIndent: 0,
                   color: Color(golden_yellow),
                 ),
-        
-                // SizedBox(
-                //   height: 20,
-                // ),
-                // Text(
-                //   "Chose the collaborator (if any)",
-                //   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Color(text_dm_offwhite)),
-                // ),
-                // SizedBox(
-                //   height: 20,
-                // )
+
+                SizedBox(
+                  height: 20,
+                ),
+                Text(
+                  "Chose the collaborator (if any)",
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Color(text_dm_offwhite)),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 // ignore: prefer_const_constructors
                 // Column(
                 //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -247,7 +262,7 @@ class _Create_eventState extends State<Create_event> {
                       created_events['eventDesc'] = eventDesc.text;
                       created_events['eccPoints'] = points.text;
                       created_events['maxCapacity'] = captroller.text;
-        
+
                       DateTime? date = DateSelectionScreen.dateObj;
                       TimeOfDay? time = TimeSelectionScreen.timeObj;
                       DateTime? eventDateTime;
@@ -258,9 +273,9 @@ class _Create_eventState extends State<Create_event> {
                       String fname = "";
                       String? upStatus = await Image_pic_pre.upload();
                       fname = upStatus ?? "";
-        
+
                       bool status = await ApiRequester.addEvent({
-                        "orgId": 1.toString(),
+                        "orgId": org['orgId'].toString(),
                         "tagId": 5.toString(), //deprecated perchance
                         "eventName": eventName.text,
                         "eventDateTime": eventDateTime?.toIso8601String(),
@@ -272,17 +287,20 @@ class _Create_eventState extends State<Create_event> {
                         "url": ApiRequester.buildUrl(fname),
                       });
                       print("Addition succeeded: ${status.toString()}");
-        
-                      Navigator.pushNamed(context, Routes.events, arguments: {
-                        'eventName': eventName.text,
-                        'organizer': collaborator,
-                        'eventVenue': eventVenue.text,
-                        'eventDate': eventDate,
-                        'eventDesc': eventDesc.text,
-                        'eccPoints': points.text,
-                        'maxCapacity': captroller.text,
-        
-                      });
+
+                      // Navigator.pushNamed(context, Routes.events, arguments: {
+                      //   'eventName': eventName.text,
+                      //   'organizer': collaborator,
+                      //   'eventVenue': eventVenue.text,
+                      //   'eventDate': eventDate,
+                      //   'eventDesc': eventDesc.text,
+                      //   'eccPoints': points.text,
+                      //   'maxCapacity': captroller.text,
+
+                      // }
+
+                      // );
+                      Navigator.pushNamed(context, Routes.editEvents);
                     },
                   ),
                 ),

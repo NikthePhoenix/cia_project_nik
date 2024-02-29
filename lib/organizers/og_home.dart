@@ -4,6 +4,8 @@ import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/organizers/og_login.dart';
+import 'package:seproject/hive/hive.dart';
 
 class OrganizerHomePage extends StatelessWidget {
   @override
@@ -26,13 +28,13 @@ class OrganizerHomePage extends StatelessWidget {
 class MyCardList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    Map<String, dynamic>? args =
-        (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>?);
-    // String imageurl = ApiRequester.buildUrl('org${args?['orgId']}.jpg');
-    String imageurl = ApiRequester.buildUrl('org1.jpg');
-
+    final org = HiveManager.myBox.get("CurrentOrg");
+    print(org);
+    // Map<String, dynamic> args =
+    //     (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
+    String imageurl = ApiRequester.buildUrl('org${org["orgId"]}.jpg');
     print(imageurl);
-    String orgName = args?['orgDept'] ?? "";
+    String orgName = org['orgDept'];
 
     return SingleChildScrollView(
       child: Container(
@@ -68,7 +70,10 @@ class MyCardList extends StatelessWidget {
                   Text(
                     // "WPA Music",
                     orgName,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   )
                 ],
               ),

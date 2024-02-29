@@ -4,9 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:seproject/home/booked_events.dart';
 import 'package:seproject/events/events.dart';
 import 'package:seproject/other/api_calls.dart';
+import 'package:seproject/other/color_palette.dart';
 import 'package:seproject/other/date_pick.dart';
 import 'package:seproject/other/time_pick.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/hive/hive.dart';
 
 class EventDescription extends StatefulWidget {
   final eventName, organiser, img;
@@ -22,6 +24,9 @@ class EventDescription extends StatefulWidget {
   @override
   State<EventDescription> createState() => _EventDescriptionState();
 }
+
+final myBox = HiveManager.myBox;
+final user = myBox.get('CurUser');
 
 class _EventDescriptionState extends State<EventDescription> {
   static List<String> bookedEvents = [];
@@ -57,7 +62,6 @@ class _EventDescriptionState extends State<EventDescription> {
             padding: EdgeInsets.all(16),
             child: SingleChildScrollView(
               child: Column(children: [
-                
                 Align(
                     alignment: Alignment.topLeft,
                     child: Container(
@@ -174,15 +178,16 @@ class _EventDescriptionState extends State<EventDescription> {
                           context: context,
                           builder: (context) {
                             return AlertDialog(
-                              title: Text("Booking Confirmation"),
+                              backgroundColor: Color(background_darkgrey),
+                              title: Text("Booking Confirmation", style: TextStyle(color: Color(text_dm_offwhite)),),
                               content: Text(
-                                  "Are you sure about booking this event?"),
+                                  "Are you sure about booking this event?", style: TextStyle(color: Color(text_dm_offwhite))),
                               actions: [
                                 TextButton(
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text("Cancel"),
+                                  child: Text("Cancel", style: TextStyle(color: Color(golden_yellow))),
                                 ),
                                 TextButton(
                                   onPressed: () async {
@@ -194,7 +199,7 @@ class _EventDescriptionState extends State<EventDescription> {
                                     // await Future.delayed(Duration(seconds: 1));
                                     bool status =
                                         await ApiRequester.addBookedTicket(
-                                            222333, int.parse(eventId));
+                                            user['uid'], int.parse(eventId));
                                     //TODO Fucking remove this static UID when and if hive shows up
                                     print(status);
                                     if (status) {
@@ -210,7 +215,7 @@ class _EventDescriptionState extends State<EventDescription> {
                                           });
                                     }
                                   },
-                                  child: Text("Proceed"),
+                                  child: Text("Proceed", style: TextStyle(color: Color(golden_yellow))),
                                 ),
                               ],
                             );
