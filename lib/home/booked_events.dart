@@ -17,14 +17,17 @@ class BookedEvents extends StatefulWidget {
   @override
   State<BookedEvents> createState() => _BookedEventsState();
 }
+
 final myBox = HiveManager.myBox;
 final user = myBox.get('CurUser');
+final org = myBox.get('OrgAll');
+
 class _BookedEventsState extends State<BookedEvents> {
   //
   static bool isEventBooked = false;
   static Map<String, dynamic>? tickets = EventDescription.tickets;
 
-//change the snapshot thingy  
+//change the snapshot thingy
   Future<dynamic> bookedEvents = ApiRequester.getBookedTickets(user['uid']);
   @override
   Widget build(BuildContext context) {
@@ -33,24 +36,24 @@ class _BookedEventsState extends State<BookedEvents> {
       appBar: AppBar(
         backgroundColor: Color(background_darkgrey),
         leading: Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                    decoration: BoxDecoration(
-                        color: Color(golden_yellow),
-                        borderRadius: BorderRadius.circular(20.0)),
-                    child: TextButton(
-                        onPressed: () {
-                          // Navigator.pushNamed(context, Routes.bookedEvents);
-                          Navigator.pushNamed(
-                            context,
-                            Routes.navigator,
-                          );
-                        },
-                        child: Icon(
-                          Icons.arrow_back,
-                          color: Colors.black,
-                        )),
+            alignment: Alignment.topLeft,
+            child: Container(
+              decoration: BoxDecoration(
+                  color: Color(golden_yellow),
+                  borderRadius: BorderRadius.circular(20.0)),
+              child: TextButton(
+                  onPressed: () {
+                    // Navigator.pushNamed(context, Routes.bookedEvents);
+                    Navigator.pushNamed(
+                      context,
+                      Routes.navigator,
+                    );
+                  },
+                  child: Icon(
+                    Icons.arrow_back,
+                    color: Colors.black,
                   )),
+            )),
       ),
       body: SafeArea(
           child: Padding(
@@ -78,23 +81,31 @@ class _BookedEventsState extends State<BookedEvents> {
                     //             color: Colors.black,
                     //           )),
                     //     )),
-                        SizedBox(
-                          height: 20,
-                        ),
+                    SizedBox(
+                      height: 20,
+                    ),
                     FutureBuilder(
                         future: bookedEvents,
                         builder: (context, snapshot) {
                           List<Widget> children = [];
                           if (snapshot.hasData) {
+                            String orgName = "";
                             for (var entry in snapshot.data["events"]) {
+                              for (var o in org) {
+                                print(o['orgId']);
+                                print(entry);
+                                if (o['orgId'] == entry['event']["orgId"]) {
+                                  orgName = o['orgDept'];
+                                  break;
+                                }
+                              }
                               dynamic event = entry["event"];
                               children.add(addBookedEvent(
-                                event["eventName"] ?? "",
-                                org["orgName"],
-                                event["url"],
-                                event["eventDateTime"],
-                                event["eventVenue"]
-                              ));
+                                  event["eventName"] ?? "",
+                                  orgName,
+                                  event["url"],
+                                  event["eventDateTime"],
+                                  event["eventVenue"]));
                             }
                           }
                           return Column(
@@ -110,20 +121,20 @@ class _BookedEventsState extends State<BookedEvents> {
     );
   }
 
-  Widget addBookedEvent(eventName, organizer, image, eventDateTime, eventVenue) {
+  Widget addBookedEvent(
+      eventName, organizer, image, eventDateTime, eventVenue) {
     final DateTime localTime = DateTime.parse(eventDateTime);
     final String eventDate = DateFormat.yMd().format(localTime);
     final String eventTime = DateFormat.jm().format(localTime);
 
     return InkWell(
       onTap: () => {
-        Navigator.pushNamed(context, Routes.bookedTicket, 
-        arguments: {
+        Navigator.pushNamed(context, Routes.bookedTicket, arguments: {
           'eventName': eventName,
           'organizer': organizer,
           'eventDate': eventDate,
           'eventTime': eventTime,
-          'eventVenue': eventVenue
+          'eventVenue': eventVenue,
         })
       },
       child: Container(
@@ -147,24 +158,22 @@ class _BookedEventsState extends State<BookedEvents> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
-                    constraints: BoxConstraints.tight(Size(150, 25)),
-                  child:Text(eventName,
-                      style:
-                          TextStyle(fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: Color(text_dm_offwhite)
-                      ),
-                      overflow: TextOverflow.ellipsis)),
-                  
+                      constraints: BoxConstraints.tight(Size(150, 25)),
+                      child: Text(eventName,
+                          style: TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                              color: Color(text_dm_offwhite)),
+                          overflow: TextOverflow.ellipsis)),
+
                   Container(
-                    constraints: BoxConstraints.tight(Size(150, 25)),
-                  child:Text(organizer,
-                      style:
-                          TextStyle(fontSize: 20,
-                          // fontWeight: FontWeight.bold,
-                          color: Color(text_dm_offwhite)
-                      ),
-                      overflow: TextOverflow.ellipsis)),
+                      constraints: BoxConstraints.tight(Size(150, 25)),
+                      child: Text(organizer,
+                          style: TextStyle(
+                              fontSize: 20,
+                              // fontWeight: FontWeight.bold,
+                              color: Color(text_dm_offwhite)),
+                          overflow: TextOverflow.ellipsis)),
                   // Text(organizer,
                   //     style: TextStyle(
                   //       fontSize: 17,

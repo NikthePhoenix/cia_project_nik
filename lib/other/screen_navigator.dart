@@ -44,10 +44,30 @@ class _BottomNavbarState extends State<BottomNavbar> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home, ), label: "Home", backgroundColor: Color(golden_yellow)),
-          BottomNavigationBarItem(icon: Icon(Icons.event,),label: "Events", backgroundColor: Color(golden_yellow)),
-          BottomNavigationBarItem(icon: Icon(Icons.search, ), label: "Search", backgroundColor: Color(golden_yellow)),
-          BottomNavigationBarItem(icon: Icon(Icons.settings, ), label: "Settings", backgroundColor: Color(golden_yellow)),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.home,
+              ),
+              label: "Home",
+              backgroundColor: Color(golden_yellow)),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.event,
+              ),
+              label: "Events",
+              backgroundColor: Color(golden_yellow)),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.search,
+              ),
+              label: "Search",
+              backgroundColor: Color(golden_yellow)),
+          BottomNavigationBarItem(
+              icon: Icon(
+                Icons.settings,
+              ),
+              label: "Settings",
+              backgroundColor: Color(golden_yellow)),
         ],
       ),
     );

@@ -15,9 +15,9 @@ class Profile extends StatefulWidget {
 }
 
 final myBox = HiveManager.myBox;
-final user = myBox.get('CurUser');
 
 class _ProfileState extends State<Profile> {
+  final user = myBox.get('CurUser');
   String str = "";
   // Map<String, dynamic> userData =user;
   late final TextEditingController email;
