@@ -195,11 +195,12 @@ class _ProfileState extends State<Profile> {
                             'email': email.text,
                             'password': pass.text,
                             'name': uname.text
-                              
                           });
                           if (updated) {
-                            
-                        myBox.put('CurUser', await ApiRequester.getUser(user['uid'].toString()));
+                            myBox.put(
+                                'CurUser',
+                                await ApiRequester.getUser(
+                                    user['uid'].toString()));
 
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Details updated')),
