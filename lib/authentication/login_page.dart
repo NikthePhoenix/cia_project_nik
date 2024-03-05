@@ -55,10 +55,9 @@ class LoginPageState extends State<LoginPage> {
   @override
   void initState() {
     super.initState();
+    ApiRequester.getAllOrganizers();
     autoFill();
   }
-
-
 
   autoFill() {
     final data = myBox.get('User');
@@ -196,7 +195,8 @@ class LoginPageState extends State<LoginPage> {
                                   ]);
                                   if (myBox.get('CurUser') == null) {
                                     var parsed = uidcontroller.text;
-                                    var temp = await ApiRequester.getUser(parsed);
+                                    var temp =
+                                        await ApiRequester.getUser(parsed);
                                     setState(() {
                                       user = temp;
                                     });

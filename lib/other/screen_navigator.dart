@@ -23,32 +23,56 @@ class _BottomNavbarState extends State<BottomNavbar> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(background_darkgrey),
-      body: pages[selectedPage],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.shifting,
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
         backgroundColor: Color(background_darkgrey),
-        unselectedItemColor: Color(background_darkgrey),
-        unselectedIconTheme: IconThemeData(color: Color(background_darkgrey)),
-        selectedItemColor: Color(selected_maroon),
-        selectedIconTheme: IconThemeData(color: Color(selected_maroon)),
-        showUnselectedLabels: false,
-        useLegacyColorScheme: false,
-        // fixedColor: Color(background_darkgrey),
-        elevation: 5.0,
-        currentIndex: selectedPage,
-        onTap: (int index) {
-          setState(() {
-            selectedPage = index;
-          });
-        },
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home, ), label: "Home", backgroundColor: Color(golden_yellow)),
-          BottomNavigationBarItem(icon: Icon(Icons.event,),label: "Events", backgroundColor: Color(golden_yellow)),
-          BottomNavigationBarItem(icon: Icon(Icons.search, ), label: "Search", backgroundColor: Color(golden_yellow)),
-          BottomNavigationBarItem(icon: Icon(Icons.settings, ), label: "Settings", backgroundColor: Color(golden_yellow)),
-        ],
+        body: pages[selectedPage],
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.shifting,
+          backgroundColor: Color(background_darkgrey),
+          unselectedItemColor: Color(background_darkgrey),
+          unselectedIconTheme: IconThemeData(color: Color(background_darkgrey)),
+          selectedItemColor: Color(selected_maroon),
+          selectedIconTheme: IconThemeData(color: Color(selected_maroon)),
+          showUnselectedLabels: false,
+          useLegacyColorScheme: false,
+          // fixedColor: Color(background_darkgrey),
+          elevation: 5.0,
+          currentIndex: selectedPage,
+          onTap: (int index) {
+            setState(() {
+              selectedPage = index;
+            });
+          },
+          items: [
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.home,
+                ),
+                label: "Home",
+                backgroundColor: Color(golden_yellow)),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.event,
+                ),
+                label: "Events",
+                backgroundColor: Color(golden_yellow)),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.search,
+                ),
+                label: "Search",
+                backgroundColor: Color(golden_yellow)),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.settings,
+                ),
+                label: "Settings",
+                backgroundColor: Color(golden_yellow)),
+          ],
+        ),
+
       ),
     );
   }

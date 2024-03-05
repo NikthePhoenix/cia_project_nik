@@ -65,7 +65,6 @@ class _EventsState extends State<Events> {
                   child: Image.network(image, width: 150, fit: BoxFit.cover),
                 ),
               ),
-
               Text(
                 eventName,
                 style: TextStyle(
@@ -105,7 +104,7 @@ class _EventsState extends State<Events> {
                   Widget builtEvent = addEvents(
                       event['eventId'],
                       event['eventName'],
-                      event['organizer']['orgName'].toString(),
+                      event['organizer']['orgDept'].toString(),
                       event['eventVenue'],
                       event['eventDesc'],
                       event['url'],

@@ -10,12 +10,15 @@ import 'package:seproject/hive/hive.dart';
 class OrganizerHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color(background_darkgrey),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: MyCardList(),
+    return PopScope(
+      canPop: false,
+      child: Scaffold(
+        backgroundColor: Color(background_darkgrey),
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
+            child: MyCardList(),
+          ),
         ),
       ),
     );
@@ -23,18 +26,15 @@ class OrganizerHomePage extends StatelessWidget {
 }
 
 class MyCardList extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
-  final org= HiveManager.myBox.get("CurrentOrg");
+    final org = HiveManager.myBox.get("CurrentOrg");
     print(org);
     // Map<String, dynamic> args =
     //     (ModalRoute.of(context)!.settings!.arguments as Map<String, dynamic>);
     String imageurl = ApiRequester.buildUrl('org${org["orgId"]}.jpg');
     print(imageurl);
     String orgName = org['orgDept'];
-    print(org);
 
     return SingleChildScrollView(
       child: Container(
@@ -70,7 +70,10 @@ class MyCardList extends StatelessWidget {
                   Text(
                     // "WPA Music",
                     orgName,
-                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   )
                 ],
               ),
@@ -102,8 +105,8 @@ class MyCardList extends StatelessWidget {
 
             SizedBox(height: 20.0),
             CardItem(
-              title: 'All Events',
-              icon: Icons.event_sharp,
+              title: 'Past Event',
+              icon: Icons.history,
               onTap: () {
                 Navigator.pushNamed(context, Routes.pastEvents);
               },

@@ -289,7 +289,7 @@ class _UpdateEventsState extends State<UpdateEvents> {
 
                     Map<String, dynamic> data = {
                       "eventId": eventId.toString(),
-                      "orgId": org["orgId"],
+                      "orgId": org["orgId"].toString(),
                       "tagId": 5.toString(), //deprecated perchance
                       "eventName": updatedEventName.text,
                       "eventDateTime": eventDateTime?.toIso8601String(),

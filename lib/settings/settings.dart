@@ -8,16 +8,16 @@ void main() {
 }
 
 final myBox = HiveManager.myBox;
-final user = myBox.get('CurUser');
 
 class SettingsPage extends StatefulWidget {
-  const SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({Key? key,}) : super(key: key);
 
   @override
   State<SettingsPage> createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  final user = myBox.get('CurUser');
   bool _isDarkMode = false;
 
   void _toggleTheme(bool newValue) {
@@ -151,7 +151,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   //   children: <Widget>[
                   //     const Text(
                   //       'Change Theme',
-                  //       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)), 
+                  //       style: TextStyle(fontSize: 16, color: Color(text_dm_offwhite)),
                   //     ),
                   //     const Spacer(),
                   //     Switch(
