@@ -111,6 +111,16 @@ class MyCardList extends StatelessWidget {
                 Navigator.pushNamed(context, Routes.pastEvents);
               },
             ),
+
+            SizedBox(height: 40.0),
+            CardItem(
+              title: 'Log out',
+              icon: Icons.logout,
+              onTap: () {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    Routes.organizerLogin, (route) => false);
+              },
+            ),
             SizedBox(height: 20.0),
           ],
         ),
