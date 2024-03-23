@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:seproject/other/routes.dart';
+import 'package:seproject/other/api_calls.dart';
 
 class EmailVerification extends StatefulWidget {
   final uid;
@@ -106,7 +107,10 @@ class _EmailVerificationState extends State<EmailVerification> {
                           });
                         },
                         child: InkWell(
-                          onTap: () {},
+                          onTap: () async {
+                            Response resp = await post(Uri.http(
+                                ApiRequester.baseUrl, "/users/newotp/$uid"));
+                          },
                           child: Text("Resend OTP",
                               style: TextStyle(
                                   fontSize: 16,
