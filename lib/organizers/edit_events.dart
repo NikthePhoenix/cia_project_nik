@@ -23,7 +23,6 @@ class _EditEventstate extends State<EditEvents> {
       appBar: AppBar(
         backgroundColor: Color(background_darkgrey),
         leading: Align(
-
           alignment: Alignment.topLeft,
           child: Container(
             decoration: BoxDecoration(
@@ -40,7 +39,6 @@ class _EditEventstate extends State<EditEvents> {
               child: Icon(
                 Icons.arrow_back,
                 color: Colors.black,
-
               ),
             ),
           ),
@@ -49,10 +47,22 @@ class _EditEventstate extends State<EditEvents> {
       body: SafeArea(
           child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Center(
-            child: SingleChildScrollView(
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              Container(
+                // height: 40,
+                decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(20.0)),
+
+                child: Text("EDIT EVENTS",
+                    style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xffECFFD1))),
+              ),
+              SizedBox(height: 20,),
               FutureBuilder(
                 future: events,
                 builder: (context, snapshot) {
@@ -73,7 +83,7 @@ class _EditEventstate extends State<EditEvents> {
               )
             ],
           ),
-        )),
+        ),
       )),
     );
   }
@@ -83,119 +93,126 @@ class _EditEventstate extends State<EditEvents> {
       padding: const EdgeInsets.all(8.0),
       child: InkWell(
         onTap: () {},
-        child: Container(
-          width: MediaQuery.of(context)!.size.width * 0.85,
-          decoration: BoxDecoration(
-              border: Border.all(width: 2.0, color: Color(golden_yellow)),
-              borderRadius: BorderRadius.circular(10)),
-          child: Padding(
-            padding: EdgeInsets.all(4.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Image.network(image,
-                      height: 150, width: 150, fit: BoxFit.cover),
-                ),
-                Column(
+        child: Column(
+          children: [
+            Container(
+              width: MediaQuery.of(context)!.size.width * 0.85,
+              decoration: BoxDecoration(
+                  border: Border.all(width: 2.0, color: Color(golden_yellow)),
+                  borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: EdgeInsets.all(4.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Container(
-                        constraints: BoxConstraints.tight(Size(150, 25)),
-                        child: Text(eventName,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(text_dm_offwhite),
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis))),
-                    Container(
-                        constraints: BoxConstraints.tight(Size(150, 25)),
-                        child: Text(organizer,
-                            overflow: TextOverflow.ellipsis,
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Color(text_dm_offwhite),
-                                fontSize: 20,
-                                // fontWeight: FontWeight.bold,
-                                overflow: TextOverflow.ellipsis))),
-                    // Text(organizer,
-                    //     style: TextStyle(
-                    //       color: Color(text_dm_offwhite),
-                    //       fontSize: 17,
-                    //     )),
-                    SizedBox(
-                      height: 10,
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Image.network(image,
+                          height: 150, width: 150, fit: BoxFit.cover),
                     ),
-                    // Container(
-                    //   decoration: BoxDecoration(
-                    //       color: Colors.green,
-                    //       borderRadius: BorderRadius.circular(12.0)),
-                    //   child: Row(
-                    //     children: [
-                    //       Text("  Created  ",
-                    //           style: TextStyle(
-                    //             color: Color(text_dm_offwhite),
-                    //             fontSize: 15,
-                    //           )),
-                    //       Icon(Icons.done_all_rounded)
-                    //     ],
-                    //   ),
-                    // ),
-                    InkWell(
-                      child: Container(
-                          // color: Color(golden_yellow),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              color: Color(golden_yellow)),
-                          child: TextButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, Routes.updateEvents,
-                                  arguments: {
+                    Column(
+                      children: [
+                        Container(
+                            constraints: BoxConstraints.tight(Size(150, 25)),
+                            child: Text(eventName,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(text_dm_offwhite),
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis))),
+                        Container(
+                            constraints: BoxConstraints.tight(Size(150, 25)),
+                            child: Text(organizer,
+                                overflow: TextOverflow.ellipsis,
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Color(text_dm_offwhite),
+                                    fontSize: 20,
+                                    // fontWeight: FontWeight.bold,
+                                    overflow: TextOverflow.ellipsis))),
+                        // Text(organizer,
+                        //     style: TextStyle(R
+                        //       color: Color(text_dm_offwhite),
+                        //       fontSize: 17,
+                        //     )),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //       color: Colors.green,
+                        //       borderRadius: BorderRadius.circular(12.0)),
+                        //   child: Row(
+                        //     children: [
+                        //       Text("  Created  ",
+                        //           style: TextStyle(
+                        //             color: Color(text_dm_offwhite),
+                        //             fontSize: 15,
+                        //           )),
+                        //       Icon(Icons.done_all_rounded)
+                        //     ],
+                        //   ),
+                        // ),
+                        InkWell(
+                          child: Container(
+                              // color: Color(golden_yellow),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(20),
+                                  color: Color(golden_yellow)),
+                              child: TextButton(
+                                onPressed: () {
+                                  Navigator.pushNamed(
+                                      context, Routes.updateEvents, arguments: {
                                     'eventName': eventName,
                                     'eventId': eventId
                                   });
-                            },
-                            child: Text(
-                              "Update Event",
-                              style: TextStyle(color: Color(text_dm_offwhite)),
-                            ),
-                          )),
+                                },
+                                child: Text(
+                                  "Update Event",
+                                  style:
+                                      TextStyle(color: Color(text_dm_offwhite)),
+                                ),
+                              )),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        InkWell(
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(25),
+                                  color: Color.fromRGBO(255, 0, 0, 1)),
+                              child: TextButton(
+                                onPressed: () async {
+                                  bool status =
+                                      await ApiRequester.deleteEvent(eventName);
+                                  if (status) {
+                                    setState(() {
+                                      events =
+                                          ApiRequester.getEventbyDept(dept);
+                                    });
+                                    ;
+                                  }
+                                },
+                                child: Text(
+                                  "Delete Event",
+                                  style:
+                                      TextStyle(color: Color(text_dm_offwhite)),
+                                ),
+                              )),
+                        )
+                      ],
                     ),
                     SizedBox(
                       height: 10,
                     ),
-                    InkWell(
-                      child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(25),
-                              color: Color.fromRGBO(255, 0, 0, 1)),
-                          child: TextButton(
-                            onPressed: () async {
-                              bool status =
-                                  await ApiRequester.deleteEvent(eventName);
-                              if (status) {
-                                setState(() {
-                                  events = ApiRequester.getEventbyDept(dept);
-                                });
-                                ;
-                              }
-                            },
-                            child: Text(
-                              "Delete Event",
-                              style: TextStyle(color: Color(text_dm_offwhite)),
-                            ),
-                          )),
-                    )
                   ],
                 ),
-                SizedBox(
-                  height: 10,
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
