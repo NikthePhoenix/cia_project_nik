@@ -3,6 +3,7 @@ import 'package:seproject/organizers/create_event.dart';
 import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/other/color_palette.dart';
+import 'package:seproject/organizers/og_login.dart' as orglogin;
 
 class EditEvents extends StatefulWidget {
   const EditEvents({Key? key}) : super(key: key);
@@ -18,6 +19,7 @@ class _EditEventstate extends State<EditEvents> {
   Future<dynamic> events = ApiRequester.getEventbyDept(dept);
   @override
   Widget build(BuildContext context) {
+    final organizer = orglogin.org;
     return Scaffold(
       backgroundColor: Color(background_darkgrey),
       appBar: AppBar(
@@ -72,7 +74,7 @@ class _EditEventstate extends State<EditEvents> {
                       children.add(addBookedEvent(
                           event['eventId'],
                           event['eventName'],
-                          event['organizer']['orgName'],
+                           event['organizer']['orgDept'],
                           event['url']));
                     }
                   }

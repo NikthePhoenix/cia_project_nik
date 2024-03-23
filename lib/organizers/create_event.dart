@@ -202,7 +202,10 @@ class _Create_eventState extends State<Create_event> {
                 ),
                 Text(
                   "Chose the collaborator (if any)",
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22, color: Color(text_dm_offwhite)),
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      color: Color(text_dm_offwhite)),
                 ),
                 SizedBox(
                   height: 20,
@@ -262,6 +265,7 @@ class _Create_eventState extends State<Create_event> {
                       created_events['eventDesc'] = eventDesc.text;
                       created_events['eccPoints'] = points.text;
                       created_events['maxCapacity'] = captroller.text;
+                      print(org["orgId"].toString());
 
                       DateTime? date = DateSelectionScreen.dateObj;
                       TimeOfDay? time = TimeSelectionScreen.timeObj;
