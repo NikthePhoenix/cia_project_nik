@@ -89,7 +89,7 @@ class _EventsState extends State<Events> {
 
   Widget eventsList(BuildContext context) {
     //TODO HIVEEEEEEEEEEEEEEEEEEEEEEEEEEE
-    final Future<dynamic> events = ApiRequester.getEventbyDept("ECC");
+    final Future<dynamic> events = ApiRequester.getAllEvents();
 
     return SizedBox(
       child: SingleChildScrollView(
