@@ -3,7 +3,7 @@ import 'package:seproject/other/api_calls.dart';
 import 'package:seproject/other/routes.dart';
 import 'package:seproject/hive/hive.dart';
 
-late final org;
+var org;
 
 class OrganizerLogin extends StatefulWidget {
   const OrganizerLogin({Key? key}) : super(key: key);
@@ -37,7 +37,7 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
   }
 
   autofill() {
-    final data = myBox.get("Org");
+    var data = myBox.get("Org");
     if (data != null) {
       emailController.text = data[0];
       passwordController.text = data[1];
@@ -45,8 +45,8 @@ class _OrganizerLoginState extends State<OrganizerLogin> {
   }
 
   findOrg() async {
-    final data = myBox.get('OrgAll');
-    final orgEmail = myBox.get("Org")[0];
+    var data = myBox.get('OrgAll');
+    var orgEmail = myBox.get("Org")[0];
     // print(data + "\n" + orgEmail);
     for (var i = 0; i < data.length; i++) {
       var temp = data[i];

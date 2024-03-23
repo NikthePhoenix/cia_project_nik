@@ -20,7 +20,7 @@ class _PastEventsState extends State<PastEvents> {
         Navigator.pushNamed(context, Routes.eventDetails, arguments: {
           'eventId': eventId.toString(),
           'eventName': eventName,
-          'organizer': "Organizer name",
+          'organizer': organizer,
           'eventVenue': eventVenue,
           'eventDesc': eventDesc,
           'url': image,
@@ -88,7 +88,7 @@ class _PastEventsState extends State<PastEvents> {
                   Widget builtEvent = addEvents(
                       event['eventId'],
                       event['eventName'],
-                      event['organizer']['orgName'].toString(),
+                      event['organizer']['orgDept'].toString(),
                       event['eventVenue'],
                       event['eventDesc'],
                       event['url'],
