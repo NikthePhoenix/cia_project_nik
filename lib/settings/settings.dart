@@ -202,6 +202,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   ),
                   InkWell(
                       onTap: () {
+                        
                         Navigator.pushNamed(context, Routes.termsConditons);
                       },
                       child: _buildSettingRow(
