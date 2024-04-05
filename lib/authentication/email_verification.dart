@@ -72,7 +72,7 @@ class _EmailVerificationState extends State<EmailVerification> {
                     onCompleted: (pin) async {
                       Map<String, dynamic> map = {'uid': uid, 'otp': pin};
                       Response response = await post(
-                          Uri.http("castelinos.com", "users/otpcheck"),
+                          Uri.http("localhost:3000", "users/otpcheck"),
                           body: map);
 
                       if (response.statusCode == 200) {

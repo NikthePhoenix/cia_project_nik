@@ -34,7 +34,7 @@ class LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
 
   Future<bool> checkData(String uid, String password) async {
-    Response response = await post(Uri.http("castelinos.com", "users/login/"),
+    Response response = await post(Uri.http("localhost:3000", "users/login/"),
         body: {"uid": uid, "password": password});
 
     if (response.statusCode == 200) {

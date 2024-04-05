@@ -128,7 +128,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
                                 confirmedController.text) {
                               print("sent");
                               Response resp = await put(
-                                  Uri.http("castelinos.com", "users/"),
+                                  Uri.http("localhost:3000", "users/"),
                                   body: {
                                     "uid": user['uid'],
                                     "password": passwordController.text
